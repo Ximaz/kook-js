@@ -3,8 +3,10 @@
  * @description Kook objects : https://developer.kookapp.cn/doc/objects
  */
 
+/* --- Trivial Types --- */
+
 class Role {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -66,13 +68,13 @@ class Role {
 class GuildRole extends Role {}
 
 class User {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
      */
     constructor(raw) {
-        this.#raw = Object.freeze(raw)
+        this.#raw = Object.freeze(raw);
     }
 
     /**
@@ -137,11 +139,10 @@ class User {
     get mobile_verified() {
         return this.#raw.mobile_verified;
     }
-
 }
 
 class GuildUser extends User {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -194,7 +195,7 @@ class GuildUser extends User {
 }
 
 class ChannelPermissionUser {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -226,7 +227,7 @@ class ChannelPermissionUser {
 }
 
 class ChannelPermissionOverwrite {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -258,7 +259,7 @@ class ChannelPermissionOverwrite {
 }
 
 class Channel {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -367,7 +368,7 @@ class Channel {
 }
 
 class GuildChannel extends Channel {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -399,7 +400,7 @@ class GuildChannel extends Channel {
 }
 
 class Guild {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -500,7 +501,7 @@ class Guild {
 }
 
 class Quote {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -546,7 +547,7 @@ class Quote {
 }
 
 class Attachement {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -585,7 +586,7 @@ class Attachement {
 }
 
 class FileAttachement extends Attachement {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -603,7 +604,7 @@ class FileAttachement extends Attachement {
 }
 
 class VideoAttachement extends FileAttachement {
-    #raw
+    #raw;
 
     /**
      * @param {Object} raw
@@ -634,4 +635,297 @@ class VideoAttachement extends FileAttachement {
     }
 }
 
-export { User, Guild, Role, Channel, Quote, Attachement, FileAttachement, VideoAttachement };
+/* --- Event Types --- */
+
+class Message {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {String}
+     */
+    get channel_type() {
+        return this.#raw.channel_type;
+    }
+
+    /**
+     * @return {Number}
+     */
+    get type() {
+        return this.#raw.type;
+    }
+
+    /**
+     * @return {String}
+     */
+    get target_id() {
+        return this.#raw.target_id;
+    }
+
+    /**
+     * @return {String}
+     */
+    get author_id() {
+        return this.#raw.author_id;
+    }
+
+    /**
+     * @return {String}
+     */
+    get content() {
+        return this.#raw.content;
+    }
+
+    /**
+     * @return {String}
+     */
+    get msg_id() {
+        return this.#raw.msg_id;
+    }
+
+    /**
+     * @return {Number}
+     */
+    get msg_timestamp() {
+        return this.#raw.msg_timestamp;
+    }
+
+    /**
+     * @return {String}
+     */
+    get nonce() {
+        return this.#raw.nonce;
+    }
+}
+
+class MessageExtra {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {Number}
+     */
+    get type() {
+        return this.#raw.type;
+    }
+
+    /**
+     * @return {String}
+     */
+    get code() {
+        return this.#raw.code;
+    }
+
+    /**
+     * @return {String}
+     */
+    get guild_id() {
+        return this.#raw.guild_id;
+    }
+
+    /**
+     * @return {User}
+     */
+    get author() {
+        return this.#raw.author;
+    }
+}
+
+class TextMessageExtra extends MessageExtra {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {String}
+     */
+    get channel_name() {
+        return this.#raw.channel_name;
+    }
+
+    /**
+     * @return {Number[]}
+     */
+    get mention() {
+        return this.#raw.mention;
+    }
+
+    /**
+     * @return {Boolean}
+     */
+    get mention_all() {
+        return this.#raw.mention_all;
+    }
+
+    /**
+     * @return {Number[]}
+     */
+    get mention_roles() {
+        return this.#raw.mention_roles;
+    }
+
+    /**
+     * @return {Boolean}
+     */
+    get mention_here() {
+        return this.#raw.mention_here;
+    }
+}
+
+class TextMessage extends Message {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {TextMessageExtra}
+     */
+    get extra() {
+        return this.#raw.extra;
+    }
+}
+
+class FileMessageExtra extends MessageExtra {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {FileAttachement}
+     */
+    get attachements() {
+        return this.#raw.attachements;
+    }
+}
+
+class FileMessage extends Message {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {FileMessageExtra}
+     */
+    get extra() {
+        return this.#raw.extra;
+    }
+}
+
+class PictureMessageExtra extends MessageExtra {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {Attachement}
+     */
+    get attachements() {
+        return this.#raw.attachements;
+    }
+}
+
+class PictureMessage extends Message {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {PictureMessageExtra}
+     */
+    get extra() {
+        return this.#raw.extra;
+    }
+}
+
+class VideoMessageExtra extends MessageExtra {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {VideoAttachement}
+     */
+    get attachements() {
+        return this.#raw.attachements;
+    }
+}
+
+class VideoMessage extends Message {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {VideoMessageExtra}
+     */
+    get extra() {
+        return this.#raw.extra;
+    }
+}
+
+export {
+    User,
+    Guild,
+    Role,
+    Channel,
+    Quote,
+    Attachement,
+    FileAttachement,
+    VideoAttachement,
+    TextMessage,
+    PictureMessage,
+    VideoMessage,
+    FileMessage,
+};
