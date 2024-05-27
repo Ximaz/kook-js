@@ -67,6 +67,31 @@ class Role {
 
 class GuildRole extends Role {}
 
+class UserTagInfo {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {String}
+     */
+    get color() {
+        return this.#raw.color;
+    }
+
+    /**
+     * @return {String}
+     */
+    get text() {
+        return this.#raw.text;
+    }
+}
+
 class User {
     #raw;
 
@@ -138,6 +163,13 @@ class User {
      */
     get mobile_verified() {
         return this.#raw.mobile_verified;
+    }
+
+    /**
+     * @return {UserTagInfo}
+     */
+    get tag_info() {
+        return this.#raw.tag_info;
     }
 }
 
@@ -635,6 +667,38 @@ class VideoAttachement extends FileAttachement {
     }
 }
 
+class KMarkdown {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {String}
+     */
+    get raw_content() {
+        return this.#raw.raw_content;
+    }
+
+    /**
+     * @return {Number[]}
+     */
+    get mention_part() {
+        return this.#raw.mention_part;
+    }
+
+    /**
+     * @return {Number[]}
+     */
+    get mention_role_part() {
+        return this.#raw.mention_role_part;
+    }
+}
+
 /* --- Event Types --- */
 
 class Message {
@@ -701,6 +765,13 @@ class Message {
      */
     get nonce() {
         return this.#raw.nonce;
+    }
+
+    /**
+     * @return {String}
+     */
+    get verify_token() {
+        return this.#raw.verify_token;
     }
 }
 
@@ -915,7 +986,51 @@ class VideoMessage extends Message {
     }
 }
 
+class KMarkdownMessageExtra extends MessageExtra {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {Number[]}
+     */
+    get nav_channels() {
+        return this.#raw.nav_channels;
+    }
+
+    /**
+     * @return {KMarkdown}
+     */
+    get kmarkdown() {
+        return this.#raw.kmarkdown;
+    }
+}
+
+class KMarkdownMessage extends Message {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {KMarkdownMessageExtra}
+     */
+    get extra() {
+        return this.#raw.extra;
+    }
+}
+
 export {
+    /* --- Trivial Types --- */
     User,
     Guild,
     Role,
@@ -924,8 +1039,12 @@ export {
     Attachement,
     FileAttachement,
     VideoAttachement,
+    KMarkdown,
+
+    /* --- Event Types --- */
     TextMessage,
     PictureMessage,
     VideoMessage,
     FileMessage,
+    KMarkdownMessage
 };
