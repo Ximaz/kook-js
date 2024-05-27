@@ -1,0 +1,25 @@
+{
+  "name": "kook",
+  "version": "0.0.1",
+  "description": "A Javascript SDK to program bots and webhooks for the Kook (kaiheila) application",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ximaz/kook-js.git"
+  },
+  "keywords": [
+    "kaiheila",
+    "kook"
+  ],
+  "author": "DURAND Malo <malo.durand@epitech.eu>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ximaz/kook-js/issues"
+  },
+  "homepage": "https://github.com/Ximaz/kook-js#readme"
+}
