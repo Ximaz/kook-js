@@ -9,6 +9,16 @@ import { Role } from "./types/Role.js";
 import { Channel } from "./types/Channel.js";
 import { Quote } from "./types/Quote.js";
 import { Attachment } from "./types/Attachment.js";
-import { TextMessage, PictureMessage } from "./types/Message.js";
+import { TextMessage, PictureMessage, VideoMessage } from "./types/Message.js";
 
-export { User, Guild, Role, Channel, Quote, Attachment, TextMessage, PictureMessage };
+export {
+    User,
+    Guild,
+    Role,
+    Channel,
+    Quote,
+    Attachment,
+    TextMessage,
+    PictureMessage,
+    VideoMessage,
+};

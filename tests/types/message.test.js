@@ -1,4 +1,4 @@
-import { TextMessage, PictureMessage } from "../../src/types.js";
+import { TextMessage, PictureMessage, VideoMessage } from "../../src/types.js";
 
 test("Checks that TextMessage class correctly binds attributes of a raw response", function () {
     const raw = {
@@ -64,6 +64,45 @@ test("Checks that PictureMessage class correctly binds attributes of a raw respo
         },
     };
     const obj = new PictureMessage(raw);
+
+    for (const k of Object.keys(raw)) expect(raw[k]).toBe(obj[k]);
+});
+
+test("Checks that VideoMessage class correctly binds attributes of a raw response", function () {
+    const raw = {
+        channel_type: "GROUP",
+        type: 3,
+        target_id: "xxxxx",
+        author_id: "xxxxx",
+        content: "https://img.kaiheila.cn/attachments/2020-12/11/asd.mp4",
+        msg_id: "67637d4c-xxxx-xxxx-xxxx-xxxxx",
+        msg_timestamp: 1607679613599,
+        nonce: "",
+        extra: {
+            type: 3,
+            guild_id: "xxxx",
+            code: "",
+            attachments: {
+                type: "video",
+                url: "https://img.kaiheila.cn/attachments/2020-12/11/asd.mp4",
+                name: "002iQMhagx07Fx0S41200323o0E010.mp4",
+                file_type: "video/mp4",
+                size: 722882,
+                duration: 15.673,
+                width: 360,
+                height: 635,
+            },
+            author: {
+                identify_num: "xxxxx",
+                avatar: "https://img.kaiheila.cn/avatars/2020-11/r20f20j9.jpg/icon",
+                username: "xxxxx",
+                id: "xxxxx",
+                nickname: "xxxxx",
+                roles: [],
+            },
+        },
+    };
+    const obj = new VideoMessage(raw);
 
     for (const k of Object.keys(raw)) expect(raw[k]).toBe(obj[k]);
 });
