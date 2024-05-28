@@ -1,4 +1,4 @@
-import { TextMessage, PictureMessage, VideoMessage } from "../../src/types.js";
+import { TextMessage, PictureMessage, VideoMessage, FileMessage } from "../../src/types.js";
 
 test("Checks that TextMessage class correctly binds attributes of a raw response", function () {
     const raw = {
@@ -103,6 +103,42 @@ test("Checks that VideoMessage class correctly binds attributes of a raw respons
         },
     };
     const obj = new VideoMessage(raw);
+
+    for (const k of Object.keys(raw)) expect(raw[k]).toBe(obj[k]);
+});
+
+test("Checks that FileMessage class correctly binds attributes of a raw response", function () {
+    const raw = {
+        channel_type: "GROUP",
+        type: 4,
+        target_id: "xxxx",
+        author_id: "xxxx",
+        content: "https://img.kaiheila.cn/attachments/2020-12/11/asd.txt",
+        msg_id: "67637d4c-xxxx-xxxx-xxxx-xxxxx",
+        msg_timestamp: 1607679683305,
+        nonce: "",
+        extra: {
+            type: 4,
+            guild_id: "xxxx",
+            code: "",
+            attachments: {
+                type: "file",
+                url: "https://img.kaiheila.cn/attachments/2020-12/11/asd.txt",
+                name: "voice-message.txt",
+                file_type: "text/plain",
+                size: 7320,
+            },
+            author: {
+                identify_num: "xxxx",
+                avatar: "https://img.kaiheila.cn/avatars/2020-11/asd.jpg/icon",
+                username: "xxxx",
+                id: "xxxx",
+                nickname: "xxxx",
+                roles: [],
+            },
+        },
+    };
+    const obj = new FileMessage(raw);
 
     for (const k of Object.keys(raw)) expect(raw[k]).toBe(obj[k]);
 });

@@ -9,7 +9,12 @@ import { Role } from "./types/Role.js";
 import { Channel } from "./types/Channel.js";
 import { Quote } from "./types/Quote.js";
 import { Attachment } from "./types/Attachment.js";
-import { TextMessage, PictureMessage, VideoMessage } from "./types/Message.js";
+import {
+    TextMessage,
+    PictureMessage,
+    VideoMessage,
+    FileMessage,
+} from "./types/Message.js";
 
 export {
     User,
@@ -21,4 +26,5 @@ export {
     TextMessage,
     PictureMessage,
     VideoMessage,
+    FileMessage,
 };
