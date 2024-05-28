@@ -5,5 +5,6 @@
 
 import { User } from "./types/User.js";
 import { Guild } from "./types/Guild.js";
+import { Role } from "./types/Role.js";
 
-export { User, Guild };
+export { User, Guild, Role };

@@ -16,32 +16,44 @@ class User {
     /**
      * @return {String}
      */
-    get id() { return this.#raw.id; }
+    get id() {
+        return this.#raw.id;
+    }
 
     /**
      * @return {String}
      */
-    get username() { return this.#raw.username; }
+    get username() {
+        return this.#raw.username;
+    }
 
     /**
      * @return {String}
      */
-    get identify_num() { return this.#raw.identify_num; }
+    get identify_num() {
+        return this.#raw.identify_num;
+    }
 
     /**
      * @return {String}
      */
-    get avatar() { return this.#raw.avatar; }
+    get avatar() {
+        return this.#raw.avatar;
+    }
 
     /**
      * @return {String}
      */
-    get vip_avatar() { return this.#raw.vip_avatar; }
+    get vip_avatar() {
+        return this.#raw.vip_avatar;
+    }
 
     /**
      * @return {String}
      */
-    get nickname() { return this.#raw.nickname; }
+    get nickname() {
+        return this.#raw.nickname;
+    }
 
     /**
      * @description
@@ -50,27 +62,37 @@ class User {
      * 10 - `banned`
      * @return {Number}
      */
-    get status() { return this.#raw.status; }
+    get status() {
+        return this.#raw.status;
+    }
 
     /**
      * @return {Boolean}
      */
-    get online() { return this.#raw.online; }
+    get online() {
+        return this.#raw.online;
+    }
 
     /**
      * @return {Boolean}
      */
-    get bot() { return this.#raw.bot; }
+    get bot() {
+        return this.#raw.bot;
+    }
 
     /**
      * @return {Boolean}
      */
-    get mobile_verified() { return this.#raw.mobile_verified; }
+    get mobile_verified() {
+        return this.#raw.mobile_verified;
+    }
 
     /**
      * @return {Number[]}
      */
-    get roles() { return this.#raw.roles; }
+    get roles() {
+        return this.#raw.roles;
+    }
 }
 
 export { User };

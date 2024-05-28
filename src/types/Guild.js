@@ -3,52 +3,7 @@
  * @description Guild object : https://developer.kookapp.cn/doc/objects#服务器 Guild
  */
 
-
-class GuildRole {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get name() { return this.#raw.name; }
-
-    /**
-     * @return {Number}
-     */
-    get role_id() { return this.#raw.role_id; }
-
-    /**
-     * @return {Number}
-     */
-    get color() { return this.#raw.color; }
-
-    /**
-     * @return {Number}
-     */
-    get position() { return this.#raw.position; }
-
-    /**
-     * @return {Number}
-     */
-    get hoist() { return this.#raw.hoist; }
-
-    /**
-     * @return {Number}
-     */
-    get mentionable() { return this.#raw.mentionable; }
-
-    /**
-     * @return {Number}
-     */
-    get permissions() { return this.#raw.permissions; }
-}
+import { Role } from "./Role.js";
 
 class GuildChannel {
     #raw;
@@ -63,42 +18,58 @@ class GuildChannel {
     /**
      * @return {String}
      */
-    get id() { return this.#raw.id; }
+    get id() {
+        return this.#raw.id;
+    }
 
     /**
      * @return {String}
      */
-    get user_id() { return this.#raw.user_id; }
+    get user_id() {
+        return this.#raw.user_id;
+    }
 
     /**
      * @return {String}
      */
-    get parent_id() { return this.#raw.parent_id; }
+    get parent_id() {
+        return this.#raw.parent_id;
+    }
 
     /**
      * @return {String}
      */
-    get name() { return this.#raw.name; }
+    get name() {
+        return this.#raw.name;
+    }
 
     /**
      * @return {Number}
      */
-    get type() { return this.#raw.type; }
+    get type() {
+        return this.#raw.type;
+    }
 
     /**
      * @return {Number}
      */
-    get level() { return this.#raw.level; }
+    get level() {
+        return this.#raw.level;
+    }
 
     /**
      * @return {Number}
      */
-    get limit_amount() { return this.#raw.limit_amount; }
+    get limit_amount() {
+        return this.#raw.limit_amount;
+    }
 
     /**
      * @return {Boolean}
      */
-    get is_category() { return this.#raw.is_category; }
+    get is_category() {
+        return this.#raw.is_category;
+    }
 }
 
 class Guild {
@@ -114,47 +85,65 @@ class Guild {
     /**
      * @return {String}
      */
-    get id() { return this.#raw.id; }
+    get id() {
+        return this.#raw.id;
+    }
 
     /**
      * @return {String}
      */
-    get name() { return this.#raw.name; }
+    get name() {
+        return this.#raw.name;
+    }
 
     /**
      * @return {String}
      */
-    get topic() { return this.#raw.topic; }
+    get topic() {
+        return this.#raw.topic;
+    }
 
     /**
      * @return {String}
      */
-    get user_id() { return this.#raw.user_id; }
+    get user_id() {
+        return this.#raw.user_id;
+    }
 
     /**
      * @return {String}
      */
-    get icon() { return this.#raw.icon; }
+    get icon() {
+        return this.#raw.icon;
+    }
 
     /**
      * @return {String}
      */
-    get region() { return this.#raw.region; }
+    get region() {
+        return this.#raw.region;
+    }
 
     /**
      * @return {String}
      */
-    get open_id() { return this.#raw.open_id; }
+    get open_id() {
+        return this.#raw.open_id;
+    }
 
     /**
      * @return {String}
      */
-    get default_channel_id() { return this.#raw.default_channel_id; }
+    get default_channel_id() {
+        return this.#raw.default_channel_id;
+    }
 
     /**
      * @return {String}
      */
-    get welcome_channel_id() { return this.#raw.welcome_channel_id; }
+    get welcome_channel_id() {
+        return this.#raw.welcome_channel_id;
+    }
 
     /**
      * @description
@@ -164,22 +153,30 @@ class Guild {
      * 3 - No notification at all
      * @return {Number}
      */
-    get notify_type() { return this.#raw.notify_type; }
+    get notify_type() {
+        return this.#raw.notify_type;
+    }
 
     /**
      * @return {Boolean}
      */
-    get enable_open() { return this.#raw.enable_open; }
+    get enable_open() {
+        return this.#raw.enable_open;
+    }
 
     /**
-     * @return {GuildRole[]}
+     * @return {Role[]}
      */
-    get roles() { return this.#raw.roles };
+    get roles() {
+        return this.#raw.roles;
+    }
 
     /**
      * @return {GuildChannel[]}
      */
-    get channels() { return this.#raw.channels };
+    get channels() {
+        return this.#raw.channels;
+    }
 }
 
 export { Guild };

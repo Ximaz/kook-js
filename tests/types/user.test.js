@@ -19,6 +19,6 @@ test("Checks that User class correctly binds attributes of a raw response", func
     };
     const user = new User(raw);
 
-    for (const k of Object.values(raw))
+    for (const k of Object.keys(raw))
         expect(raw[k]).toBe(user[k]);
 })
