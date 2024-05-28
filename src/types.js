@@ -7,5 +7,6 @@ import { User } from "./types/User.js";
 import { Guild } from "./types/Guild.js";
 import { Role } from "./types/Role.js";
 import { Channel } from "./types/Channel.js";
+import { Quote } from "./types/Quote.js";
 
-export { User, Guild, Role, Channel };
+export { User, Guild, Role, Channel, Quote };
