@@ -3,6 +3,8 @@
  * @description Message objects : https://developer.kookapp.cn/doc/event/message
  */
 
+/* --- TEXT MESSAGE --- */
+
 class TextMessageExtraAuthor {
     #raw;
 
@@ -204,4 +206,211 @@ class TextMessage {
     }
 }
 
-export { TextMessage };
+/* --- Picture MESSAGE --- */
+
+class PictureMessageExtraAttachment {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {String}
+     */
+    get type() {
+        return this.#raw.type;
+    }
+
+    /**
+     * @return {String}
+     */
+    get url() {
+        return this.#raw.url;
+    }
+
+    /**
+     * @return {String}
+     */
+    get name() {
+        return this.#raw.name;
+    }
+}
+
+class PictureMessageExtraAuthor {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {String}
+     */
+    get identify_num() {
+        return this.#raw.identify_num;
+    }
+
+    /**
+     * @return {String}
+     */
+    get avatar() {
+        return this.#raw.avatar;
+    }
+
+    /**
+     * @return {String}
+     */
+    get username() {
+        return this.#raw.username;
+    }
+
+    /**
+     * @return {String}
+     */
+    get id() {
+        return this.#raw.id;
+    }
+
+    /**
+     * @return {String}
+     */
+    get nickname() {
+        return this.#raw.nickname;
+    }
+
+    /**
+     * @return {Number[]}
+     */
+    get roles() {
+        return this.#raw.roles;
+    }
+}
+
+class PictureMessageExtra {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {String}
+     */
+    get guild_id() {
+        return this.#raw.guild_id;
+    }
+
+    /**
+     * @return {String}
+     */
+    get code() {
+        return this.#raw.code;
+    }
+
+    /**
+     * @return {Number}
+     */
+    get type() {
+        return this.#raw.type;
+    }
+
+    /**
+     * @return {PictureMessageExtraAttachment}
+     */
+    get attachments() {
+        return this.#raw.attachments;
+    }
+
+    /**
+     * @return {PictureMessageExtraAuthor}
+     */
+    get author() {
+        return this.#raw.author;
+    }
+}
+
+class PictureMessage {
+    #raw;
+
+    /**
+     * @param {Object} raw
+     */
+    constructor(raw) {
+        this.#raw = Object.freeze(raw);
+    }
+
+    /**
+     * @return {String}
+     */
+    get channel_type() {
+        return this.#raw.channel_type;
+    }
+
+    /**
+     * @return {String}
+     */
+    get target_id() {
+        return this.#raw.target_id;
+    }
+
+    /**
+     * @return {String}
+     */
+    get author_id() {
+        return this.#raw.author_id;
+    }
+
+    /**
+     * @return {String}
+     */
+    get content() {
+        return this.#raw.content;
+    }
+
+    /**
+     * @return {String}
+     */
+    get msg_id() {
+        return this.#raw.msg_id;
+    }
+
+    /**
+     * @return {String}
+     */
+    get nonce() {
+        return this.#raw.nonce;
+    }
+
+    /**
+     * @return {Number}
+     */
+    get type() {
+        return this.#raw.type;
+    }
+
+    /**
+     * @return {Number}
+     */
+    get msg_timestamp() {
+        return this.#raw.msg_timestamp;
+    }
+
+    /**
+     * @return {PictureMessageExtra}
+     */
+    get extra() {
+        return this.#raw.extra;
+    }
+}
+
+export { TextMessage, PictureMessage };
