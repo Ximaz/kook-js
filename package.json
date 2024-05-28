@@ -17,7 +17,7 @@
     "kook"
   ],
   "author": "DURAND Malo <malo.durand@epitech.eu>",
-  "license": "ISC",
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/Ximaz/kook-js/issues"
   },
