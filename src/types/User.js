@@ -44,7 +44,10 @@ class User {
     get nickname() { return this.#raw.nickname; }
 
     /**
-     * @brief Returns 0 or 1 for "normal", 10 for "banned"
+     * @description
+     * 0  - `normal`
+     * 1  - `normal`
+     * 10 - `banned`
      * @return {Number}
      */
     get status() { return this.#raw.status; }

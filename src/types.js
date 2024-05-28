@@ -4,5 +4,6 @@
  */
 
 import { User } from "./types/User.js";
+import { Guild } from "./types/Guild.js";
 
-export { User };
+export { User, Guild };
