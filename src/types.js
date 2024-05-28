@@ -14,7 +14,8 @@ import {
     PictureMessage,
     VideoMessage,
     FileMessage,
-    KMarkdownMessage
+    KMarkdownMessage,
+    CardMessage,
 } from "./types/Message.js";
 
 export {
@@ -28,5 +29,6 @@ export {
     PictureMessage,
     VideoMessage,
     FileMessage,
-    KMarkdownMessage
+    KMarkdownMessage,
+    CardMessage,
 };

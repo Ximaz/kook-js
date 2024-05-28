@@ -4,6 +4,7 @@ import {
     VideoMessage,
     FileMessage,
     KMarkdownMessage,
+    CardMessage,
 } from "../../src/types.js";
 
 test("Checks that TextMessage class correctly binds attributes of a raw response", function () {
@@ -193,6 +194,61 @@ test("Checks that KMarkdownMessage class correctly binds attributes of a raw res
         verify_token: "xxx",
     };
     const obj = new KMarkdownMessage(raw);
+
+    for (const k of Object.keys(raw)) expect(raw[k]).toBe(obj[k]);
+});
+
+test("Checks that CardMessage class correctly binds attributes of a raw response", function () {
+    const raw = {
+        channel_type: "GROUP",
+        type: 12,
+        target_id: "48818200000000000",
+        author_id: "2418200000",
+        content: {
+            type: "item",
+            data: {
+                user_id: "2418200000",
+                target_id: "2418200000",
+                item_id: 10001,
+            },
+        },
+        extra: {
+            type: 12,
+            mention: ["2418200000"],
+            author: {
+                id: "2418200000",
+                username: "tz-un",
+                identify_num: "5618",
+                online: false,
+                os: "Websocket",
+                status: 1,
+                avatar: "https://img.kaiheila.cn/avatars/2020-02/xxxx.jpg/icon",
+                tag_info: {
+                    color: "#6666CC",
+                    text: "KOOK",
+                },
+                nickname: "12316993",
+                roles: [111, 112],
+            },
+            kmarkdown: {
+                mention: ["2418200000"],
+                mention_part: [
+                    {
+                        id: "2418200000",
+                        username: "tz-un",
+                        full_name: "tz-un#5618",
+                        avatar: "https://img.kaiheila.cn/avatars/2020-02/xxxx.jpg/icon",
+                    },
+                ],
+                item_part: [],
+            },
+        },
+        msg_id: "553f1f78-xxxxx-39c65d9c5584",
+        msg_timestamp: 1613996743849,
+        nonce: "",
+        verify_token: "xxxxx",
+    };
+    const obj = new CardMessage(raw);
 
     for (const k of Object.keys(raw)) expect(raw[k]).toBe(obj[k]);
 });
