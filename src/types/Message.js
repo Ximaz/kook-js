@@ -1225,6 +1225,7 @@ class KMarkdownMessage {
 }
 
 /* --- CARD MESSAGE : https://developer.kookapp.cn/doc/event/message#Card 消息 --- */
+/* --- TODO: https://developer.kookapp.cn/doc/cardmessage */
 
 class CardMessageExtraAuthorTagInfo {
     #raw;
