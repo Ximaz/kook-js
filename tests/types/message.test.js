@@ -1,4 +1,10 @@
-import { TextMessage, PictureMessage, VideoMessage, FileMessage } from "../../src/types.js";
+import {
+    TextMessage,
+    PictureMessage,
+    VideoMessage,
+    FileMessage,
+    KMarkdownMessage,
+} from "../../src/types.js";
 
 test("Checks that TextMessage class correctly binds attributes of a raw response", function () {
     const raw = {
@@ -139,6 +145,54 @@ test("Checks that FileMessage class correctly binds attributes of a raw response
         },
     };
     const obj = new FileMessage(raw);
+
+    for (const k of Object.keys(raw)) expect(raw[k]).toBe(obj[k]);
+});
+
+test("Checks that KMarkdownMessage class correctly binds attributes of a raw response", function () {
+    const raw = {
+        channel_type: "GROUP",
+        type: 9,
+        target_id: "48818200000000000",
+        author_id: "2418200000",
+        content: "*Hello World*",
+        extra: {
+            type: 9,
+            guild_id: "6016389914000000",
+            channel_name: "123123",
+            mention: [],
+            mention_all: false,
+            mention_roles: [],
+            mention_here: false,
+            nav_channels: [],
+            code: "",
+            author: {
+                id: "2418200000",
+                username: "tz-un",
+                identify_num: "5618",
+                online: false,
+                os: "Websocket",
+                status: 1,
+                avatar: "https://img.kaiheila.cn/avatars/2020-02/xxxx.jpg/icon",
+                tag_info: {
+                    color: "#6666CC",
+                    text: "KOOK",
+                },
+                nickname: "12316993",
+                roles: [111, 112],
+            },
+            kmarkdown: {
+                raw_content: "Hello World",
+                mention_part: [],
+                mention_role_part: [],
+            },
+        },
+        msg_id: "789c0b23-xxxx-f7ae1a946f11",
+        msg_timestamp: 1613996877757,
+        nonce: "",
+        verify_token: "xxx",
+    };
+    const obj = new KMarkdownMessage(raw);
 
     for (const k of Object.keys(raw)) expect(raw[k]).toBe(obj[k]);
 });
