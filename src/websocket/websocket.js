@@ -6,8 +6,9 @@
 import { EventEmitter } from "node:events";
 import { inflateSync } from "node:zlib";
 
-import APIExecutor from "../api/index.js";
 import ws from "ws";
+
+import APIExecutor from "../api/index.js";
 
 /* https://developer.kookapp.cn/doc/reference#API 版本管理 */
 const API_VERSION = 3;

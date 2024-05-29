@@ -3,7 +3,7 @@
  * @description Kook API Executor
  */
 
-import axios from "axios";
+import axios, { Method } from "axios";
 
 /**
  * @param {Map<string, string>} headers Axios' response headers
@@ -52,7 +52,7 @@ class APIExecutor {
      * @property {any} params
      * @property {any} headers
      *
-     * @param {String} method The method to use
+     * @param {Method} method The method to use
      * @param {String} endpoint The endpoint to hit
      * @param {APIExecutorOptions} options The options
      */
