@@ -38,7 +38,7 @@ class APIExecutor {
     constructor(version, token) {
         this.#api = axios.create({
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bot ${token}`,
                 "Accept-Language": "en-US",
                 Accept: "application/json",
             },
@@ -78,6 +78,7 @@ class APIExecutor {
                 throw new Error(
                     `${response.data.message} (Error code : ${response.data.code})`
                 );
+            return response;
         } catch (err) {
             if (err.response?.data)
                 throw new Error(JSON.stringify(err.response.data));
