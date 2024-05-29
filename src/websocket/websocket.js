@@ -34,7 +34,15 @@ import {
     GuildEvent,
     GuildAddedBlockListEvent,
     GuildDeletedBlockListEvent,
-    GuildEmojiEvent
+    GuildEmojiEvent,
+
+    /* User Events */
+    UserJoinedChannelEvent,
+    UserExitedChannelEvent,
+    UserUpdatedEvent,
+    UserSelfJoinedGuildEvent,
+    UserSelfExitedGuildEvent,
+    UserMessageButtonClickEvent,
 } from "../events/index.js";
 import APIExecutor from "../api/index.js";
 
@@ -82,6 +90,14 @@ import APIExecutor from "../api/index.js";
  * @property {function(GuildEmojiEvent): void} added_emoji
  * @property {function(GuildEmojiEvent): void} removed_emoji
  * @property {function(GuildEmojiEvent): void} updated_emoji
+ *
+ * User Events
+ * @property {function(UserJoinedChannelEvent): void} joined_channel
+ * @property {function(UserExitedChannelEvent): void} exited_channel
+ * @property {function(UserUpdatedEvent): void} user_updated
+ * @property {function(UserSelfJoinedGuildEvent): void} self_joined_guild
+ * @property {function(UserSelfExitedGuildEvent): void} self_exited_guild
+ * @property {function(UserMessageButtonClickEvent): void} message_btn_click
  */
 
 /* https://developer.kookapp.cn/doc/reference#API 版本管理 */

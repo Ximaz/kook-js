@@ -11,9 +11,9 @@ client.on("debug", function(msg) {
     console.log(msg);
 })
 
-client.on("added_emoji", function(emoji) {
-    console.log(`Emoji '${emoji.extra.body.name}' has been added`);
-})
+client.on("user_updated", function(user) {
+    console.log(user.extra.body);
+});
 
 client.login().catch(function (err) {
     console.error(err);
