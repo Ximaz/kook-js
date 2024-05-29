@@ -36,6 +36,9 @@ import {
     GuildDeletedBlockListEvent,
     GuildEmojiEvent,
 
+    /* Message Events */
+    MessageEvent,
+
     /* User Events */
     UserJoinedChannelEvent,
     UserExitedChannelEvent,
@@ -51,7 +54,6 @@ import APIExecutor from "../api/index.js";
  * @property {function(): void} ready
  * @property {function(): void} disconnected
  * @property {function(any): void} debug
- * @property {function(any): void} message
  *
  * Channel Events
  * @property {function(ChannelReactionEvent): void} added_reaction
@@ -90,6 +92,9 @@ import APIExecutor from "../api/index.js";
  * @property {function(GuildEmojiEvent): void} added_emoji
  * @property {function(GuildEmojiEvent): void} removed_emoji
  * @property {function(GuildEmojiEvent): void} updated_emoji
+ *
+ * Message Events
+ * @property {function(MessageEvent): void} message
  *
  * User Events
  * @property {function(UserJoinedChannelEvent): void} joined_channel
@@ -138,7 +143,7 @@ class KookWebsocket extends EventEmitter {
         this.emit("debug", { s, d });
         switch (s) {
             case WEBSOCKET_EVENTS.EVENT:
-                const eventName = d.extra?.type || "message";
+                const eventName = isNaN(d.extra?.type) ? d.extra?.type : "message";
                 this.emit(eventName, d);
                 break;
             case WEBSOCKET_EVENTS.HANDSHAKE:

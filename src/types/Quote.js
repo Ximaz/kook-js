@@ -35,7 +35,7 @@ class QuoteAuthor {
     }
 
     /**
-     * @return {String}
+     * @return {"Websocket" | "Webhook"}
      */
     get os() {
         return this.#raw.os;
@@ -63,11 +63,7 @@ class QuoteAuthor {
     }
 
     /**
-     * @description
-     * 0  - `normal`
-     * 1  - `normal`
-     * 10 - `banned`
-     * @return {Number}
+     * @return {0 | 1 | 10}
      */
     get status() {
         return this.#raw.status;

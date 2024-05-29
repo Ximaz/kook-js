@@ -67,7 +67,7 @@ class ChannelPermissionUserUser {
     }
 
     /**
-     * @return {String}
+     * @return {"Websocket" | "Webhook"}
      */
     get os() {
         return this.#raw.os;
@@ -88,7 +88,7 @@ class ChannelPermissionUserUser {
     }
 
     /**
-     * @return {String}
+     * @return {0 | 1 | 10}
      */
     get status() {
         return this.#raw.status;

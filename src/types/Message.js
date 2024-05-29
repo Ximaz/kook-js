@@ -949,14 +949,14 @@ class KMarkdownMessageExtraAuthor {
     }
 
     /**
-     * @return {String}
+     * @return {"Websocket" | "Webhook"}
      */
     get os() {
         return this.#raw.os;
     }
 
     /**
-     * @return {Number}
+     * @return {0 | 1 | 10}
      */
     get status() {
         return this.#raw.status;
@@ -1298,14 +1298,14 @@ class CardMessageExtraAuthor {
     }
 
     /**
-     * @return {String}
+     * @return {"Websocket" | "Webhook"}
      */
     get os() {
         return this.#raw.os;
     }
 
     /**
-     * @return {Number}
+     * @return {0 | 1 | 10}
      */
     get status() {
         return this.#raw.status;
