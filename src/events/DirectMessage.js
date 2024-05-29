@@ -1,6 +1,6 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Kook Channel events : https://developer.kookapp.cn/doc/event/direct-message
+ * @description Kook DirectMessage events : https://developer.kookapp.cn/doc/event/direct-message
  */
 
 import { RawEvent } from "./RawEvent.js";

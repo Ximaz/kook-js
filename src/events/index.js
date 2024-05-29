@@ -5,3 +5,4 @@
 
 export * from "./Channel.js";
 export * from "./DirectMessage.js";
+export * from "./GuildMember.js";

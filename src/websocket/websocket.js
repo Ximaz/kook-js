@@ -15,10 +15,17 @@ import {
     ChannelUpdatedEvent,
     ChannelDeletedEvent,
     ChannelPinEvent,
+
     /* DirectMessage Events */
     DirectMessageUpdatedEvent,
     DirectMessageDeletedEvent,
     DirectMessageReactionEvent,
+
+    /* GuildMember Events */
+    GuildMemberJoinedEvent,
+    GuildMemberExitedEvent,
+    GuildMemberUpdatedEvent,
+    GuildMemberPresenceEvent,
 } from "../events/index.js";
 import APIExecutor from "../api/index.js";
 
@@ -43,8 +50,15 @@ import APIExecutor from "../api/index.js";
  * DirectMessage Events
  * @property {function(DirectMessageReactionEvent): void} private_added_reaction
  * @property {function(DirectMessageReactionEvent): void} private_deleted_reaction
- * @property {function(ChannelMessageUpdatedEvent): void} updated_message
- * @property {function(ChannelMessageDeletedEvent): void} deleted_message
+ * @property {function(DirectMessageUpdatedEvent): void} updated_message
+ * @property {function(DirectMessageDeletedEvent): void} deleted_message
+ *
+ * GuildMember Events
+ * @property {function(GuildMemberJoinedEvent): void} joined_guild
+ * @property {function(GuildMemberExitedEvent): void} exited_guild
+ * @property {function(GuildMemberUpdatedEvent): void} updated_guild_member
+ * @property {function(GuildMemberPresenceEvent): void} guild_member_online
+ * @property {function(GuildMemberPresenceEvent): void} guild_member_offline
  */
 
 /* https://developer.kookapp.cn/doc/reference#API 版本管理 */
