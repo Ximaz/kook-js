@@ -123,8 +123,9 @@ class KookWebsocket extends EventEmitter {
 
     /**
      * Register an event listener for the given event.
-     * @param {keyof KookEvents} event
-     * @param {KookEvents[keyof KookEvents]} listener
+     * @template {keyof KookEvents} K
+     * @param {K} event
+     * @param {KookEvents[K]} listener
      * @returns {this}
      */
     on(event, listener) {
@@ -134,8 +135,9 @@ class KookWebsocket extends EventEmitter {
 
     /**
      * Register a one-time event listener for the given event.
-     * @param {keyof KookEvents} event
-     * @param {KookEvents[keyof KookEvents]} listener
+     * @template {keyof KookEvents} K
+     * @param {K} event
+     * @param {KookEvents[K]} listener
      * @returns {this}
      */
     once(event, listener) {
@@ -145,8 +147,9 @@ class KookWebsocket extends EventEmitter {
 
     /**
      * Emit the given event with the provided arguments.
-     * @param {keyof KookEvents} event
-     * @param {...any} args
+     * @template {keyof KookEvents} K
+     * @param {K} event
+     * @param {...Parameters<KookEvents[K]>} args
      * @returns {Boolean}
      */
     emit(event, ...args) {
