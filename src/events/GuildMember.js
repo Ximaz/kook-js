@@ -3,298 +3,116 @@
  * @description Kook GuildMember events : https://developer.kookapp.cn/doc/event/guild-member
  */
 
-import { RawEvent } from "./RawEvent.js";
+/**
+ * @typedef {Object} GuildMemberJoinedGuildExtraBody
+ * @property {String} user_id
+ * @property {Number} joined_at
+ *
+ * @typedef {Object} GuildMemberJoinedGuildExtra
+ * @property {"joined_guild"} type
+ * @property {GuildMemberJoinedGuildExtraBody} body
+ *
+ * @typedef {Object} GuildMemberJoinedGuild
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildMemberJoinedGuildExtra} extra
+ */
 
-/* --- GUILD MEMBER JOINED EVENT : https://developer.kookapp.cn/doc/event/guild-member#新成员加入服务器 */
+/**
+ * @typedef {Object} GuildMemberExitedGuildExtraBody
+ * @property {String} user_id
+ * @property {Number} exited_at
+ *
+ * @typedef {Object} GuildMemberExitedGuildExtra
+ * @property {"exited_guild"} type
+ * @property {GuildMemberExitedGuildExtraBody} body
+ *
+ * @typedef {Object} GuildMemberExitedGuild
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildMemberExitedGuildExtra} extra
+ */
 
-class GuildMemberJoinedEventExtraBody {
-    #raw;
+/**
+ * @typedef {Object} GuildMemberUpdatedGuildMemberExtraBody
+ * @property {String} user_id
+ * @property {String} nickname
+ *
+ * @typedef {Object} GuildMemberUpdatedGuildMemberExtra
+ * @property {"updated_guild_member"} type
+ * @property {GuildMemberUpdatedGuildMemberExtraBody} body
+ *
+ * @typedef {Object} GuildMemberUpdatedGuildMember
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildMemberUpdatedGuildMemberExtra} extra
+ */
 
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
+/**
+ * @typedef {Object} GuildMemberGuildMemberOnlineExtraBody
+ * @property {String} user_id
+ * @property {Number} event_time
+ * @property {String[]} guilds
+ *
+ * @typedef {Object} GuildMemberGuildMemberOnlineExtra
+ * @property {"guild_member_online"} type
+ * @property {GuildMemberGuildMemberOnlineExtraBody} body
+ *
+ * @typedef {Object} GuildMemberGuildMemberOnline
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildMemberGuildMemberOnlineExtra} extra
+ */
 
-    /**
-     * @return {String}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
+/**
+ * @typedef {Object} GuildMemberGuildMemberOfflineExtraBody
+ * @property {String} user_id
+ * @property {Number} event_time
+ * @property {String[]} guilds
+ *
+ * @typedef {Object} GuildMemberGuildMemberOfflineExtra
+ * @property {"updateguild_member_offlined_guild_member"} type
+ * @property {GuildMemberGuildMemberOfflineExtraBody} body
+ *
+ * @typedef {Object} GuildMemberGuildMemberOffline
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildMemberGuildMemberOfflineExtra} extra
+ */
 
-    /**
-     * @return {Number}
-     */
-    get joined_at() {
-        return this.#raw.joined_at;
-    }
-}
-
-class GuildMemberJoinedEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"joined_guild"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {GuildMemberJoinedEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class GuildMemberJoinedEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {GuildMemberJoinedEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- GUILD MEMBER EXITED EVENT : https://developer.kookapp.cn/doc/event/guild-member#服务器成员退出 */
-
-class GuildMemberExitedEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get exited_at() {
-        return this.#raw.exited_at;
-    }
-}
-
-class GuildMemberExitedEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"exited_guild"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {GuildMemberExitedEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class GuildMemberExitedEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {GuildMemberExitedEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- GUILD MEMBER UPDATED EVENT : https://developer.kookapp.cn/doc/event/guild-member#服务器成员信息更新 */
-
-class GuildMemberUpdatedEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nickname() {
-        return this.#raw.nickname;
-    }
-}
-
-class GuildMemberUpdatedEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"updated_guild_member"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {GuildMemberUpdatedEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class GuildMemberUpdatedEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {GuildMemberUpdatedEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- GUILD MEMBER ONLINE EVENT : https://developer.kookapp.cn/doc/event/guild-member#服务器成员上线 */
-
-class GuildMemberPresenceEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get event_time() {
-        return this.#raw.event_time;
-    }
-
-    /**
-     * @return {String[]}
-     */
-    get guilds() {
-        return this.#raw.guilds;
-    }
-}
-
-class GuildMemberPresenceEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"guild_member_online" | "guild_member_offline"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {GuildMemberPresenceEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class GuildMemberPresenceEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {GuildMemberPresenceEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-export {
-    GuildMemberJoinedEvent,
-    GuildMemberExitedEvent,
-    GuildMemberUpdatedEvent,
-    GuildMemberPresenceEvent,
-};
+export {};

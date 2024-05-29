@@ -3,361 +3,139 @@
  * @description Kook Guild events : https://developer.kookapp.cn/doc/event/guild
  */
 
-import { RawEvent } from "./RawEvent.js";
+/**
+ * @typedef {Object} GuildUpdatedGuildExtra
+ * @property {"updated_guild"} type
+ * @property {import("../types/index.js").BaseGuild} body
+ *
+ * @typedef {Object} GuildUpdatedGuild
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildUpdatedGuildExtra} extra
+ */
 
-/* --- GUILD EVENT : https://developer.kookapp.cn/doc/event/guild#服务器信息更新 */
+/**
+ * @typedef {Object} GuildDeletedGuildExtra
+ * @property {"deleted_guild"} type
+ * @property {import("../types/index.js").BaseGuild} body
+ *
+ * @typedef {Object} GuildDeletedGuild
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildDeletedGuildExtra} extra
+ */
 
-class GuildEventExtraBody {
-    #raw;
+/**
+ * @typedef {Object} GuildAddedBlockListExtraBody
+ * @property {String} operator_id
+ * @property {String} remark
+ * @property {String[]} user_id
+ *
+ * @typedef {Object} GuildAddedBlockListExtra
+ * @property {"added_block_list"} type
+ * @property {GuildAddedBlockListExtraBody} body
+ *
+ * @typedef {Object} GuildAddedBlockList
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildAddedBlockListExtra} extra
+ */
 
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
+/**
+ * @typedef {Object} GuildDeletedBlockListExtraBody
+ * @property {String} operator_id
+ * @property {String[]} user_id
+ *
+ * @typedef {Object} GuildDeletedBlockListExtra
+ * @property {"added_block_list"} type
+ * @property {GuildDeletedBlockListExtraBody} body
+ *
+ * @typedef {Object} GuildDeletedBlockList
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildDeletedBlockListExtra} extra
+ */
 
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
+/**
+ * @typedef {Object} GuildAddedEmojiExtra
+ * @property {"added_emoji"} type
+ * @property {import("../types/index.js").BaseEmoji} body
+ *
+ * @typedef {Object} GuildAddedEmoji
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildAddedEmojiExtra} extra
+ */
 
-    /**
-     * @return {String}
-     */
-    get name() {
-        return this.#raw.name;
-    }
+/**
+ * @typedef {Object} GuildRemovedEmojiExtra
+ * @property {"removed_emoji"} type
+ * @property {import("../types/index.js").BaseEmoji} body
+ *
+ * @typedef {Object} GuildRemovedEmoji
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildRemovedEmojiExtra} extra
+ */
 
-    /**
-     * @return {String}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
+/**
+ * @typedef {Object} GuildUpdatedEmojiExtra
+ * @property {"updated_emoji"} type
+ * @property {import("../types/index.js").BaseEmoji} body
+ *
+ * @typedef {Object} GuildUpdatedEmoji
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildUpdatedEmojiExtra} extra
+ */
 
-    /**
-     * @return {String}
-     */
-    get icon() {
-        return this.#raw.icon;
-    }
-
-    /**
-     * @return {String}
-     */
-    get region() {
-        return this.#raw.region;
-    }
-
-    /**
-     * @return {String}
-     */
-    get open_id() {
-        return this.#raw.open_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get default_channel_id() {
-        return this.#raw.default_channel_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get welcome_channel_id() {
-        return this.#raw.welcome_channel_id;
-    }
-
-    /**
-     * @description
-     * 1 - All notifications
-     * 2 - Only `@mention`
-     * 3 - No notification at all
-     * @return {Number}
-     */
-    get notify_type() {
-        return this.#raw.notify_type;
-    }
-
-    /**
-     * @description
-     * 0 - open not enabled
-     * 1 - open enabled
-     * @return {Number}
-     */
-    get enable_open() {
-        return this.#raw.enable_open;
-    }
-}
-
-class GuildEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"updated_guild" | "deleted_guild"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {GuildEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class GuildEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {GuildEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- GUILD BLOCK LIST ADDED EVENT : https://developer.kookapp.cn/doc/event/guild#服务器封禁用户 */
-
-class GuildAddedBlockListEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get operator_id() {
-        return this.#raw.operator_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get remark() {
-        return this.#raw.remark;
-    }
-
-    /**
-     * @return {String[]}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
-}
-
-class GuildAddedBlockListEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"added_block_list"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {GuildAddedBlockListEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class GuildAddedBlockListEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {GuildAddedBlockListEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- GUILD BLOCK LIST DELETED EVENT : https://developer.kookapp.cn/doc/event/guild#服务器取消封禁用户 */
-
-class GuildDeletedBlockListEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get operator_id() {
-        return this.#raw.operator_id;
-    }
-
-    /**
-     * @return {String[]}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
-}
-
-class GuildDeletedBlockListEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"deleted_block_list"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {GuildDeletedBlockListEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class GuildDeletedBlockListEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {GuildDeletedBlockListEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- GUILD REACTION EVENT: https://developer.kookapp.cn/doc/event/guild#服务器添加新表情 */
-
-class GuildEmojiEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get name() {
-        return this.#raw.name;
-    }
-}
-
-class GuildEmojiEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"added_emoji" | "removed_emoji" | "updated_emoji"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {GuildEmojiEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class GuildEmojiEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {GuildEmojiEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-export {
-    GuildEvent,
-    GuildAddedBlockListEvent,
-    GuildDeletedBlockListEvent,
-    GuildEmojiEvent,
-};
+export { };

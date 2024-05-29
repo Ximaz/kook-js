@@ -3,543 +3,206 @@
  * @description Kook Channel events : https://developer.kookapp.cn/doc/event/channel
  */
 
-import { RawEvent } from "./RawEvent.js";
-import { Channel } from "../types/Channel.js";
-
-/* --- CHANNEL REACTION EVENT: https://developer.kookapp.cn/doc/event/channel#频道内用户添加 reaction */
-
-class ChannelReactionEventExtraBodyEmoji {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get name() {
-        return this.#raw.name;
-    }
-}
-
-class ChannelReactionEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_id() {
-        return this.#raw.channel_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {ChannelReactionEventExtraBodyEmoji}
-     */
-    get emoji() {
-        return this.#raw.emoji;
-    }
-}
-
-class ChannelReactionEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"added_reaction" | "deleted_reaction"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {ChannelReactionEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class ChannelReactionEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {ChannelReactionEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- CHANNEL MESSAGE UPDATED EVENT: https://developer.kookapp.cn/doc/event/channel#频道消息更新 */
-
-class ChannelMessageUpdatedEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_id() {
-        return this.#raw.channel_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get content() {
-        return this.#raw.content;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get updated_at() {
-        return this.#raw.updated_at;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get mention_all() {
-        return this.#raw.mention_all;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get mention_here() {
-        return this.#raw.mention_here;
-    }
-
-    /**
-     * @return {String[]}
-     */
-    get mention() {
-        return this.#raw.mention;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get mention_roles() {
-        return this.#raw.mention_roles;
-    }
-}
-
-class ChannelMessageUpdatedEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"updated_message"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {ChannelMessageUpdatedEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class ChannelMessageUpdatedEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {ChannelMessageUpdatedEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- CHANNEL MESSAGE DELETED EVENT: https://developer.kookapp.cn/doc/event/channel#频道消息被删除 */
-
-class ChannelMessageDeletedEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_id() {
-        return this.#raw.channel_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-}
-
-class ChannelMessageDeletedEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"updated_message"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {ChannelMessageDeletedEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class ChannelMessageDeletedEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {ChannelMessageDeletedEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- CHANNEL ADDED EVENT: https://developer.kookapp.cn/doc/event/channel#新增频道 */
-
-class ChannelAddedEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"added_channel"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Channel}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class ChannelAddedEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {ChannelAddedEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- CHANNEL UPDATED EVENT: https://developer.kookapp.cn/doc/event/channel#修改频道信息 */
-
-class ChannelUpdatedEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"updated_channel"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Channel}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class ChannelUpdatedEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {ChannelUpdatedEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- CHANNEL DELETED EVENT: https://developer.kookapp.cn/doc/event/channel#删除频道 */
-
-class ChannelDeletedEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get deleted_at() {
-        return this.#raw.deleted_at;
-    }
-}
-
-class ChannelDeletedEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"deleted_channel"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {ChannelDeletedEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class ChannelDeletedEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {ChannelDeletedEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- CHANNEL PIN EVENT: https://developer.kookapp.cn/doc/event/channel#新的频道置顶消息 */
-
-class ChannelPinEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_id() {
-        return this.#raw.channel_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get operator_id() {
-        return this.#raw.operator_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-}
-
-class ChannelPinEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"pinned_message" | "unpinned_message"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {ChannelPinEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class ChannelPinEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {ChannelPinEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-export {
-    ChannelReactionEvent,
-    ChannelMessageUpdatedEvent,
-    ChannelMessageDeletedEvent,
-    ChannelAddedEvent,
-    ChannelUpdatedEvent,
-    ChannelDeletedEvent,
-    ChannelPinEvent
-};
+/**
+ * @typedef {Object} ChannelAddedReactionExtraBody
+ * @property {String} channel_id
+ * @property {import("../types/index.js").BaseEmoji} emoji
+ * @property {String} user_id
+ * @property {String} msg_id
+ *
+ * @typedef {Object} ChannelAddedReactionExtra
+ * @property {"added_reaction"} type
+ * @property {ChannelAddedReactionExtraBody} body
+ *
+ * @typedef {Object} ChannelAddedReaction
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {ChannelAddedReactionExtra} extra
+ */
+
+/**
+ * @typedef {Object} ChannelDeletedReactionExtraBody
+ * @property {String} channel_id
+ * @property {import("../types/index.js").BaseEmoji} emoji
+ * @property {String} user_id
+ * @property {String} msg_id
+ *
+ * @typedef {Object} ChannelDeletedReactionExtra
+ * @property {"deleted_reaction"} type
+ * @property {ChannelDeletedReactionExtraBody} body
+ *
+ * @typedef {Object} ChannelDeletedReaction
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {ChannelDeletedReactionExtra} extra
+ */
+
+/**
+ * @typedef {Object} ChannelUpdatedMessageExtraBody
+ * @property {String} channel_id
+ * @property {String} content
+ * @property {String[]} mention
+ * @property {Boolean} mention_all
+ * @property {Boolean} mention_here
+ * @property {Number[]} mention_roles
+ * @property {Number} updated_at
+ * @property {String} msg_id
+ *
+ * @typedef {Object} ChannelUpdatedMessageExtra
+ * @property {"updated_message"} type
+ * @property {ChannelUpdatedMessageExtraBody} body
+ *
+ * @typedef {Object} ChannelUpdatedMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {ChannelUpdatedMessageExtra} extra
+ */
+
+/**
+ * @typedef {Object} ChannelDeletedMessageExtraBody
+ * @property {String} channel_id
+ * @property {String} msg_id
+ *
+ * @typedef {Object} ChannelDeletedMessageExtra
+ * @property {"deleted_message"} type
+ * @property {ChannelDeletedMessageExtraBody} body
+ *
+ * @typedef {Object} ChannelDeletedMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {ChannelDeletedMessageExtra} extra
+ */
+
+/**
+ * @typedef {Object} ChannelAddedChannelExtra
+ * @property {"added_channel"} type
+ * @property {import("../types/index.js").BaseChannel} body
+ *
+ * @typedef {Object} ChannelAddedChannel
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {ChannelAddedChannelExtra} extra
+ */
+
+/**
+ * @typedef {Object} ChannelUpdatedChannelExtra
+ * @property {"updated_channel"} type
+ * @property {import("../types/index.js").BaseChannel} body
+ *
+ * @typedef {Object} ChannelUpdatedChannel
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {ChannelUpdatedChannelExtra} extra
+ */
+
+/**
+ * @typedef {Object} ChannelDeletedChannelExtraBody
+ * @property {String} id
+ * @property {Number} deleted_at
+ *
+ * @typedef {Object} ChannelDeletedChannelExtra
+ * @property {"deleted_channel"} type
+ * @property {ChannelDeletedChannelExtraBody} body
+ *
+ * @typedef {Object} ChannelDeletedChannel
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {ChannelDeletedChannelExtra} extra
+ */
+
+/**
+ * @typedef {Object} ChannelPinnedMessageExtraBody
+ * @property {String} channel_id
+ * @property {String} operator_id
+ * @property {String} msg_id
+ *
+ * @typedef {Object} ChannelPinnedMessageExtra
+ * @property {"pinned_message"} type
+ * @property {ChannelPinnedMessageExtraBody} body
+ *
+ * @typedef {Object} ChannelPinnedMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {ChannelPinnedMessageExtra} extra
+ */
+
+/**
+ * @typedef {Object} ChannelUnpinnedMessageExtraBody
+ * @property {String} channel_id
+ * @property {String} operator_id
+ * @property {String} msg_id
+ *
+ * @typedef {Object} ChannelUnpinnedMessageExtra
+ * @property {"unpinned_message"} type
+ * @property {ChannelUnpinnedMessageExtraBody} body
+ *
+ * @typedef {Object} ChannelUnpinnedMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {ChannelUnpinnedMessageExtra} extra
+ */
+
+export {};

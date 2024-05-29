@@ -3,308 +3,103 @@
  * @description Kook DirectMessage events : https://developer.kookapp.cn/doc/event/direct-message
  */
 
-import { RawEvent } from "./RawEvent.js";
+/**
+ * @typedef {Object} DirectMessageUpdatedPrivateMessageExtraBody
+ * @property {String} author_id
+ * @property {String} target_id
+ * @property {String} msg_id
+ * @property {String} content
+ * @property {Number} updated_at
+ * @property {String} chat_code
+ *
+ * @typedef {Object} DirectMessageUpdatedPrivateMessageExtra
+ * @property {"updated_private_message"} type
+ * @property {DirectMessageUpdatedPrivateMessageExtraBody} body
+ *
+ * @typedef {Object} DirectMessageUpdatedPrivateMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {DirectMessageUpdatedPrivateMessageExtra} extra
+ */
 
-/* --- PRIVATE MESSAGE UPDATED EVENT : https://developer.kookapp.cn/doc/event/direct-message#私聊消息更新 */
+/**
+ * @typedef {Object} DirectMessageDeletedPrivateMessageExtraBody
+ * @property {String} author_id
+ * @property {String} target_id
+ * @property {String} msg_id
+ * @property {Number} deleted_at
+ * @property {String} chat_code
+ *
+ * @typedef {Object} DirectMessageDeletedPrivateMessageExtra
+ * @property {"deleted_private_message"} type
+ * @property {DirectMessageDeletedPrivateMessageExtraBody} body
+ *
+ * @typedef {Object} DirectMessageDeletedPrivateMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {DirectMessageDeletedPrivateMessageExtra} extra
+ */
 
-class DirectMessageUpdatedEventExtraBody {
-    #raw;
+/**
+ * @typedef {Object} DirectMessagePrivateAddedReactionExtraBody
+ * @property {String} chat_code
+ * @property {import("../types/index.js").BaseEmoji} emoji
+ * @property {String} user_id
+ * @property {String} msg_id
+ *
+ * @typedef {Object} DirectMessagePrivateAddedReactionExtra
+ * @property {"private_added_reaction"} type
+ * @property {DirectMessagePrivateAddedReactionExtraBody} body
+ *
+ * @typedef {Object} DirectMessagePrivateAddedReaction
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {DirectMessagePrivateAddedReactionExtra} extra
+ */
 
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
+/**
+ * @typedef {Object} DirectMessagePrivateDeletedReactionExtraBody
+ * @property {String} chat_code
+ * @property {import("../types/index.js").BaseEmoji} emoji
+ * @property {String} user_id
+ * @property {String} msg_id
+ *
+ * @typedef {Object} DirectMessagePrivateDeletedReactionExtra
+ * @property {"private_deleted_reaction"} type
+ * @property {DirectMessagePrivateDeletedReactionExtraBody} body
+ *
+ * @typedef {Object} DirectMessagePrivateDeletedReaction
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {DirectMessagePrivateDeletedReactionExtra} extra
+ */
 
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get author_id() {
-        return this.#raw.author_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get target_id() {
-        return this.#raw.target_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get content() {
-        return this.#raw.content;
-    }
-
-    /**
-     * @return {String}
-     */
-    get chat_code() {
-        return this.#raw.chat_code;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get updated_at() {
-        return this.#raw.updated_at;
-    }
-}
-
-class DirectMessageUpdatedEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"updated_private_message"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {DirectMessageUpdatedEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class DirectMessageUpdatedEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {DirectMessageUpdatedEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- PRIVATE MESSAGE DELETED EVENT : https://developer.kookapp.cn/doc/event/direct-message#私聊消息被删除 */
-
-class DirectMessageDeletedEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get author_id() {
-        return this.#raw.author_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get target_id() {
-        return this.#raw.target_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get chat_code() {
-        return this.#raw.chat_code;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get deleted_at() {
-        return this.#raw.deleted_at;
-    }
-}
-
-class DirectMessageDeletedEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"updated_private_message"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {DirectMessageDeletedEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class DirectMessageDeletedEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {DirectMessageDeletedEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- PRIVATE MESSAGE REACTION EVENT: https://developer.kookapp.cn/doc/event/channel#私聊内用户添加 reaction */
-
-class DirectMessageReactionEventExtraBodyEmoji {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get name() {
-        return this.#raw.name;
-    }
-}
-
-class DirectMessageReactionEventExtraBody {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get chat_code() {
-        return this.#raw.chat_code;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {DirectMessageReactionEventExtraBodyEmoji}
-     */
-    get emoji() {
-        return this.#raw.emoji;
-    }
-}
-
-class DirectMessageReactionEventExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"private_added_reaction" | "deleted_private_message"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {DirectMessageReactionEventExtraBody}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class DirectMessageReactionEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {DirectMessageReactionEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-export {
-    DirectMessageUpdatedEvent,
-    DirectMessageDeletedEvent,
-    DirectMessageReactionEvent,
-};
+export {};

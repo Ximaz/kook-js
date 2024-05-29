@@ -1,1640 +1,242 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
  * @description Message objects : https://developer.kookapp.cn/doc/event/message
+ * https://developer.kookapp.cn/doc/cardmessage
+ * https://developer.kookapp.cn/doc/kmarkdown
  */
 
-/* --- TEXT MESSAGE : https://developer.kookapp.cn/doc/event/message#文字消息 --- */
+/**
+ * @typedef {Object} BaseTextMessageExtra
+ * @property {1} type
+ * @property {String} guild_id
+ * @property {String} channel_name
+ * @property {String[]} mention
+ * @property {Boolean} mention_all
+ * @property {Number[]} mention_roles
+ * @property {Boolean} mention_here
+ * @property {String} code
+ * @property {import("./User.js").BaseUser} author
+ *
+ * @typedef {Object} BaseTextMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {1} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {BaseTextMessageExtra} extra
+ */
 
-class TextMessageExtraAuthor {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get identify_num() {
-        return this.#raw.identify_num;
-    }
-
-    /**
-     * @return {String}
-     */
-    get avatar() {
-        return this.#raw.avatar;
-    }
-
-    /**
-     * @return {String}
-     */
-    get username() {
-        return this.#raw.username;
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nickname() {
-        return this.#raw.nickname;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get roles() {
-        return this.#raw.roles;
-    }
+/**
+ * @param {Object} raw
+ * @return {BaseTextMessage}
+ */
+export function messageText(raw) {
+    return raw;
 }
 
-class TextMessageExtra {
-    #raw;
+/**
+ * @typedef {Object} BaseImageMessageExtra
+ * @property {2} type
+ * @property {String} guild_id
+ * @property {String} code
+ * @property {import("./User.js").BaseUser} author
+ * @property {import("./Attachment.js").BaseImageAttachment} attachments
+ *
+ * @typedef {Object} BaseImageMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {2} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {BaseImageMessageExtra} extra
+ */
 
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get guild_id() {
-        return this.#raw.guild_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_name() {
-        return this.#raw.channel_name;
-    }
-
-    /**
-     * @return {String}
-     */
-    get code() {
-        return this.#raw.code;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get mention_all() {
-        return this.#raw.mention_all;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get mention_here() {
-        return this.#raw.mention_here;
-    }
-
-    /**
-     * @return {String[]}
-     */
-    get mention() {
-        return this.#raw.mention;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get mention_roles() {
-        return this.#raw.mention_roles;
-    }
-
-    /**
-     * @return {TextMessageExtraAuthor}
-     */
-    get author() {
-        return this.#raw.author;
-    }
+/**
+ * @param {Object} raw
+ * @return {BaseImageMessage}
+ */
+export function messageImage(raw) {
+    return raw;
 }
 
-class TextMessage {
-    #raw;
+/**
+ * @typedef {Object} BaseVideoMessageExtra
+ * @property {3} type
+ * @property {String} guild_id
+ * @property {String} code
+ * @property {import("./User.js").BaseUser} author
+ * @property {import("./Attachment.js").BaseVideoAttachment} attachments
+ *
+ * @typedef {Object} BaseVideoMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {3} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {BaseVideoMessageExtra} extra
+ */
 
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_type() {
-        return this.#raw.channel_type;
-    }
-
-    /**
-     * @return {String}
-     */
-    get target_id() {
-        return this.#raw.target_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get author_id() {
-        return this.#raw.author_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get content() {
-        return this.#raw.content;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nonce() {
-        return this.#raw.nonce;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get msg_timestamp() {
-        return this.#raw.msg_timestamp;
-    }
-
-    /**
-     * @return {TextMessageExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
+/**
+ * @param {Object} raw
+ * @return {BaseVideoMessage}
+ */
+export function messageVideo(raw) {
+    return raw;
 }
 
-/* --- PICTURE MESSAGE : https://developer.kookapp.cn/doc/event/message#图片消息 --- */
+/**
+ * @typedef {Object} BaseFileMessageExtra
+ * @property {4} type
+ * @property {String} guild_id
+ * @property {String} code
+ * @property {import("./User.js").BaseUser} author
+ * @property {import("./Attachment.js").BaseFileAttachment} attachments
+ *
+ * @typedef {Object} BaseFileMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {4} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {BaseFileMessageExtra} extra
+ */
 
-class PictureMessageExtraAttachment {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {String}
-     */
-    get url() {
-        return this.#raw.url;
-    }
-
-    /**
-     * @return {String}
-     */
-    get name() {
-        return this.#raw.name;
-    }
+/**
+ * @param {Object} raw
+ * @return {BaseFileMessage}
+ */
+export function messageFile(raw) {
+    return raw;
 }
 
-class PictureMessageExtraAuthor {
-    #raw;
+/**
+ * @typedef {Object} BaseKMarkdownMessageExtra
+ * @property {9} type
+ * @property {String} guild_id
+ * @property {String} channel_name
+ * @property {String[]} mention
+ * @property {Boolean} mention_all
+ * @property {Number[]} mention_roles
+ * @property {Boolean} mention_here
+ * @property {any[]} nav_channels Undefined in the documentation yet
+ * @property {String} code
+ * @property {import("./User.js").BaseUser} author
+ * @property {import("./KMarkdown.js").BaseKMarkdown} kmarkdown
+ *
+ * @typedef {Object} BaseKMarkdownMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {9} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {BaseKMarkdownMessageExtra} extra
+ */
 
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get identify_num() {
-        return this.#raw.identify_num;
-    }
-
-    /**
-     * @return {String}
-     */
-    get avatar() {
-        return this.#raw.avatar;
-    }
-
-    /**
-     * @return {String}
-     */
-    get username() {
-        return this.#raw.username;
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nickname() {
-        return this.#raw.nickname;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get roles() {
-        return this.#raw.roles;
-    }
+/**
+ * @param {Object} raw
+ * @return {BaseKMarkdownMessage}
+ */
+export function messageKMarkdown(raw) {
+    return raw;
 }
 
-class PictureMessageExtra {
-    #raw;
+/**
+ * @typedef {Object} BaseCardMessageExtra
+ * @property {10} type
+ * @property {String} guild_id
+ * @property {String} channel_name
+ * @property {String[]} mention
+ * @property {Boolean} mention_all
+ * @property {Number[]} mention_roles
+ * @property {Boolean} mention_here
+ * @property {any[]} nav_channels Undefined in the documentation yet
+ * @property {String} code
+ * @property {import("./User.js").BaseUser} author
+ *
+ * @typedef {Object} BaseCardMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {10} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {BaseCardMessageExtra} extra
+ */
 
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get guild_id() {
-        return this.#raw.guild_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get code() {
-        return this.#raw.code;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {PictureMessageExtraAttachment}
-     */
-    get attachments() {
-        return this.#raw.attachments;
-    }
-
-    /**
-     * @return {PictureMessageExtraAuthor}
-     */
-    get author() {
-        return this.#raw.author;
-    }
+/**
+ * @param {Object} raw
+ * @return {BaseCardMessage}
+ */
+export function messageCard(raw) {
+    return raw;
 }
 
-class PictureMessage {
-    #raw;
+/**
+ * @typedef {Object} BasePropsMessageContentData
+ * @property {String} user_id
+ * @property {String} target_id
+ * @property {Number} item_id
+ *
+ * @typedef {Object} BasePropsMessageContent
+ * @property {"string" | "item"} type
+ * @property {BasePropsMessageContentData} data
+ *
+ * @typedef {Object} BasePropsMessageExtra
+ * @property {12} type
+ * @property {String} guild_id
+ * @property {String} channel_name
+ * @property {String[]} mention
+ * @property {import("./User.js").BaseUser} author
+ * @property {import("./KMarkdown.js").BaseKMarkdown} kmarkdown
+ *
+ * @typedef {Object} BasePropsMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {12} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {BasePropsMessageContent} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {BasePropsMessageExtra} extra
+ */
 
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_type() {
-        return this.#raw.channel_type;
-    }
-
-    /**
-     * @return {String}
-     */
-    get target_id() {
-        return this.#raw.target_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get author_id() {
-        return this.#raw.author_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get content() {
-        return this.#raw.content;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nonce() {
-        return this.#raw.nonce;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get msg_timestamp() {
-        return this.#raw.msg_timestamp;
-    }
-
-    /**
-     * @return {PictureMessageExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
+/**
+ * @param {Object} raw
+ * @return {BasePropsMessage}
+ */
+export function messageProps(raw) {
+    return raw;
 }
 
-/* --- VIDEO MESSAGE : https://developer.kookapp.cn/doc/event/message#视频消息 --- */
+/**
+ * @typedef {BaseTextMessage | BaseImageMessage | BaseVideoMessage | BaseFileMessage | BaseKMarkdownMessage | BaseCardMessage | BasePropsMessage} BaseMessage
+ */
 
-class VideoMessageExtraAttachment {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {String}
-     */
-    get url() {
-        return this.#raw.url;
-    }
-
-    /**
-     * @return {String}
-     */
-    get name() {
-        return this.#raw.name;
-    }
-
-    /**
-     * @return {String}
-     */
-    get file_type() {
-        return this.#raw.file_type;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get size() {
-        return this.#raw.size;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get duration() {
-        return this.#raw.duration;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get width() {
-        return this.#raw.width;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get height() {
-        return this.#raw.height;
-    }
+/**
+ * @param {Object} raw
+ * @returns {BaseMessage}
+ */
+export function message(raw) {
+    return raw;
 }
-
-class VideoMessageExtraAuthor {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get identify_num() {
-        return this.#raw.identify_num;
-    }
-
-    /**
-     * @return {String}
-     */
-    get avatar() {
-        return this.#raw.avatar;
-    }
-
-    /**
-     * @return {String}
-     */
-    get username() {
-        return this.#raw.username;
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nickname() {
-        return this.#raw.nickname;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get roles() {
-        return this.#raw.roles;
-    }
-}
-
-class VideoMessageExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get guild_id() {
-        return this.#raw.guild_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get code() {
-        return this.#raw.code;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {VideoMessageExtraAttachment}
-     */
-    get attachments() {
-        return this.#raw.attachments;
-    }
-
-    /**
-     * @return {VideoMessageExtraAuthor}
-     */
-    get author() {
-        return this.#raw.author;
-    }
-}
-
-class VideoMessage {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_type() {
-        return this.#raw.channel_type;
-    }
-
-    /**
-     * @return {String}
-     */
-    get target_id() {
-        return this.#raw.target_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get author_id() {
-        return this.#raw.author_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get content() {
-        return this.#raw.content;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nonce() {
-        return this.#raw.nonce;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get msg_timestamp() {
-        return this.#raw.msg_timestamp;
-    }
-
-    /**
-     * @return {VideoMessageExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- FILE MESSAGE : https://developer.kookapp.cn/doc/event/message#文件消息 --- */
-
-class FileMessageExtraAttachment {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {String}
-     */
-    get url() {
-        return this.#raw.url;
-    }
-
-    /**
-     * @return {String}
-     */
-    get name() {
-        return this.#raw.name;
-    }
-
-    /**
-     * @return {String}
-     */
-    get file_type() {
-        return this.#raw.file_type;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get size() {
-        return this.#raw.size;
-    }
-}
-
-class FileMessageExtraAuthor {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get identify_num() {
-        return this.#raw.identify_num;
-    }
-
-    /**
-     * @return {String}
-     */
-    get avatar() {
-        return this.#raw.avatar;
-    }
-
-    /**
-     * @return {String}
-     */
-    get username() {
-        return this.#raw.username;
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nickname() {
-        return this.#raw.nickname;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get roles() {
-        return this.#raw.roles;
-    }
-}
-
-class FileMessageExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get guild_id() {
-        return this.#raw.guild_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get code() {
-        return this.#raw.code;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {FileMessageExtraAttachment}
-     */
-    get attachments() {
-        return this.#raw.attachments;
-    }
-
-    /**
-     * @return {FileMessageExtraAuthor}
-     */
-    get author() {
-        return this.#raw.author;
-    }
-}
-
-class FileMessage {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_type() {
-        return this.#raw.channel_type;
-    }
-
-    /**
-     * @return {String}
-     */
-    get target_id() {
-        return this.#raw.target_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get author_id() {
-        return this.#raw.author_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get content() {
-        return this.#raw.content;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nonce() {
-        return this.#raw.nonce;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get msg_timestamp() {
-        return this.#raw.msg_timestamp;
-    }
-
-    /**
-     * @return {FileMessageExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- KMARKDOWN MESSAGE : https://developer.kookapp.cn/doc/event/message#KMarkdown 消息 --- */
-
-class KMarkdownMessageExtraAuthorTagInfo {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get color() {
-        return this.#raw.color;
-    }
-
-    /**
-     * @return {String}
-     */
-    get text() {
-        return this.#raw.text;
-    }
-}
-
-class KMarkdownMessageExtraAuthor {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get identify_num() {
-        return this.#raw.identify_num;
-    }
-
-    /**
-     * @return {String}
-     */
-    get avatar() {
-        return this.#raw.avatar;
-    }
-
-    /**
-     * @return {String}
-     */
-    get username() {
-        return this.#raw.username;
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nickname() {
-        return this.#raw.nickname;
-    }
-
-    /**
-     * @return {"Websocket" | "Webhook"}
-     */
-    get os() {
-        return this.#raw.os;
-    }
-
-    /**
-     * @return {0 | 1 | 10}
-     */
-    get status() {
-        return this.#raw.status;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get online() {
-        return this.#raw.online;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get roles() {
-        return this.#raw.roles;
-    }
-
-    /**
-     * @return {KMarkdownMessageExtraAuthorTagInfo}
-     */
-    get tag_info() {
-        return this.#raw.tag_info;
-    }
-}
-
-class KMarkdownMessageExtraKMarkdownMentionPart {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get username() {
-        return this.#raw.username;
-    }
-
-    /**
-     * @return {String}
-     */
-    get full_name() {
-        return this.#raw.full_name;
-    }
-
-    /**
-     * @return {String}
-     */
-    get avatar() {
-        return this.#raw.avatar;
-    }
-}
-
-class KMarkdownMessageExtraKMarkdown {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get raw_content() {
-        return this.#raw.raw_content;
-    }
-
-    /**
-     * @return {KMarkdownMessageExtraKMarkdownMentionPart[]}
-     */
-    get mention_part() {
-        return this.#raw.mention_part;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get mention_role_part() {
-        return this.#raw.mention_role_part;
-    }
-}
-
-class KMarkdownMessageExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get guild_id() {
-        return this.#raw.guild_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_name() {
-        return this.#raw.channel_name;
-    }
-
-    /**
-     * @return {String}
-     */
-    get code() {
-        return this.#raw.code;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get mention_all() {
-        return this.#raw.mention_all;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get mention_here() {
-        return this.#raw.mention_here;
-    }
-
-    /**
-     * @return {String[]}
-     */
-    get mention() {
-        return this.#raw.mention;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get mention_roles() {
-        return this.#raw.mention_roles;
-    }
-
-    /**
-     * @return {any[]}
-     */
-    get nav_channels() {
-        return this.#raw.nav_channels;
-    }
-
-    /**
-     * @return {KMarkdownMessageExtraAuthor}
-     */
-    get author() {
-        return this.#raw.author;
-    }
-
-    /**
-     * @return {KMarkdownMessageExtraKMarkdown}
-     */
-    get kmarkdown() {
-        return this.#raw.kmarkdown;
-    }
-}
-
-class KMarkdownMessage {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_type() {
-        return this.#raw.channel_type;
-    }
-
-    /**
-     * @return {String}
-     */
-    get target_id() {
-        return this.#raw.target_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get author_id() {
-        return this.#raw.author_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get content() {
-        return this.#raw.content;
-    }
-
-    /**
-     * @return {String}
-     */
-    get verify_token() {
-        return this.#raw.verify_token;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nonce() {
-        return this.#raw.nonce;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get msg_timestamp() {
-        return this.#raw.msg_timestamp;
-    }
-
-    /**
-     * @return {KMarkdownMessageExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-/* --- CARD MESSAGE : https://developer.kookapp.cn/doc/event/message#Card 消息 --- */
-/* --- TODO: https://developer.kookapp.cn/doc/cardmessage */
-
-class CardMessageExtraAuthorTagInfo {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get color() {
-        return this.#raw.color;
-    }
-
-    /**
-     * @return {String}
-     */
-    get text() {
-        return this.#raw.text;
-    }
-}
-
-class CardMessageExtraAuthor {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get identify_num() {
-        return this.#raw.identify_num;
-    }
-
-    /**
-     * @return {String}
-     */
-    get avatar() {
-        return this.#raw.avatar;
-    }
-
-    /**
-     * @return {String}
-     */
-    get username() {
-        return this.#raw.username;
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nickname() {
-        return this.#raw.nickname;
-    }
-
-    /**
-     * @return {"Websocket" | "Webhook"}
-     */
-    get os() {
-        return this.#raw.os;
-    }
-
-    /**
-     * @return {0 | 1 | 10}
-     */
-    get status() {
-        return this.#raw.status;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get online() {
-        return this.#raw.online;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get roles() {
-        return this.#raw.roles;
-    }
-
-    /**
-     * @return {CardMessageExtraAuthorTagInfo}
-     */
-    get tag_info() {
-        return this.#raw.tag_info;
-    }
-}
-
-class CardMessageExtraKMarkdownMentionPart {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get username() {
-        return this.#raw.username;
-    }
-
-    /**
-     * @return {String}
-     */
-    get full_name() {
-        return this.#raw.full_name;
-    }
-
-    /**
-     * @return {String}
-     */
-    get avatar() {
-        return this.#raw.avatar;
-    }
-}
-
-class CardMessageExtraKMarkdown {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {any[]}
-     */
-    get item_part() {
-        return this.#raw.item_part;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get mention_part() {
-        return this.#raw.mention_part;
-    }
-
-    /**
-     * @return {CardMessageExtraKMarkdownMentionPart[]}
-     */
-    get mention_role_part() {
-        return this.#raw.mention_role_part;
-    }
-}
-
-class CardMessageExtra {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get guild_id() {
-        return this.#raw.guild_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_name() {
-        return this.#raw.channel_name;
-    }
-
-    /**
-     * @return {String}
-     */
-    get code() {
-        return this.#raw.code;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get mention_all() {
-        return this.#raw.mention_all;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get mention_here() {
-        return this.#raw.mention_here;
-    }
-
-    /**
-     * @return {String[]}
-     */
-    get mention() {
-        return this.#raw.mention;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get mention_roles() {
-        return this.#raw.mention_roles;
-    }
-
-    /**
-     * @return {any[]}
-     */
-    get nav_channels() {
-        return this.#raw.nav_channels;
-    }
-
-    /**
-     * @return {CardMessageExtraAuthor}
-     */
-    get author() {
-        return this.#raw.author;
-    }
-
-    /**
-     * @return {CardMessageExtraKMarkdown}
-     */
-    get kmarkdown() {
-        return this.#raw.kmarkdown;
-    }
-}
-
-class CardMessageContentData {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get target_id() {
-        return this.#raw.target_id;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get item_id() {
-        return this.#raw.item_id;
-    }
-}
-
-class CardMessageContent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"string" | "item"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {CardMessageContentData[]}
-     */
-    get data() {
-        return this.#raw.data;
-    }
-}
-
-class CardMessage {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get channel_type() {
-        return this.#raw.channel_type;
-    }
-
-    /**
-     * @return {String}
-     */
-    get target_id() {
-        return this.#raw.target_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get author_id() {
-        return this.#raw.author_id;
-    }
-
-    /**
-     * @return {CardMessageContent}
-     */
-    get content() {
-        return this.#raw.content;
-    }
-
-    /**
-     * @return {String}
-     */
-    get verify_token() {
-        return this.#raw.verify_token;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nonce() {
-        return this.#raw.nonce;
-    }
-
-    /**
-     * @return {String}
-     */
-    get msg_id() {
-        return this.#raw.msg_id;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get msg_timestamp() {
-        return this.#raw.msg_timestamp;
-    }
-
-    /**
-     * @return {CardMessageExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-export {
-    TextMessage,
-    PictureMessage,
-    VideoMessage,
-    FileMessage,
-    KMarkdownMessage,
-    CardMessage,
-};

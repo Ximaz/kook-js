@@ -3,6 +3,6 @@
  * @description Kook SDK entry point
  */
 
-import { KookWebsocket } from "./websocket/websocket.js";
+import { KookClient } from "./websocket/client.js";
 
-export { KookWebsocket };
+export { KookClient };

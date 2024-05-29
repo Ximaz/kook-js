@@ -1,240 +1,144 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Kook SDK Websocket implementation https://developer.kookapp.cn/doc/websocket
+ * @description Kook raw websocket implementation https://developer.kookapp.cn/doc/websocket#连接流程
  */
 
-import { EventEmitter } from "node:events";
+import { inflateSync } from "node:zlib";
 
-import Websocket, { WEBSOCKET_EVENTS } from "./internal.js";
-import {
-    /* Channel Events */
-    ChannelReactionEvent,
-    ChannelMessageUpdatedEvent,
-    ChannelMessageDeletedEvent,
-    ChannelAddedEvent,
-    ChannelUpdatedEvent,
-    ChannelDeletedEvent,
-    ChannelPinEvent,
+import ws from "ws";
 
-    /* DirectMessage Events */
-    DirectMessageUpdatedEvent,
-    DirectMessageDeletedEvent,
-    DirectMessageReactionEvent,
+/* https://developer.kookapp.cn/doc/websocket#信令说明 */
+const WEBSOCKET_EVENTS = {
+    EVENT: 0,
+    HANDSHAKE: 1,
+    PING: 2,
+    PONG: 3,
+    RESUME_SESSION: 4,
+    RECONNECT: 5,
+    RESUME_ACK: 6,
+};
 
-    /* GuildMember Events */
-    GuildMemberJoinedEvent,
-    GuildMemberExitedEvent,
-    GuildMemberUpdatedEvent,
-    GuildMemberPresenceEvent,
+/* https://developer.kookapp.cn/doc/websocket#信令[1] HELLO */
+const WEBSOCKET_ERRORS = {
+    40100: new Error("Missing parameters."),
+    40101: new Error("Invalid token."),
+    40102: new Error("Token verification failed."),
+    40103: new Error("Token expires (Need to reconnect)."),
+};
 
-    /* GuildRole Events */
-    GuildRoleEvent,
+export { WEBSOCKET_EVENTS };
 
-    /* Guild Events */
-    GuildEvent,
-    GuildAddedBlockListEvent,
-    GuildDeletedBlockListEvent,
-    GuildEmojiEvent,
-
-    /* Message Events */
-    MessageEvent,
-
-    /* User Events */
-    UserJoinedChannelEvent,
-    UserExitedChannelEvent,
-    UserUpdatedEvent,
-    UserSelfJoinedGuildEvent,
-    UserSelfExitedGuildEvent,
-    UserMessageButtonClickEvent,
-} from "../events/index.js";
-import APIExecutor from "../api/index.js";
-
-/**
- * @typedef {Object} KookEvents
- * @property {function(): void} ready
- * @property {function(): void} disconnected
- * @property {function(any): void} debug
- *
- * Channel Events
- * @property {function(ChannelReactionEvent): void} added_reaction
- * @property {function(ChannelReactionEvent): void} deleted_reaction
- * @property {function(ChannelMessageUpdatedEvent): void} updated_message
- * @property {function(ChannelMessageDeletedEvent): void} deleted_message
- * @property {function(ChannelAddedEvent): void} added_channel
- * @property {function(ChannelUpdatedEvent): void} updated_channel
- * @property {function(ChannelDeletedEvent): void} deleted_channel
- * @property {function(ChannelPinEvent): void} pinned_message
- * @property {function(ChannelPinEvent): void} unpinned_message
- *
- * DirectMessage Events
- * @property {function(DirectMessageReactionEvent): void} private_added_reaction
- * @property {function(DirectMessageReactionEvent): void} private_deleted_reaction
- * @property {function(DirectMessageUpdatedEvent): void} updated_message
- * @property {function(DirectMessageDeletedEvent): void} deleted_message
- *
- * GuildMember Events
- * @property {function(GuildMemberJoinedEvent): void} joined_guild
- * @property {function(GuildMemberExitedEvent): void} exited_guild
- * @property {function(GuildMemberUpdatedEvent): void} updated_guild_member
- * @property {function(GuildMemberPresenceEvent): void} guild_member_online
- * @property {function(GuildMemberPresenceEvent): void} guild_member_offline
- *
- * GuildRole Events
- * @property {function(GuildRoleEvent): void} added_role
- * @property {function(GuildRoleEvent): void} deleted_role
- * @property {function(GuildRoleEvent): void} updated_role
- *
- * Guild Events
- * @property {function(GuildEvent): void} updated_guild
- * @property {function(GuildEvent): void} deleted_guild
- * @property {function(GuildAddedBlockListEvent): void} added_block_list
- * @property {function(GuildDeletedBlockListEvent): void} deleted_block_list
- * @property {function(GuildEmojiEvent): void} added_emoji
- * @property {function(GuildEmojiEvent): void} removed_emoji
- * @property {function(GuildEmojiEvent): void} updated_emoji
- *
- * Message Events
- * @property {function(MessageEvent): void} message
- *
- * User Events
- * @property {function(UserJoinedChannelEvent): void} joined_channel
- * @property {function(UserExitedChannelEvent): void} exited_channel
- * @property {function(UserUpdatedEvent): void} user_updated
- * @property {function(UserSelfJoinedGuildEvent): void} self_joined_guild
- * @property {function(UserSelfExitedGuildEvent): void} self_exited_guild
- * @property {function(UserMessageButtonClickEvent): void} message_btn_click
- */
-
-/* https://developer.kookapp.cn/doc/reference#API 版本管理 */
-const API_VERSION = 3;
-
-class KookWebsocket extends EventEmitter {
-    /** @type {APIExecutor} */
-    #api;
-
-    /** @type {Websocket} */
-    #ws = null;
-
-    /** @type {String} */
-    #session_id = null;
-
-    /** @type {Boolean} */
-    #reconnect = false;
+export default class {
+    #ws;
+    #sn = 0;
+    #resumeClock = null;
+    #heartbeatClock = null;
 
     /**
-     * @param {String} token
+     * @param {String} url The websocket URL returned by the gateway endpoint.
      */
-    constructor(token) {
-        super();
-        this.#api = new APIExecutor(API_VERSION, token);
-    }
-
-    #onOpen() {
-        if (null !== this.#ws) this.#ws.heartbeat();
+    constructor(url) {
+        this.#ws = new ws(url);
     }
 
     /**
-     * @param {RawEvent} packet The received event packet
+     * @param {String} message
+     * @param {Number[]} delays
      */
-    async #onMessage(packet) {
-        if (null === this.#ws) return;
-        const { s, d } = await this.#ws.parsePacketResponse(packet);
+    #initClock(message, delays) {
+        let tries = 0;
+        const allowed_tries = delays.length - 1;
+        const clock = setInterval(
+            function (self) {
+                self.#ws.send(message, function (err) {
+                    if (undefined === err) {
+                        tries = 0;
+                        clearInterval(clock);
+                        return;
+                    }
+                    if (tries > allowed_tries) {
+                        clearInterval(clock);
+                        self.#ws.close();
+                        throw err;
+                    }
+                    ++tries;
+                });
+            },
+            delays[tries],
+            this
+        );
 
-        this.emit("debug", { s, d });
-        switch (s) {
-            case WEBSOCKET_EVENTS.EVENT:
-                const eventName = isNaN(d.extra?.type) ? d.extra?.type : "message";
-                this.emit(eventName, d);
-                break;
-            case WEBSOCKET_EVENTS.HANDSHAKE:
-                const { sessionId, session_id } = d;
-                this.#session_id = sessionId || session_id;
-                this.emit("ready");
-                break;
-            case WEBSOCKET_EVENTS.PONG:
-                this.#ws.heartbeat();
-                break;
-            case WEBSOCKET_EVENTS.RESUME_SESSION:
-                this.#ws.resume();
-                break;
-            case WEBSOCKET_EVENTS.RECONNECT:
-                this.#ws.disconnect();
-                this.#session_id = "";
-                this.#reconnect = true;
-                break;
-            case WEBSOCKET_EVENTS.RESUME_ACK:
-                break;
-            /* This should never happen unless Kookapp adds new events. */
-            default:
-                throw new Error(`Unhandled event: ${s}`);
-        }
+        return clock;
     }
 
-    async #onClose() {
-        if (true === this.#reconnect) {
-            this.#reconnect = false;
-            await this.login();
-        } else await this.disconnect();
-    }
-
-    async login() {
-        const params = {
-            compress: 1,
-        };
-        if (null !== this.#session_id) {
-            params.resume = 1;
-            params.session_id = this.#session_id;
-            if (null !== this.#ws) params.sn = this.#ws.sn;
-            else params.sn = 0;
-        }
-        const { data } = await this.#api.execute("GET", "/gateway/index", {
-            params,
+    resume() {
+        if (null !== this.#resumeClock)
+            clearInterval(this.#resumeClock);
+        const message = JSON.stringify({
+            s: WEBSOCKET_EVENTS.RESUME_SESSION,
+            sn: this.#sn,
         });
-        if (null === this.#ws) this.#ws = new Websocket(data.data.url);
-        this.#ws.setHandler("open", (...args) => this.#onOpen(args));
-        this.#ws.setHandler("message", (...args) => this.#onMessage(args));
-        this.#ws.setHandler("close", (...args) => this.#onClose(args));
+        const delays = [25000, 8000, 16000];
+        this.#resumeClock = this.#initClock(message, delays);
     }
 
-    async disconnect() {
-        if (null !== this.#ws) this.#ws.stop();
-        this.emit("disconnect");
+    heartbeat() {
+        if (null !== this.#heartbeatClock)
+            clearInterval(this.#heartbeatClock);
+        const message = JSON.stringify({
+            s: WEBSOCKET_EVENTS.PING,
+            sn: this.#sn,
+        });
+        const delays = [6000, 2000, 4000];
+        this.#heartbeatClock = this.#initClock(message, delays);
     }
 
-    /**
-     * Register an event listener for the given event.
-     * @template {keyof KookEvents} K
-     * @param {K} event
-     * @param {KookEvents[K]} listener
-     * @returns {this}
-     */
-    on(event, listener) {
-        super.on(event, listener);
-        return this;
-    }
-
-    /**
-     * Register a one-time event listener for the given event.
-     * @template {keyof KookEvents} K
-     * @param {K} event
-     * @param {KookEvents[K]} listener
-     * @returns {this}
-     */
-    once(event, listener) {
-        super.once(event, listener);
-        return this;
+    disconnect() {
+        this.#ws.close();
+        this.#sn = 0;
+        clearInterval(this.#heartbeatClock);
+        clearInterval(this.#resumeClock);
     }
 
     /**
-     * Emit the given event with the provided arguments.
-     * @template {keyof KookEvents} K
-     * @param {K} event
-     * @param {...Parameters<KookEvents[K]>} args
-     * @returns {Boolean}
+     * @param {String} name The event name
+     * @param {CallableFunction} listener The event listener
      */
-    emit(event, ...args) {
-        return super.emit(event, ...args);
+    setHandler(name, listener) {
+        this.#ws.on(name, listener);
+    }
+
+    /**
+     * @typedef {Object} RawEvent
+     * @property {Number} s The message kind (WEBSOCKET_EVENTS)
+     * @property {Object | undefined} d The message details
+     * @property {Number | undefined} sn The message counter
+     *
+     * @param {[Buffer, Boolean]} packet The raw packet to parse
+     * @returns {Promise<RawEvent>} The inflated message
+     */
+    parsePacketResponse(packet) {
+        try {
+            const data = inflateSync(packet[0]);
+            try {
+                const message = JSON.parse(data.toString("utf-8"));
+                if (undefined === message.d) return message;
+                if (Object.keys(WEBSOCKET_ERRORS).includes(message.d.code))
+                    throw WEBSOCKET_ERRORS[message.d.code];
+                this.#sn = message.sn;
+                return message;
+            } catch (err) {
+                throw err;
+            }
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    /**
+     * @return {Number}
+     */
+    get sn() {
+        return this.#sn;
     }
 }
-
-export { KookWebsocket };

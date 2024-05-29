@@ -3,180 +3,27 @@
  * @description Guild object : https://developer.kookapp.cn/doc/objects#服务器 Guild
  */
 
-import { Role } from "./Role.js";
+/**
+ * @typedef {Object} BaseGuild
+ * @property {String} id
+ * @property {String} name
+ * @property {String} [topic]
+ * @property {String} user_id
+ * @property {String} icon
+ * @property {0 | 1 | 2 | 3} notify_type
+ * @property {String} region
+ * @property {Boolean} enable_open
+ * @property {String} open_id
+ * @property {String} default_channel_id
+ * @property {String} welcome_channel_id
+ * @property {import("./Role.js").BaseRole[]} [roles]
+ * @property {import("./Channel.js").BaseChannel[]} [channels]
+ */
 
-class GuildChannel {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get parent_id() {
-        return this.#raw.parent_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get name() {
-        return this.#raw.name;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get level() {
-        return this.#raw.level;
-    }
-
-    /**
-     * @return {Number}
-     */
-    get limit_amount() {
-        return this.#raw.limit_amount;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get is_category() {
-        return this.#raw.is_category;
-    }
+/**
+ * @param {Object} raw
+ * @returns {BaseGuild}
+ */
+export function guild(raw) {
+    return raw;
 }
-
-class Guild {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get name() {
-        return this.#raw.name;
-    }
-
-    /**
-     * @return {String}
-     */
-    get topic() {
-        return this.#raw.topic;
-    }
-
-    /**
-     * @return {String}
-     */
-    get user_id() {
-        return this.#raw.user_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get icon() {
-        return this.#raw.icon;
-    }
-
-    /**
-     * @return {String}
-     */
-    get region() {
-        return this.#raw.region;
-    }
-
-    /**
-     * @return {String}
-     */
-    get open_id() {
-        return this.#raw.open_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get default_channel_id() {
-        return this.#raw.default_channel_id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get welcome_channel_id() {
-        return this.#raw.welcome_channel_id;
-    }
-
-    /**
-     * @description
-     * 0 - Guild's default's notifications settings
-     * 1 - All notifications
-     * 2 - Only `@mention`
-     * 3 - No notification at all
-     * @return {Number}
-     */
-    get notify_type() {
-        return this.#raw.notify_type;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get enable_open() {
-        return this.#raw.enable_open;
-    }
-
-    /**
-     * @return {Role[]}
-     */
-    get roles() {
-        return this.#raw.roles;
-    }
-
-    /**
-     * @return {GuildChannel[]}
-     */
-    get channels() {
-        return this.#raw.channels;
-    }
-}
-
-export { Guild };

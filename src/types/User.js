@@ -3,92 +3,34 @@
  * @description User object : https://developer.kookapp.cn/doc/objects#用户 User
  */
 
-class User {
-    #raw;
+/**
+ * @typedef {Object} BaseUserTagInfo
+ * @property {String} color
+ * @property {String} text
+ *
+ * @typedef {Object} BaseUser
+ * @property {String} id
+ * @property {String} username
+ * @property {String} identify_num
+ * @property {Boolean} online
+ * @property {"Websocket" | "Webhook"} [os]
+ * @property {String} avatar
+ * @property {String} [vip_avatar]
+ * @property {Boolean} [is_vip]
+ * @property {Boolean} [bot]
+ * @property {0 | 1 | 10} status
+ * @property {Boolean} mobile_verified
+ * @property {String} [nickname]
+ * @property {Number[]} [roles]
+ * @property {Number} [joined_at]
+ * @property {Number} [active_time]
+ * @property {BaseUserTagInfo} [tag_info]
+ */
 
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {String}
-     */
-    get id() {
-        return this.#raw.id;
-    }
-
-    /**
-     * @return {String}
-     */
-    get username() {
-        return this.#raw.username;
-    }
-
-    /**
-     * @return {String}
-     */
-    get identify_num() {
-        return this.#raw.identify_num;
-    }
-
-    /**
-     * @return {String}
-     */
-    get avatar() {
-        return this.#raw.avatar;
-    }
-
-    /**
-     * @return {String}
-     */
-    get vip_avatar() {
-        return this.#raw.vip_avatar;
-    }
-
-    /**
-     * @return {String}
-     */
-    get nickname() {
-        return this.#raw.nickname;
-    }
-
-    /**
-     * @return {0 | 1 | 10}
-     */
-    get status() {
-        return this.#raw.status;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get online() {
-        return this.#raw.online;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get bot() {
-        return this.#raw.bot;
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    get mobile_verified() {
-        return this.#raw.mobile_verified;
-    }
-
-    /**
-     * @return {Number[]}
-     */
-    get roles() {
-        return this.#raw.roles;
-    }
+/**
+ * @param {Object} raw
+ * @returns {BaseUser}
+ */
+export function user(raw) {
+    return raw;
 }
-
-export { User };

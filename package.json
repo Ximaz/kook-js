@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node .",
-    "dev": "node --env-file=.env --trace-uncaught index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "dev": "node --env-file=.env --trace-uncaught index.js"
   },
   "repository": {
     "type": "git",
@@ -23,9 +22,6 @@
     "url": "https://github.com/Ximaz/kook-js/issues"
   },
   "homepage": "https://github.com/Ximaz/kook-js#readme",
-  "devDependencies": {
-    "jest": "^29.7.0"
-  },
   "dependencies": {
     "axios": "^1.7.2",
     "ws": "^8.17.0"

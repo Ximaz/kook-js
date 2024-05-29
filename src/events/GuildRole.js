@@ -3,52 +3,58 @@
  * @description Kook GuildRole events : https://developer.kookapp.cn/doc/event/guild-role
  */
 
-import { RawEvent } from "./RawEvent.js";
-import { Role } from "../types/Role.js";
+/**
+ * @typedef {Object} GuildAddedRoleExtra
+ * @property {"added_role"} type
+ * @property {import("../types/index.js").BaseRole} body
+ *
+ * @typedef {Object} GuildAddedRole
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildAddedRoleExtra} extra
+ */
 
-/* --- GUILD ROLE EVENT : https://developer.kookapp.cn/doc/event/guild-role#服务器角色增加 */
+/**
+ * @typedef {Object} GuildDeletedRoleExtra
+ * @property {"deleted_role"} type
+ * @property {import("../types/index.js").BaseRole} body
+ *
+ * @typedef {Object} GuildDeletedRole
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildDeletedRoleExtra} extra
+ */
 
-class GuildRoleEventExtra {
-    #raw;
+/**
+ * @typedef {Object} GuildUpdatedRoleExtra
+ * @property {"updated_role"} type
+ * @property {import("../types/index.js").BaseRole} body
+ *
+ * @typedef {Object} GuildUpdatedRole
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {255} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {GuildUpdatedRoleExtra} extra
+ */
 
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {"added_role" | "deleted_role" | "updated_role"}
-     */
-    get type() {
-        return this.#raw.type;
-    }
-
-    /**
-     * @return {Role}
-     */
-    get body() {
-        return this.#raw.body;
-    }
-}
-
-class GuildRoleEvent extends RawEvent {
-    #raw;
-
-    /**
-     * @param {Object} raw
-     */
-    constructor(raw) {
-        this.#raw = Object.freeze(raw);
-    }
-
-    /**
-     * @return {GuildRoleEventExtra}
-     */
-    get extra() {
-        return this.#raw.extra;
-    }
-}
-
-export { GuildRoleEvent };
+export {};
