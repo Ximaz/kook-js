@@ -7,13 +7,18 @@ import { EventEmitter } from "node:events";
 
 import Websocket, { WEBSOCKET_EVENTS } from "./internal.js";
 import {
+    /* Channel Events */
     ChannelReactionEvent,
     ChannelMessageUpdatedEvent,
     ChannelMessageDeletedEvent,
     ChannelAddedEvent,
     ChannelUpdatedEvent,
     ChannelDeletedEvent,
-    ChannelPinEvent
+    ChannelPinEvent,
+    /* DirectMessage Events */
+    DirectMessageUpdatedEvent,
+    DirectMessageDeletedEvent,
+    DirectMessageReactionEvent,
 } from "../events/index.js";
 import APIExecutor from "../api/index.js";
 
@@ -34,6 +39,12 @@ import APIExecutor from "../api/index.js";
  * @property {function(ChannelDeletedEvent): void} deleted_channel
  * @property {function(ChannelPinEvent): void} pinned_message
  * @property {function(ChannelPinEvent): void} unpinned_message
+ *
+ * DirectMessage Events
+ * @property {function(DirectMessageReactionEvent): void} private_added_reaction
+ * @property {function(DirectMessageReactionEvent): void} private_deleted_reaction
+ * @property {function(ChannelMessageUpdatedEvent): void} updated_message
+ * @property {function(ChannelMessageDeletedEvent): void} deleted_message
  */
 
 /* https://developer.kookapp.cn/doc/reference#API 版本管理 */

@@ -6,7 +6,7 @@
 import { RawEvent } from "./RawEvent.js";
 import { Channel } from "../types/Channel.js";
 
-/* --- CHANNEL REACTION EVENT: https://developer.kookapp.cn/doc/event/channel频道内用户添加 reaction */
+/* --- CHANNEL REACTION EVENT: https://developer.kookapp.cn/doc/event/channel#频道内用户添加 reaction */
 
 class ChannelReactionEventExtraBodyEmoji {
     #raw;

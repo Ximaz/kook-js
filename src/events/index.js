@@ -4,3 +4,4 @@
  */
 
 export * from "./Channel.js";
+export * from "./DirectMessage.js";
