@@ -10,6 +10,10 @@ import {
     ChannelReactionEvent,
     ChannelMessageUpdatedEvent,
     ChannelMessageDeletedEvent,
+    ChannelAddedEvent,
+    ChannelUpdatedEvent,
+    ChannelDeletedEvent,
+    ChannelPinEvent
 } from "../events/index.js";
 import APIExecutor from "../api/index.js";
 
@@ -19,10 +23,17 @@ import APIExecutor from "../api/index.js";
  * @property {function(): void} disconnected
  * @property {function(any): void} debug
  * @property {function(any): void} message
+ *
+ * Channel Events
  * @property {function(ChannelReactionEvent): void} added_reaction
  * @property {function(ChannelReactionEvent): void} deleted_reaction
  * @property {function(ChannelMessageUpdatedEvent): void} updated_message
  * @property {function(ChannelMessageDeletedEvent): void} deleted_message
+ * @property {function(ChannelAddedEvent): void} added_channel
+ * @property {function(ChannelUpdatedEvent): void} updated_channel
+ * @property {function(ChannelDeletedEvent): void} deleted_channel
+ * @property {function(ChannelPinEvent): void} pinned_message
+ * @property {function(ChannelPinEvent): void} unpinned_message
  */
 
 /* https://developer.kookapp.cn/doc/reference#API 版本管理 */
