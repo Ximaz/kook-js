@@ -11,13 +11,9 @@ client.on("debug", function(msg) {
     console.log(msg);
 })
 
-client.on("guild_member_offline", function(guildMember) {
-    console.log(`${guildMember.extra.body.user_id} is now offline`);
-});
-
-client.on("guild_member_online", function(guildMember) {
-    console.log(`${guildMember.extra.body.user_id} is now online`);
-});
+client.on("updated_role", function(role) {
+    console.log(`The role ${role.extra.body.name} has been modified.`);
+})
 
 client.login().catch(function (err) {
     console.error(err);

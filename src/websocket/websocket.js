@@ -26,6 +26,9 @@ import {
     GuildMemberExitedEvent,
     GuildMemberUpdatedEvent,
     GuildMemberPresenceEvent,
+
+    /* GuildRole Events */
+    GuildRoleEvent,
 } from "../events/index.js";
 import APIExecutor from "../api/index.js";
 
@@ -59,6 +62,11 @@ import APIExecutor from "../api/index.js";
  * @property {function(GuildMemberUpdatedEvent): void} updated_guild_member
  * @property {function(GuildMemberPresenceEvent): void} guild_member_online
  * @property {function(GuildMemberPresenceEvent): void} guild_member_offline
+ *
+ * GuildRole Events
+ * @property {function(GuildRoleEvent): void} added_role
+ * @property {function(GuildRoleEvent): void} deleted_role
+ * @property {function(GuildRoleEvent): void} updated_role
  */
 
 /* https://developer.kookapp.cn/doc/reference#API 版本管理 */
