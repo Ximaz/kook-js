@@ -7,3 +7,4 @@ export * from "./Channel.js";
 export * from "./DirectMessage.js";
 export * from "./GuildMember.js";
 export * from "./GuildRole.js";
+export * from "./Guild.js";

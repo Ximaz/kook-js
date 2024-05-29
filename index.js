@@ -11,8 +11,8 @@ client.on("debug", function(msg) {
     console.log(msg);
 })
 
-client.on("updated_role", function(role) {
-    console.log(`The role ${role.extra.body.name} has been modified.`);
+client.on("added_emoji", function(emoji) {
+    console.log(`Emoji '${emoji.extra.body.name}' has been added`);
 })
 
 client.login().catch(function (err) {

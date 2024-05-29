@@ -29,6 +29,12 @@ import {
 
     /* GuildRole Events */
     GuildRoleEvent,
+
+    /* Guild Events */
+    GuildEvent,
+    GuildAddedBlockListEvent,
+    GuildDeletedBlockListEvent,
+    GuildEmojiEvent
 } from "../events/index.js";
 import APIExecutor from "../api/index.js";
 
@@ -67,6 +73,15 @@ import APIExecutor from "../api/index.js";
  * @property {function(GuildRoleEvent): void} added_role
  * @property {function(GuildRoleEvent): void} deleted_role
  * @property {function(GuildRoleEvent): void} updated_role
+ *
+ * Guild Events
+ * @property {function(GuildEvent): void} updated_guild
+ * @property {function(GuildEvent): void} deleted_guild
+ * @property {function(GuildAddedBlockListEvent): void} added_block_list
+ * @property {function(GuildDeletedBlockListEvent): void} deleted_block_list
+ * @property {function(GuildEmojiEvent): void} added_emoji
+ * @property {function(GuildEmojiEvent): void} removed_emoji
+ * @property {function(GuildEmojiEvent): void} updated_emoji
  */
 
 /* https://developer.kookapp.cn/doc/reference#API 版本管理 */
