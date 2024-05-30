@@ -43,6 +43,7 @@ class UserJoinedChannelExtra {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.body = new UserJoinedChannelExtraBody(raw.body, api);
     }
 }
 
@@ -86,6 +87,7 @@ class UserJoinedChannel {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.extra = new UserJoinedChannelExtra(raw.extra, api);
     }
 }
 
@@ -127,6 +129,7 @@ class UserExitedChannelExtra {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.body = new UserExitedChannelExtraBody(raw.body, api);
     }
 }
 
@@ -170,6 +173,7 @@ class UserExitedChannel {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.extra = new UserExitedChannelExtra(raw.extra, api);
     }
 }
 
@@ -211,6 +215,7 @@ class UserUpdatedExtra {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.body = new UserUpdatedExtraBody(raw.body, api);
     }
 }
 
@@ -254,6 +259,7 @@ class UserUpdated {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.extra = new UserUpdatedExtra(raw.extra, api);
     }
 }
 
@@ -292,6 +298,7 @@ class UserSelfJoinedGuildExtra {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.body = new UserSelfJoinedGuildExtraBody(raw.body, api);
     }
 }
 
@@ -335,6 +342,7 @@ class UserSelfJoinedGuild {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.extra = new UserSelfJoinedGuildExtra(raw.extra, api);
     }
 }
 
@@ -370,6 +378,7 @@ class UserSelfExitedGuildExtra {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.body = new UserSelfExitedGuildExtraBody(raw.body, api);
     }
 }
 
@@ -413,6 +422,7 @@ class UserSelfExitedGuild {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.extra = new UserSelfExitedGuildExtra(raw.extra, api);
     }
 }
 
@@ -457,6 +467,7 @@ class UserMessageBtnClickExtra {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.body = new UserMessageBtnClickExtraBody(raw.body, api);
     }
 }
 
@@ -500,6 +511,7 @@ class UserMessageBtnClick {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
+        this.extra = new UserMessageBtnClickExtra(raw.extra, api);
     }
 }
 
