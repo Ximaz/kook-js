@@ -65,7 +65,6 @@ import {
 } from "../events/index.js";
 import APIExecutor from "../api/index.js";
 
-
 /**
  * @typedef {Object} KookEvents
  *
@@ -142,6 +141,25 @@ const MESSAGE_TYPES = {
     10: "card_message",
     12: "props_message",
 };
+
+/**
+ * TODO:
+ * - fetch guilds -> users
+ *                -> roles
+ *                -> channels
+ * - fetch dms
+ * - fetch users -> fetch guilds.users.all() + fetch.dms.all()
+ * - implement a cache system, with explicit refesh ? Delay ?
+ *
+ * @example
+ * ```javascript
+ * client.once("ready", function () {
+ *    console.log(`The bot is currently on ${client.guilds.length} guilds`);
+ *    console.log(`The bot is currently watching ${client.users.length} users`);
+ *    console.log(`The bot can access ${client.channels.length} channels`);
+ * });
+ * ```
+ */
 
 class KookClient extends EventEmitter {
     /** @type {APIExecutor} */
