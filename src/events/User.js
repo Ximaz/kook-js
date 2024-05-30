@@ -3,7 +3,11 @@
  * @description User implementation
  */
 
+import APIExecutor from "../api/index.js";
+
 class UserJoinedChannelExtraBody {
+    #api;
+
     /** @type {String} */
     user_id;
 
@@ -13,24 +17,38 @@ class UserJoinedChannelExtraBody {
     /** @type {Number} */
     joined_at;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserJoinedChannelExtra {
+    #api;
+
     /** @type {"joined_channel"} */
     type;
 
     /** @type {UserJoinedChannelExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserJoinedChannel {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -61,12 +79,19 @@ class UserJoinedChannel {
     /** @type {UserJoinedChannelExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserExitedChannelExtraBody {
+    #api;
+
     /** @type {String} */
     user_id;
 
@@ -76,24 +101,38 @@ class UserExitedChannelExtraBody {
     /** @type {Number} */
     exited_at;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserExitedChannelExtra {
+    #api;
+
     /** @type {"exited_channel"} */
     type;
 
     /** @type {UserExitedChannelExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserExitedChannel {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -124,12 +163,19 @@ class UserExitedChannel {
     /** @type {UserExitedChannelExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserUpdatedExtraBody {
+    #api;
+
     /** @type {String} */
     user_id;
 
@@ -139,24 +185,38 @@ class UserUpdatedExtraBody {
     /** @type {String} */
     avatar;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserUpdatedExtra {
+    #api;
+
     /** @type {"user_updated"} */
     type;
 
     /** @type {UserUpdatedExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserUpdated {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -187,36 +247,57 @@ class UserUpdated {
     /** @type {UserUpdatedExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserSelfJoinedGuildExtraBody {
+    #api;
+
     /** @type {String} */
     guild_id;
 
     /** @type {String} */
     state;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserSelfJoinedGuildExtra {
+    #api;
+
     /** @type {"self_joined_guild"} */
     type;
 
     /** @type {UserSelfJoinedGuildExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserSelfJoinedGuild {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -247,33 +328,54 @@ class UserSelfJoinedGuild {
     /** @type {UserSelfJoinedGuildExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserSelfExitedGuildExtraBody {
+    #api;
+
     /** @type {String} */
     guild_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserSelfExitedGuildExtra {
+    #api;
+
     /** @type {"self_exited_guild"} */
     type;
 
     /** @type {UserSelfExitedGuildExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserSelfExitedGuild {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -304,12 +406,19 @@ class UserSelfExitedGuild {
     /** @type {UserSelfExitedGuildExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserMessageBtnClickExtraBody {
+    #api;
+
     /** @type {String} */
     value;
 
@@ -322,24 +431,38 @@ class UserMessageBtnClickExtraBody {
     /** @type {String} */
     target_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserMessageBtnClickExtra {
+    #api;
+
     /** @type {"message_btn_click"} */
     type;
 
     /** @type {UserMessageBtnClickExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class UserMessageBtnClick {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -370,8 +493,13 @@ class UserMessageBtnClick {
     /** @type {UserMessageBtnClickExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 

@@ -3,7 +3,7 @@
  * @description GuildMember implementation
  */
 
-import APIExecutor from "../api";
+import APIExecutor from "../api/index.js";
 
 class GuildMemberJoinedGuildExtraBody {
     #api;
