@@ -3,21 +3,32 @@
  * @description Guild implementation
  */
 
+import APIExecutor from "../api/index.js";
 import { BaseEmoji, BaseGuild } from "../types/index.js";
 
 class GuildUpdatedGuildExtra {
+    #api;
+
     /** @type {"updated_guild"} */
     type;
 
     /** @type {BaseGuild} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new BaseGuild(raw.body, api);
     }
 }
 
 class GuildUpdatedGuild {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -48,24 +59,40 @@ class GuildUpdatedGuild {
     /** @type {GuildUpdatedGuildExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildUpdatedGuildExtra(raw.extra, api);
     }
 }
 
 class GuildDeletedGuildExtra {
+    #api;
+
     /** @type {"deleted_guild"} */
     type;
 
     /** @type {BaseGuild} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new BaseGuild(raw.body, api);
     }
 }
 
 class GuildDeletedGuild {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -96,12 +123,20 @@ class GuildDeletedGuild {
     /** @type {GuildDeletedGuildExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildDeletedGuildExtra(raw.extra, api);
     }
 }
 
 class GuildAddedBlockListExtraBody {
+    #api;
+
     /** @type {String} */
     operator_id;
 
@@ -111,24 +146,39 @@ class GuildAddedBlockListExtraBody {
     /** @type {String[]} */
     user_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class GuildAddedBlockListExtra {
+    #api;
+
     /** @type {"added_block_list"} */
     type;
 
     /** @type {GuildAddedBlockListExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new GuildAddedBlockListExtraBody(raw.body, api);
     }
 }
 
 class GuildAddedBlockList {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -159,36 +209,59 @@ class GuildAddedBlockList {
     /** @type {GuildAddedBlockListExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildAddedBlockListExtra(raw.extra, api);
     }
 }
 
 class GuildDeletedBlockListExtraBody {
+    #api;
+
     /** @type {String} */
     operator_id;
 
     /** @type {String[]} */
     user_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class GuildDeletedBlockListExtra {
+    #api;
+
     /** @type {"added_block_list"} */
     type;
 
     /** @type {GuildDeletedBlockListExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new GuildDeletedBlockListExtraBody(raw.body, api);
     }
 }
 
 class GuildDeletedBlockList {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -219,24 +292,40 @@ class GuildDeletedBlockList {
     /** @type {GuildDeletedBlockListExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildDeletedBlockListExtra(raw.extra, api);
     }
 }
 
 class GuildAddedEmojiExtra {
+    #api;
+
     /** @type {"added_emoji"} */
     type;
 
     /** @type {BaseEmoji} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new BaseGuild(raw.body, api);
     }
 }
 
 class GuildAddedEmoji {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -267,24 +356,40 @@ class GuildAddedEmoji {
     /** @type {GuildAddedEmojiExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildAddedEmojiExtra(raw.extra, api);
     }
 }
 
 class GuildRemovedEmojiExtra {
+    #api;
+
     /** @type {"removed_emoji"} */
     type;
 
     /** @type {BaseEmoji} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new BaseGuild(raw.body, api);
     }
 }
 
 class GuildRemovedEmoji {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -315,24 +420,40 @@ class GuildRemovedEmoji {
     /** @type {GuildRemovedEmojiExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildRemovedEmojiExtra(raw.extra, api);
     }
 }
 
 class GuildUpdatedEmojiExtra {
+    #api;
+
     /** @type {"updated_emoji"} */
     type;
 
     /** @type {BaseEmoji} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new BaseGuild(raw.body, api);
     }
 }
 
 class GuildUpdatedEmoji {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -363,8 +484,14 @@ class GuildUpdatedEmoji {
     /** @type {GuildUpdatedEmojiExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildUpdatedEmojiExtra(raw.extra, api);
     }
 }
 
