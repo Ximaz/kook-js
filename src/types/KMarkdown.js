@@ -19,9 +19,8 @@
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseKMarkdown}
+ * @param {BaseKMarkdown} raw
  */
 export function kmarkdown(raw) {
-    return raw;
+    return { ...raw };
 }

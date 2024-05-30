@@ -11,11 +11,10 @@
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseImageAttachment}
+ * @param {BaseImageAttachment} raw
  */
 export function attachmentImage(raw) {
-    return raw;
+    return { ...raw };
 }
 
 /**
@@ -31,11 +30,10 @@ export function attachmentImage(raw) {
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseVideoAttachment}
+ * @param {BaseVideoAttachment} raw
  */
 export function attachmentVideo(raw) {
-    return raw;
+    return { ...raw };
 }
 
 /**
@@ -48,11 +46,10 @@ export function attachmentVideo(raw) {
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseFileAttachment}
+ * @param {BaseFileAttachment} raw
  */
 export function attachmentFile(raw) {
-    return raw;
+    return { ...raw };
 }
 
 /**
@@ -68,9 +65,8 @@ export function attachmentFile(raw) {
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseAttachment}
+ * @param {BaseAttachment} raw
  */
 export function attachment(raw) {
-    return raw;
+    return { ...raw };
 }

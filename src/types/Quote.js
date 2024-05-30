@@ -13,9 +13,8 @@
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseQuote}
+ * @param {BaseQuote} raw
  */
 export function quote(raw) {
-    return raw;
+    return { ...raw };
 }

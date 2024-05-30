@@ -10,9 +10,8 @@
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseEmoji}
+ * @param {BaseEmoji} raw
  */
 export function emoji(raw) {
-    return raw;
+    return { ...raw };
 }

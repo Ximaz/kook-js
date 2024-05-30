@@ -28,9 +28,8 @@
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseUser}
+ * @param {BaseUser} raw
  */
 export function user(raw) {
-    return raw;
+    return { ...raw };
 }

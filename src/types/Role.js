@@ -14,9 +14,8 @@
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseRole}
+ * @param {BaseRole} raw
  */
 export function role(raw) {
-    return raw;
+    return { ...raw };
 }

@@ -30,11 +30,10 @@
  */
 
 /**
- * @param {Object} raw
- * @return {BaseTextMessage}
+ * @param {BaseTextMessage} raw
  */
 export function messageText(raw) {
-    return raw;
+    return { ...raw };
 }
 
 /**
@@ -58,11 +57,10 @@ export function messageText(raw) {
  */
 
 /**
- * @param {Object} raw
- * @return {BaseImageMessage}
+ * @param {BaseImageMessage} raw
  */
 export function messageImage(raw) {
-    return raw;
+    return { ...raw };
 }
 
 /**
@@ -86,11 +84,10 @@ export function messageImage(raw) {
  */
 
 /**
- * @param {Object} raw
- * @return {BaseVideoMessage}
+ * @param {BaseVideoMessage} raw
  */
 export function messageVideo(raw) {
-    return raw;
+    return { ...raw };
 }
 
 /**
@@ -114,11 +111,10 @@ export function messageVideo(raw) {
  */
 
 /**
- * @param {Object} raw
- * @return {BaseFileMessage}
+ * @param {BaseFileMessage} raw
  */
 export function messageFile(raw) {
-    return raw;
+    return { ...raw };
 }
 
 /**
@@ -149,11 +145,10 @@ export function messageFile(raw) {
  */
 
 /**
- * @param {Object} raw
- * @return {BaseKMarkdownMessage}
+ * @param {BaseKMarkdownMessage} raw
  */
 export function messageKMarkdown(raw) {
-    return raw;
+    return { ...raw };
 }
 
 /**
@@ -183,11 +178,10 @@ export function messageKMarkdown(raw) {
  */
 
 /**
- * @param {Object} raw
- * @return {BaseCardMessage}
+ * @param {BaseCardMessage} raw
  */
 export function messageCard(raw) {
-    return raw;
+    return { ...raw };
 }
 
 /**
@@ -222,11 +216,10 @@ export function messageCard(raw) {
  */
 
 /**
- * @param {Object} raw
- * @return {BasePropsMessage}
+ * @param {BasePropsMessage} raw
  */
 export function messageProps(raw) {
-    return raw;
+    return { ...raw };
 }
 
 /**
@@ -258,9 +251,8 @@ export function messageProps(raw) {
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseMessage}
+ * @param {BaseMessage} raw
  */
 export function message(raw) {
-    return raw;
+    return { ...raw };
 }

@@ -21,9 +21,8 @@
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseGuild}
+ * @param {BaseGuild} raw
  */
 export function guild(raw) {
-    return raw;
+    return { ...raw };
 }

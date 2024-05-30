@@ -32,9 +32,8 @@
  */
 
 /**
- * @param {Object} raw
- * @returns {BaseChannel}
+ * @param {BaseChannel} raw
  */
 export function channel(raw) {
-    return raw;
+    return { ...raw };
 }
