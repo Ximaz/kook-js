@@ -3,9 +3,15 @@
  * @description Quote implementation
  */
 
+import APIExecutor from "../api/index.js";
 import { BaseUser } from "./User.js";
 
+/**
+ * @link `https://developer.kookapp.cn/doc/objects#引用消息 Quote`
+ */
 class BaseQuote {
+    #api;
+
     /** @type {String} */
     id;
 
@@ -21,8 +27,13 @@ class BaseQuote {
     /** @type {BaseUser} */
     author;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 

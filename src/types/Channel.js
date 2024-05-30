@@ -3,9 +3,12 @@
  * @description Channel implementation
  */
 
+import APIExecutor from "../api/index.js";
 import { BaseUser } from "./User.js";
 
 class BaseChannelPermissionOverwrite {
+    #api;
+
     /** @type {Number} */
     role_id;
 
@@ -15,12 +18,19 @@ class BaseChannelPermissionOverwrite {
     /** @type {Number} */
     deny;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class BaseChannelPermissionUser {
+    #api;
+
     /** @type {BaseUser} */
     user;
 
@@ -30,12 +40,23 @@ class BaseChannelPermissionUser {
     /** @type {Number} */
     deny;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.user = new BaseUser(raw.user, api);
     }
 }
 
+/**
+ * @link `https://developer.kookapp.cn/doc/objects#频道 Channel`
+ */
 class BaseChannel {
+    #api;
+
     /** @type {String} */
     id;
 
@@ -44,6 +65,12 @@ class BaseChannel {
 
     /** @type {String} */
     user_id;
+
+    /** @type {String | undefined} */
+    guild_id;
+
+    /** @type {String | undefined} */
+    topic;
 
     /** @type {Boolean} */
     is_category;
@@ -72,8 +99,19 @@ class BaseChannel {
     /** @type {0 | 1} */
     permission_sync;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.permission_overwrites = raw.permission_overwrites.map(
+            (p) => new BaseChannelPermissionOverwrite(p, api)
+        );
+        this.permission_users = raw.permission_users.map(
+            (p) => new BaseChannelPermissionUser(p, api)
+        );
     }
 }
 

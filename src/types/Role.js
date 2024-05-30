@@ -3,7 +3,14 @@
  * @description Role implementation
  */
 
+import APIExecutor from "../api/index.js";
+
+/**
+ * @link `https://developer.kookapp.cn/doc/objects#角色 Role`
+ */
 class BaseRole {
+    #api;
+
     /** @type {Number} */
     role_id;
 
@@ -25,8 +32,13 @@ class BaseRole {
     /** @type {Number} */
     permissions;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 

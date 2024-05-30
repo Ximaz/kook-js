@@ -3,7 +3,11 @@
  * @description Attachment implementation
  */
 
+import APIExecutor from "../api/index.js";
+
 class BaseImageAttachment {
+    #api;
+
     /** @type {"image"} */
     type;
 
@@ -13,12 +17,19 @@ class BaseImageAttachment {
     /** @type {String} */
     url;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class BaseVideoAttachment {
+    #api;
+
     /** @type {"video"} */
     type;
 
@@ -43,12 +54,19 @@ class BaseVideoAttachment {
     /** @type {Number} */
     height;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class BaseFileAttachment {
+    #api;
+
     /** @type {"file"} */
     type;
 
@@ -64,12 +82,19 @@ class BaseFileAttachment {
     /** @type {Number} */
     size;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class BaseAttachment {
+    #api;
+
     /** @type {"image" | "video" | "file"} */
     type;
 
@@ -94,8 +119,13 @@ class BaseAttachment {
     /** @type {Number | undefined} */
     height;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 

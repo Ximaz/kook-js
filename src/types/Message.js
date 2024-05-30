@@ -11,8 +11,11 @@ import {
     BaseFileAttachment,
 } from "./Attachment.js";
 import { BaseKMarkdown } from "./KMarkdown.js";
+import APIExecutor from "../api/index.js";
 
 class BaseTextMessageExtra {
+    #api;
+
     /** @type {1} */
     type;
 
@@ -40,12 +43,23 @@ class BaseTextMessageExtra {
     /** @type {BaseUser} */
     author;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.author = new BaseUser(raw.author, api);
     }
 }
 
+/**
+ * @link `https://developer.kookapp.cn/doc/event/message#文字消息`
+ */
 class BaseTextMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -73,12 +87,20 @@ class BaseTextMessage {
     /** @type {BaseTextMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new BaseTextMessageExtra(raw.extra, api);
     }
 }
 
 class BaseImageMessageExtra {
+    #api;
+
     /** @type {2} */
     type;
 
@@ -94,12 +116,24 @@ class BaseImageMessageExtra {
     /** @type {BaseImageAttachment} */
     attachments;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.author = new BaseUser(raw.author, api);
+        this.attachments = new BaseImageAttachment(raw.attachments, api);
     }
 }
 
+/**
+ * @link `https://developer.kookapp.cn/doc/event/message#图片消息`
+ */
 class BaseImageMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -127,12 +161,20 @@ class BaseImageMessage {
     /** @type {BaseImageMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new BaseImageMessageExtra(raw.extra, api);
     }
 }
 
 class BaseVideoMessageExtra {
+    #api;
+
     /** @type {3} */
     type;
 
@@ -148,12 +190,24 @@ class BaseVideoMessageExtra {
     /** @type {BaseVideoAttachment} */
     attachments;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.author = new BaseUser(raw.author, api);
+        this.attachments = new BaseVideoAttachment(raw.attachments, api);
     }
 }
 
+/**
+ * @link `https://developer.kookapp.cn/doc/event/message#视频消息`
+ */
 class BaseVideoMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -181,12 +235,20 @@ class BaseVideoMessage {
     /** @type {BaseVideoMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new BaseVideoMessageExtra(raw.extra, api);
     }
 }
 
 class BaseFileMessageExtra {
+    #api;
+
     /** @type {4} */
     type;
 
@@ -202,12 +264,24 @@ class BaseFileMessageExtra {
     /** @type {BaseFileAttachment} */
     attachments;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.author = new BaseUser(raw.author, api);
+        this.attachments = new BaseFileAttachment(raw.attachments, api);
     }
 }
 
+/**
+ * @link `https://developer.kookapp.cn/doc/event/message#文件消息`
+ */
 class BaseFileMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -235,12 +309,20 @@ class BaseFileMessage {
     /** @type {BaseFileMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new BaseFileMessageExtra(raw.extra, api);
     }
 }
 
 class BaseKMarkdownMessageExtra {
+    #api;
+
     /** @type {9} */
     type;
 
@@ -274,12 +356,24 @@ class BaseKMarkdownMessageExtra {
     /** @type {BaseKMarkdown} */
     kmarkdown;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.author = new BaseUser(raw.author, api);
+        this.kmarkdown = new BaseKMarkdown(raw.kmarkdown, api);
     }
 }
 
+/**
+ * @link `https://developer.kookapp.cn/doc/event/message#KMarkdown 消息`
+ */
 class BaseKMarkdownMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -310,12 +404,20 @@ class BaseKMarkdownMessage {
     /** @type {BaseKMarkdownMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new BaseKMarkdownMessageExtra(raw.extra, api);
     }
 }
 
 class BaseCardMessageExtra {
+    #api;
+
     /** @type {10} */
     type;
 
@@ -346,12 +448,23 @@ class BaseCardMessageExtra {
     /** @type {BaseUser} */
     author;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.author = new BaseUser(raw.author, api);
     }
 }
 
+/**
+ * @link `https://developer.kookapp.cn/doc/event/message#Card 消息`
+ */
 class BaseCardMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -382,12 +495,20 @@ class BaseCardMessage {
     /** @type {BaseCardMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new BaseCardMessageExtra(raw.extra, api);
     }
 }
 
 class BasePropsMessageContentData {
+    #api;
+
     /** @type {String} */
     user_id;
 
@@ -397,24 +518,39 @@ class BasePropsMessageContentData {
     /** @type {Number} */
     item_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class BasePropsMessageContent {
+    #api;
+
     /** @type {"string" | "item"} */
     type;
 
     /** @type {BasePropsMessageContentData} */
     data;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.data = new BasePropsMessageContentData(raw.data, api);
     }
 }
 
 class BasePropsMessageExtra {
+    #api;
+
     /** @type {12} */
     type;
 
@@ -433,12 +569,24 @@ class BasePropsMessageExtra {
     /** @type {BaseKMarkdown} */
     kmarkdown;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.author = new BaseUser(raw.author, api);
+        this.kmarkdown = new BaseKMarkdown(raw.kmarkdown, api);
     }
 }
 
+/**
+ * @link `https://developer.kookapp.cn/doc/event/message#道具 消息`
+ */
 class BasePropsMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -469,12 +617,21 @@ class BasePropsMessage {
     /** @type {BasePropsMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.content = new BasePropsMessageContent(raw.content, api);
+        this.extra = new BasePropsMessageExtra(raw.extra, api);
     }
 }
 
 class BaseMessageExtra {
+    #api;
+
     /** @type {1 | 2 | 3 | 4 | 9 | 10 | 12} */
     type;
 
@@ -511,12 +668,23 @@ class BaseMessageExtra {
     /** @type {BaseKMarkdown | undefined} */
     kmarkdown;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        if (undefined !== raw.attachments)
+            this.attachments = new BaseAttachment(raw.attachments, api);
+        if (undefined !== raw.kmarkdown)
+            this.kmarkdown = new BaseKMarkdown(raw.kmarkdown, api);
     }
 }
 
 class BaseMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -547,8 +715,16 @@ class BaseMessage {
     /** @type {BaseMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        if (typeof raw.content !== "string")
+            this.content = new BasePropsMessageContent(raw.content, api);
+        this.extra = new BaseMessageExtra(raw.extra, api);
     }
 }
 
