@@ -3,21 +3,32 @@
  * @description GuildRole implementation
  */
 
+import APIExecutor from "../api/index.js";
 import { BaseRole } from "../types/index.js";
 
 class GuildAddedRoleExtra {
+    #api;
+
     /** @type {"added_role"} */
     type;
 
     /** @type {BaseRole} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new BaseRole(raw.body, api);
     }
 }
 
 class GuildAddedRole {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -48,24 +59,40 @@ class GuildAddedRole {
     /** @type {GuildAddedRoleExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildAddedRoleExtra(raw.extra, api);
     }
 }
 
 class GuildDeletedRoleExtra {
+    #api;
+
     /** @type {"deleted_role"} */
     type;
 
     /** @type {BaseRole} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new BaseRole(raw.body, api);
     }
 }
 
 class GuildDeletedRole {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -96,24 +123,40 @@ class GuildDeletedRole {
     /** @type {GuildDeletedRoleExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildDeletedRoleExtra(raw.extra, api);
     }
 }
 
 class GuildUpdatedRoleExtra {
+    #api;
+
     /** @type {"updated_role"} */
     type;
 
     /** @type {BaseRole} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new BaseRole(raw.body, api);
     }
 }
 
 class GuildUpdatedRole {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -144,8 +187,14 @@ class GuildUpdatedRole {
     /** @type {GuildUpdatedRoleExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildUpdatedRoleExtra(raw.extra, api);
     }
 }
 
