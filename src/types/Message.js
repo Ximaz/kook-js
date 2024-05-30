@@ -473,54 +473,6 @@ class BasePropsMessage {
     }
 }
 
-class BaseMessageExtra {
-    /** @type {1 | 2 | 3 | 4 | 9 | 10 | 12} */
-    type;
-
-    /** @type {BaseUser} */
-    author;
-
-    constructor(raw) {
-        Object.assign(this, raw);
-    }
-}
-
-class BaseMessage {
-    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
-    channel_type;
-
-    /** @type {1 | 2 | 3 | 4 | 9 |10 | 12} */
-    type;
-
-    /** @type {String} */
-    target_id;
-
-    /** @type {String} */
-    author_id;
-
-    /** @type {String | BasePropsMessageContent} */
-    content;
-
-    /** @type {String} */
-    msg_id;
-
-    /** @type {Number} */
-    msg_timestamp;
-
-    /** @type {String} */
-    nonce;
-
-    /** @type {String} */
-    verify_token;
-
-    /** @type {BaseMessageExtra} */
-    extra;
-
-    constructor(raw) {
-        Object.assign(this, raw);
-    }
-}
-
 export {
     BaseTextMessage,
     BaseImageMessage,
@@ -529,5 +481,4 @@ export {
     BaseKMarkdownMessage,
     BaseCardMessage,
     BasePropsMessage,
-    BaseMessage,
 };

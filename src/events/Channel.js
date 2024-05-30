@@ -3,7 +3,7 @@
  * @description Channel implementation
  */
 
-import { BaseEmoji } from "../types/index.js";
+import { BaseEmoji, BaseChannel } from "../types/index.js";
 
 class ChannelAddedReactionExtraBody {
     /** @type {String} */
@@ -279,7 +279,7 @@ class ChannelAddedChannelExtra {
     /** @type {"added_channel"} */
     type;
 
-    /** @type {import("../types/index.js").BaseChannel} */
+    /** @type {BaseChannel} */
     body;
 
     constructor(raw) {
@@ -327,7 +327,7 @@ class ChannelUpdatedChannelExtra {
     /** @type {"updated_channel"} */
     type;
 
-    /** @type {import("../types/index.js").BaseChannel} */
+    /** @type {BaseChannel} */
     body;
 
     constructor(raw) {

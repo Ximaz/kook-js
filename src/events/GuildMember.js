@@ -262,7 +262,7 @@ class GuildMemberGuildMemberOfflineExtraBody {
 }
 
 class GuildMemberGuildMemberOfflineExtra {
-    /** @type {"updateguild_member_offlined_guild_member"} */
+    /** @type {"guild_member_offline"} */
     type;
 
     /** @type {GuildMemberGuildMemberOfflineExtraBody} */

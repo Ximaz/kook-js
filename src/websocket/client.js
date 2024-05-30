@@ -7,6 +7,7 @@ import { EventEmitter } from "node:events";
 
 import Websocket, { WEBSOCKET_EVENTS } from "./websocket.js";
 import {
+    /* Channel Events */
     ChannelAddedReaction,
     ChannelDeletedReaction,
     ChannelUpdatedMessage,
@@ -17,21 +18,25 @@ import {
     ChannelPinnedMessage,
     ChannelUnpinnedMessage,
 
+    /* DirectMessage Events */
     DirectMessageUpdatedPrivateMessage,
     DirectMessageDeletedPrivateMessage,
     DirectMessagePrivateAddedReaction,
     DirectMessagePrivateDeletedReaction,
 
+    /* GuildMember Events */
     GuildMemberJoinedGuild,
     GuildMemberExitedGuild,
     GuildMemberUpdatedGuildMember,
     GuildMemberGuildMemberOnline,
     GuildMemberGuildMemberOffline,
 
+    /* GuildRole Events */
     GuildAddedRole,
     GuildDeletedRole,
     GuildUpdatedRole,
 
+    /* Guild Events */
     GuildUpdatedGuild,
     GuildDeletedGuild,
     GuildAddedBlockList,
@@ -40,8 +45,16 @@ import {
     GuildRemovedEmoji,
     GuildUpdatedEmoji,
 
-    BaseMessage,
+    /* Message Events */
+    BaseTextMessage,
+    BaseImageMessage,
+    BaseVideoMessage,
+    BaseFileMessage,
+    BaseKMarkdownMessage,
+    BaseCardMessage,
+    BasePropsMessage,
 
+    /* User Events */
     UserJoinedChannel,
     UserExitedChannel,
     UserUpdated,
@@ -50,7 +63,6 @@ import {
     UserMessageBtnClick,
 } from "../events/index.js";
 import APIExecutor from "../api/index.js";
-
 
 /**
  * @typedef {Object} KookEvents
@@ -94,7 +106,14 @@ import APIExecutor from "../api/index.js";
  * @property {function(GuildUpdatedEmoji): void} updated_emoji
  *
  * Message Events
- * @property {function(BaseMessage): void} message
+ * @property {function(BaseTextMessage): void} text_message
+ * @property {function(BaseImageMessage): void} image_message
+ * @property {function(BaseVideoMessage): void} video_message
+ * @property {function(BaseFileMessage): void} file_message
+ * @property {function(BaseKMarkdownMessage): void} kmarkdown_message
+ * @property {function(BaseCardMessage): void} card_message
+ * @property {function(BasePropsMessage): void} props_message
+ * @property {function(BaseTextMessage | BaseImageMessage | BaseVideoMessage | BaseFileMessage | BaseKMarkdownMessage | BaseCardMessage | BasePropsMessage): void} message
  *
  * User Events
  * @property {function(UserJoinedChannel): void} joined_channel
@@ -111,6 +130,16 @@ import APIExecutor from "../api/index.js";
 
 /* https://developer.kookapp.cn/doc/reference#API 版本管理 */
 const API_VERSION = 3;
+
+const MESSAGE_TYPES = {
+    1: "text_message",
+    2: "image_message",
+    3: "video_message",
+    4: "file_message",
+    9: "kmarkdown_message",
+    10: "card_message",
+    12: "props_message",
+};
 
 class KookClient extends EventEmitter {
     /** @type {APIExecutor} */
@@ -147,10 +176,11 @@ class KookClient extends EventEmitter {
         this.emit("debug", { s, d });
         switch (s) {
             case WEBSOCKET_EVENTS.EVENT:
-                const eventName = isNaN(d.extra?.type)
-                    ? d.extra?.type
-                    : "message";
-                this.emit(eventName, d);
+                if (isNaN(d.extra?.type)) this.emit(eventName, d);
+                else {
+                    this.emit(MESSAGE_TYPES[parseInt(d.extra.type)], d);
+                    this.emit("message", d);
+                }
                 break;
             case WEBSOCKET_EVENTS.HANDSHAKE:
                 const { sessionId, session_id } = d;
