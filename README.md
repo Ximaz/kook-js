@@ -17,7 +17,7 @@ import { KookClient } from "./src/index.js";
 const KOOK_WEBSOCKET_TOKEN = process.env.KOOK_WEBSOCKET_TOKEN;
 const client = new KookClient(KOOK_WEBSOCKET_TOKEN);
 
-client.on("ready", function () {
+client.once("ready", function () {
     console.log("Bot is ready");
 });
 

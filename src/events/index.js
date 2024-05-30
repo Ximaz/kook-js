@@ -10,5 +10,3 @@ export * from "./GuildRole.js";
 export * from "./Guild.js";
 export * from "../types/Message.js";
 export * from "./User.js";
-
-export {};

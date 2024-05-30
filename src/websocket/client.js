@@ -65,6 +65,7 @@ import {
 } from "../events/index.js";
 import APIExecutor from "../api/index.js";
 
+
 /**
  * @typedef {Object} KookEvents
  *
@@ -146,8 +147,50 @@ class KookClient extends EventEmitter {
     /** @type {APIExecutor} */
     #api;
 
-    /** @type {Object} */
-    #apis;
+    #events = {
+        added_reaction: ChannelAddedReaction,
+        deleted_reaction: ChannelDeletedReaction,
+        updated_message: ChannelUpdatedMessage,
+        deleted_message: ChannelDeletedMessage,
+        added_channel: ChannelAddedChannel,
+        updated_channel: ChannelUpdatedChannel,
+        deleted_channel: ChannelDeletedChannel,
+        pinned_message: ChannelPinnedMessage,
+        unpinned_message: ChannelUnpinnedMessage,
+        updated_message: DirectMessageUpdatedPrivateMessage,
+        deleted_message: DirectMessageDeletedPrivateMessage,
+        private_added_reaction: DirectMessagePrivateAddedReaction,
+        private_deleted_reaction: DirectMessagePrivateDeletedReaction,
+        joined_guild: GuildMemberJoinedGuild,
+        exited_guild: GuildMemberExitedGuild,
+        updated_guild_member: GuildMemberUpdatedGuildMember,
+        guild_member_online: GuildMemberGuildMemberOnline,
+        guild_member_offline: GuildMemberGuildMemberOffline,
+        added_role: GuildAddedRole,
+        deleted_role: GuildDeletedRole,
+        updated_role: GuildUpdatedRole,
+        updated_guild: GuildUpdatedGuild,
+        deleted_guild: GuildDeletedGuild,
+        added_block_list: GuildAddedBlockList,
+        deleted_block_list: GuildDeletedBlockList,
+        added_emoji: GuildAddedEmoji,
+        removed_emoji: GuildRemovedEmoji,
+        updated_emoji: GuildUpdatedEmoji,
+        text_message: BaseTextMessage,
+        image_message: BaseImageMessage,
+        video_message: BaseVideoMessage,
+        file_message: BaseFileMessage,
+        kmarkdown_message: BaseKMarkdownMessage,
+        card_message: BaseCardMessage,
+        props_message: BasePropsMessage,
+        message: BaseMessage,
+        joined_channel: UserJoinedChannel,
+        exited_channel: UserExitedChannel,
+        user_updated: UserUpdated,
+        self_joined_guild: UserSelfJoinedGuild,
+        self_exited_guild: UserSelfExitedGuild,
+        message_btn_click: UserMessageBtnClick,
+    };
 
     /** @type {Websocket} */
     #ws = null;
@@ -164,50 +207,6 @@ class KookClient extends EventEmitter {
     constructor(token) {
         super();
         this.#api = new APIExecutor(API_VERSION, token);
-        this.#apis = {
-            added_reaction: ChannelAddedReaction,
-            deleted_reaction: ChannelDeletedReaction,
-            updated_message: ChannelUpdatedMessage,
-            deleted_message: ChannelDeletedMessage,
-            added_channel: ChannelAddedChannel,
-            updated_channel: ChannelUpdatedChannel,
-            deleted_channel: ChannelDeletedChannel,
-            pinned_message: ChannelPinnedMessage,
-            unpinned_message: ChannelUnpinnedMessage,
-            updated_message: DirectMessageUpdatedPrivateMessage,
-            deleted_message: DirectMessageDeletedPrivateMessage,
-            private_added_reaction: DirectMessagePrivateAddedReaction,
-            private_deleted_reaction: DirectMessagePrivateDeletedReaction,
-            joined_guild: GuildMemberJoinedGuild,
-            exited_guild: GuildMemberExitedGuild,
-            updated_guild_member: GuildMemberUpdatedGuildMember,
-            guild_member_online: GuildMemberGuildMemberOnline,
-            guild_member_offline: GuildMemberGuildMemberOffline,
-            added_role: GuildAddedRole,
-            deleted_role: GuildDeletedRole,
-            updated_role: GuildUpdatedRole,
-            updated_guild: GuildUpdatedGuild,
-            deleted_guild: GuildDeletedGuild,
-            added_block_list: GuildAddedBlockList,
-            deleted_block_list: GuildDeletedBlockList,
-            added_emoji: GuildAddedEmoji,
-            removed_emoji: GuildRemovedEmoji,
-            updated_emoji: GuildUpdatedEmoji,
-            text_message: BaseTextMessage,
-            image_message: BaseImageMessage,
-            video_message: BaseVideoMessage,
-            file_message: BaseFileMessage,
-            kmarkdown_message: BaseKMarkdownMessage,
-            card_message: BaseCardMessage,
-            props_message: BasePropsMessage,
-            message: BaseMessage,
-            joined_channel: UserJoinedChannel,
-            exited_channel: UserExitedChannel,
-            user_updated: UserUpdated,
-            self_joined_guild: UserSelfJoinedGuild,
-            self_exited_guild: UserSelfExitedGuild,
-            message_btn_click: UserMessageBtnClick,
-        };
     }
 
     #onOpen() {
@@ -227,12 +226,12 @@ class KookClient extends EventEmitter {
                 if (isNaN(d.extra?.type)) {
                     this.emit(
                         d.extra.type,
-                        new this.#apis[d.extra.type](d, this.#api)
+                        new this.#events[d.extra.type](d, this.#api)
                     );
                 }
                 else {
                     this.emit(
-                        new this.#apis[MESSAGE_TYPES[parseInt(d.extra.type)]](
+                        new this.#events[MESSAGE_TYPES[parseInt(d.extra.type)]](
                             d,
                             this.#api
                         )
@@ -296,11 +295,10 @@ class KookClient extends EventEmitter {
     }
 
     /**
-     * Register an event listener for the given event.
      * @template {keyof KookEvents} K
      * @param {K} event
      * @param {KookEvents[K]} listener
-     * @returns {this}
+     * @returns {KookClient}
      */
     on(event, listener) {
         super.on(event, listener);
@@ -308,11 +306,10 @@ class KookClient extends EventEmitter {
     }
 
     /**
-     * Register a one-time event listener for the given event.
      * @template {keyof KookEvents} K
      * @param {K} event
      * @param {KookEvents[K]} listener
-     * @returns {this}
+     * @returns {KookClient}
      */
     once(event, listener) {
         super.once(event, listener);
@@ -320,7 +317,6 @@ class KookClient extends EventEmitter {
     }
 
     /**
-     * Emit the given event with the provided arguments.
      * @template {keyof KookEvents} K
      * @param {K} event
      * @param {...Parameters<KookEvents[K]>} args
