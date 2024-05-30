@@ -5,6 +5,7 @@
 
 import { BaseUser } from "./User.js";
 import {
+    BaseAttachment,
     BaseImageAttachment,
     BaseVideoAttachment,
     BaseFileAttachment,
@@ -473,6 +474,84 @@ class BasePropsMessage {
     }
 }
 
+class BaseMessageExtra {
+    /** @type {1 | 2 | 3 | 4 | 9 | 10 | 12} */
+    type;
+
+    /** @type {String | undefined} */
+    guild_id;
+
+    /** @type {String | undefined} */
+    channel_name;
+
+    /** @type {String[] | undefined} */
+    mention;
+
+    /** @type {Boolean | undefined} */
+    mention_all;
+
+    /** @type {Number[] | undefined} */
+    mention_roles;
+
+    /** @type {Boolean | undefined} */
+    mention_here;
+
+    /** @type {String | undefined} */
+    code;
+
+    /** @type {BaseUser} */
+    author;
+
+    /** @type {BaseAttachment | undefined} */
+    attachments;
+
+    /** @type {any[] | undefined} */
+    nav_channels;
+
+    /** @type {BaseKMarkdown | undefined} */
+    kmarkdown;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class BaseMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {12} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String | BasePropsMessageContent} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {BaseMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
 export {
     BaseTextMessage,
     BaseImageMessage,
@@ -481,4 +560,5 @@ export {
     BaseKMarkdownMessage,
     BaseCardMessage,
     BasePropsMessage,
+    BaseMessage
 };

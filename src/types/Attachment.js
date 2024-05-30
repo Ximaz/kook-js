@@ -79,6 +79,21 @@ class BaseAttachment {
     /** @type {String} */
     url;
 
+    /** @type {String | undefined} */
+    file_type;
+
+    /** @type {Number | undefined} */
+    size;
+
+    /** @type {Number | undefined} */
+    duration;
+
+    /** @type {Number | undefined} */
+    width;
+
+    /** @type {Number | undefined} */
+    height;
+
     constructor(raw) {
         Object.assign(this, raw);
     }

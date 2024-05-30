@@ -53,6 +53,7 @@ import {
     BaseKMarkdownMessage,
     BaseCardMessage,
     BasePropsMessage,
+    BaseMessage,
 
     /* User Events */
     UserJoinedChannel,
@@ -113,7 +114,7 @@ import APIExecutor from "../api/index.js";
  * @property {function(BaseKMarkdownMessage): void} kmarkdown_message
  * @property {function(BaseCardMessage): void} card_message
  * @property {function(BasePropsMessage): void} props_message
- * @property {function(BaseTextMessage | BaseImageMessage | BaseVideoMessage | BaseFileMessage | BaseKMarkdownMessage | BaseCardMessage | BasePropsMessage): void} message
+ * @property {function(BaseMessage): void} message
  *
  * User Events
  * @property {function(UserJoinedChannel): void} joined_channel
