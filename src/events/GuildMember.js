@@ -3,31 +3,50 @@
  * @description GuildMember implementation
  */
 
+import APIExecutor from "../api";
+
 class GuildMemberJoinedGuildExtraBody {
+    #api;
+
     /** @type {String} */
     user_id;
 
     /** @type {Number} */
     joined_at;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class GuildMemberJoinedGuildExtra {
+    #api;
+
     /** @type {"joined_guild"} */
     type;
 
     /** @type {GuildMemberJoinedGuildExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new GuildMemberJoinedGuildExtraBody(raw.body, api);
     }
 }
 
 class GuildMemberJoinedGuild {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -58,36 +77,59 @@ class GuildMemberJoinedGuild {
     /** @type {GuildMemberJoinedGuildExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildMemberJoinedGuildExtra(raw.extra, api);
     }
 }
 
 class GuildMemberExitedGuildExtraBody {
+    #api;
+
     /** @type {String} */
     user_id;
 
     /** @type {Number} */
     exited_at;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class GuildMemberExitedGuildExtra {
+    #api;
+
     /** @type {"exited_guild"} */
     type;
 
     /** @type {GuildMemberExitedGuildExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new GuildMemberExitedGuildExtraBody(raw.body, api);
     }
 }
 
 class GuildMemberExitedGuild {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -118,36 +160,59 @@ class GuildMemberExitedGuild {
     /** @type {GuildMemberExitedGuildExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildMemberExitedGuildExtra(raw.extra, api);
     }
 }
 
 class GuildMemberUpdatedGuildMemberExtraBody {
+    #api;
+
     /** @type {String} */
     user_id;
 
     /** @type {String} */
     nickname;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class GuildMemberUpdatedGuildMemberExtra {
+    #api;
+
     /** @type {"updated_guild_member"} */
     type;
 
     /** @type {GuildMemberUpdatedGuildMemberExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new GuildMemberUpdatedGuildMemberExtraBody(raw.body, api);
     }
 }
 
 class GuildMemberUpdatedGuildMember {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -178,12 +243,20 @@ class GuildMemberUpdatedGuildMember {
     /** @type {GuildMemberUpdatedGuildMemberExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildMemberUpdatedGuildMemberExtra(raw.extra, api);
     }
 }
 
 class GuildMemberGuildMemberOnlineExtraBody {
+    #api;
+
     /** @type {String} */
     user_id;
 
@@ -193,24 +266,39 @@ class GuildMemberGuildMemberOnlineExtraBody {
     /** @type {String[]} */
     guilds;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class GuildMemberGuildMemberOnlineExtra {
+    #api;
+
     /** @type {"guild_member_online"} */
     type;
 
     /** @type {GuildMemberGuildMemberOnlineExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new GuildMemberGuildMemberOnlineExtraBody(raw.body, api);
     }
 }
 
 class GuildMemberGuildMemberOnline {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -241,12 +329,20 @@ class GuildMemberGuildMemberOnline {
     /** @type {GuildMemberGuildMemberOnlineExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildMemberGuildMemberOnlineExtra(raw.extra, api);
     }
 }
 
 class GuildMemberGuildMemberOfflineExtraBody {
+    #api;
+
     /** @type {String} */
     user_id;
 
@@ -256,24 +352,39 @@ class GuildMemberGuildMemberOfflineExtraBody {
     /** @type {String[]} */
     guilds;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class GuildMemberGuildMemberOfflineExtra {
+    #api;
+
     /** @type {"guild_member_offline"} */
     type;
 
     /** @type {GuildMemberGuildMemberOfflineExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new GuildMemberGuildMemberOfflineExtraBody(raw.body, api);
     }
 }
 
 class GuildMemberGuildMemberOffline {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -304,8 +415,14 @@ class GuildMemberGuildMemberOffline {
     /** @type {GuildMemberGuildMemberOfflineExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new GuildMemberGuildMemberOfflineExtra(raw.extra, api);
     }
 }
 
