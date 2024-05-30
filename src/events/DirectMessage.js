@@ -3,9 +3,12 @@
  * @description DirectMessage implementation
  */
 
+import APIExecutor from "../api/index.js";
 import { BaseEmoji } from "../types/index.js";
 
 class DirectMessageUpdatedPrivateMessageExtraBody {
+    #api;
+
     /** @type {String} */
     author_id;
 
@@ -24,24 +27,42 @@ class DirectMessageUpdatedPrivateMessageExtraBody {
     /** @type {String} */
     chat_code;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class DirectMessageUpdatedPrivateMessageExtra {
+    #api;
+
     /** @type {"updated_private_message"} */
     type;
 
     /** @type {DirectMessageUpdatedPrivateMessageExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new DirectMessageUpdatedPrivateMessageExtraBody(
+            raw.body,
+            api
+        );
     }
 }
 
 class DirectMessageUpdatedPrivateMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -72,12 +93,23 @@ class DirectMessageUpdatedPrivateMessage {
     /** @type {DirectMessageUpdatedPrivateMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new DirectMessageUpdatedPrivateMessageExtra(
+            raw.extra,
+            api
+        );
     }
 }
 
 class DirectMessageDeletedPrivateMessageExtraBody {
+    #api;
+
     /** @type {String} */
     author_id;
 
@@ -93,24 +125,42 @@ class DirectMessageDeletedPrivateMessageExtraBody {
     /** @type {String} */
     chat_code;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class DirectMessageDeletedPrivateMessageExtra {
+    #api;
+
     /** @type {"deleted_private_message"} */
     type;
 
     /** @type {DirectMessageDeletedPrivateMessageExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new DirectMessageDeletedPrivateMessageExtraBody(
+            raw.body,
+            api
+        );
     }
 }
 
 class DirectMessageDeletedPrivateMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -141,12 +191,23 @@ class DirectMessageDeletedPrivateMessage {
     /** @type {DirectMessageDeletedPrivateMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new DirectMessageDeletedPrivateMessageExtra(
+            raw.extra,
+            api
+        );
     }
 }
 
 class DirectMessagePrivateAddedReactionExtraBody {
+    #api;
+
     /** @type {String} */
     chat_code;
 
@@ -159,24 +220,43 @@ class DirectMessagePrivateAddedReactionExtraBody {
     /** @type {String} */
     msg_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.emoji = new BaseEmoji(raw.emoji, api);
     }
 }
 
 class DirectMessagePrivateAddedReactionExtra {
+    #api;
+
     /** @type {"private_added_reaction"} */
     type;
 
     /** @type {DirectMessagePrivateAddedReactionExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new DirectMessagePrivateAddedReactionExtraBody(
+            raw.body,
+            api
+        );
     }
 }
 
 class DirectMessagePrivateAddedReaction {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -207,12 +287,20 @@ class DirectMessagePrivateAddedReaction {
     /** @type {DirectMessagePrivateAddedReactionExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new DirectMessagePrivateAddedReactionExtra(raw.extra, api);
     }
 }
 
 class DirectMessagePrivateDeletedReactionExtraBody {
+    #api;
+
     /** @type {String} */
     chat_code;
 
@@ -225,24 +313,40 @@ class DirectMessagePrivateDeletedReactionExtraBody {
     /** @type {String} */
     msg_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.emoji = new BaseEmoji(raw.emoji, api);
     }
 }
 
 class DirectMessagePrivateDeletedReactionExtra {
+    #api;
+
     /** @type {"private_deleted_reaction"} */
     type;
 
     /** @type {DirectMessagePrivateDeletedReactionExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new DirectMessagePrivateDeletedReactionExtra(raw.body, api);
     }
 }
 
 class DirectMessagePrivateDeletedReaction {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -273,8 +377,17 @@ class DirectMessagePrivateDeletedReaction {
     /** @type {DirectMessagePrivateDeletedReactionExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new DirectMessagePrivateDeletedReactionExtra(
+            raw.extra,
+            api
+        );
     }
 }
 
