@@ -23,7 +23,7 @@ client.on("ready", function () {
 
 client.on("message", function(message) {
     console.log(message.content);
-})
+});
 
 client.login().catch(function (err) {
     console.error(err);
