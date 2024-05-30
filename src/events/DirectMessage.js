@@ -1,6 +1,7 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
  * @description DirectMessage implementation
+ * @link https://developer.kookapp.cn/doc/event/direct-message
  */
 
 import APIExecutor from "../api/index.js";
@@ -60,6 +61,7 @@ class DirectMessageUpdatedPrivateMessageExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/direct-message#私聊消息更新` */
 class DirectMessageUpdatedPrivateMessage {
     #api;
 
@@ -158,6 +160,7 @@ class DirectMessageDeletedPrivateMessageExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/direct-message#私聊消息被删除` */
 class DirectMessageDeletedPrivateMessage {
     #api;
 
@@ -254,6 +257,7 @@ class DirectMessagePrivateAddedReactionExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/direct-message#私聊内用户添加 reaction` */
 class DirectMessagePrivateAddedReaction {
     #api;
 
@@ -344,6 +348,7 @@ class DirectMessagePrivateDeletedReactionExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/direct-message#私聊内用户取消 reaction` */
 class DirectMessagePrivateDeletedReaction {
     #api;
 

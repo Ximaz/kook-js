@@ -1,6 +1,7 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
  * @description GuildRole implementation
+ * @link `https://developer.kookapp.cn/doc/event/guild-role`
  */
 
 import APIExecutor from "../api/index.js";
@@ -26,6 +27,7 @@ class GuildAddedRoleExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild-role#服务器角色增加` */
 class GuildAddedRole {
     #api;
 
@@ -90,6 +92,7 @@ class GuildDeletedRoleExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild-role#服务器角色删除` */
 class GuildDeletedRole {
     #api;
 
@@ -154,6 +157,7 @@ class GuildUpdatedRoleExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild-role#服务器角色更新` */
 class GuildUpdatedRole {
     #api;
 

@@ -1,6 +1,7 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
  * @description Guild implementation
+ * @link https://developer.kookapp.cn/doc/event/guild
  */
 
 import APIExecutor from "../api/index.js";
@@ -26,6 +27,7 @@ class GuildUpdatedGuildExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild#服务器信息更新` */
 class GuildUpdatedGuild {
     #api;
 
@@ -90,6 +92,7 @@ class GuildDeletedGuildExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild#服务器删除` */
 class GuildDeletedGuild {
     #api;
 
@@ -176,6 +179,7 @@ class GuildAddedBlockListExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild#服务器封禁用户` */
 class GuildAddedBlockList {
     #api;
 
@@ -259,6 +263,7 @@ class GuildDeletedBlockListExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild#服务器取消封禁用户` */
 class GuildDeletedBlockList {
     #api;
 
@@ -323,6 +328,7 @@ class GuildAddedEmojiExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild#服务器添加新表情` */
 class GuildAddedEmoji {
     #api;
 
@@ -387,6 +393,7 @@ class GuildRemovedEmojiExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild#服务器删除表情` */
 class GuildRemovedEmoji {
     #api;
 
@@ -451,6 +458,7 @@ class GuildUpdatedEmojiExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild#服务器更新表情` */
 class GuildUpdatedEmoji {
     #api;
 

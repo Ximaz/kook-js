@@ -1,6 +1,8 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
  * @description Channel implementation
+ * @link https://developer.kookapp.cn/doc/event/channel
+ *
  */
 
 import APIExecutor from "../api/index.js";
@@ -52,6 +54,7 @@ class ChannelAddedReactionExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/channel#频道内用户添加 0reaction` */
 class ChannelAddedReaction {
     #api;
 
@@ -142,6 +145,7 @@ class ChannelDeletedReactionExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/channel#频道内用户取消 reaction` */
 class ChannelDeletedReaction {
     #api;
 
@@ -243,6 +247,7 @@ class ChannelUpdatedMessageExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/channel#频道消息更新` */
 class ChannelUpdatedMessage {
     #api;
 
@@ -326,6 +331,7 @@ class ChannelDeletedMessageExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/channel#频道消息被删除` */
 class ChannelDeletedMessage {
     #api;
 
@@ -390,6 +396,7 @@ class ChannelAddedChannelExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/channel#新增频道` */
 class ChannelAddedChannel {
     #api;
 
@@ -454,6 +461,7 @@ class ChannelUpdatedChannelExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/channel#修改频道信息` */
 class ChannelUpdatedChannel {
     #api;
 
@@ -537,6 +545,7 @@ class ChannelDeletedChannelExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/channel#删除频道` */
 class ChannelDeletedChannel {
     #api;
 
@@ -623,6 +632,7 @@ class ChannelPinnedMessageExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/channel#新的频道置顶消息` */
 class ChannelPinnedMessage {
     #api;
 
@@ -709,6 +719,7 @@ class ChannelUnpinnedMessageExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/channel#取消频道置顶消息` */
 class ChannelUnpinnedMessage {
     #api;
 

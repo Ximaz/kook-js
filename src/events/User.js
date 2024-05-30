@@ -1,6 +1,7 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
  * @description User implementation
+ * @link https://developer.kookapp.cn/doc/event/user
  */
 
 import APIExecutor from "../api/index.js";
@@ -47,6 +48,7 @@ class UserJoinedChannelExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/user#用户加入语音频道` */
 class UserJoinedChannel {
     #api;
 
@@ -133,6 +135,7 @@ class UserExitedChannelExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/user#用户退出语音频道` */
 class UserExitedChannel {
     #api;
 
@@ -219,6 +222,7 @@ class UserUpdatedExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/user#用户信息更新` */
 class UserUpdated {
     #api;
 
@@ -302,6 +306,7 @@ class UserSelfJoinedGuildExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/user#自己新加入服务器` */
 class UserSelfJoinedGuild {
     #api;
 
@@ -382,6 +387,7 @@ class UserSelfExitedGuildExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/user#自己退出服务器` */
 class UserSelfExitedGuild {
     #api;
 
@@ -471,6 +477,7 @@ class UserMessageBtnClickExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/user#Card 消息中的 Button 点击事件` */
 class UserMessageBtnClick {
     #api;
 

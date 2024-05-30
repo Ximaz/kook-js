@@ -1,6 +1,7 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
  * @description GuildMember implementation
+ * @link `https://developer.kookapp.cn/doc/event/guild-member`
  */
 
 import APIExecutor from "../api/index.js";
@@ -44,6 +45,7 @@ class GuildMemberJoinedGuildExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild-member#新成员加入服务器` */
 class GuildMemberJoinedGuild {
     #api;
 
@@ -127,6 +129,7 @@ class GuildMemberExitedGuildExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild-member#服务器成员退出` */
 class GuildMemberExitedGuild {
     #api;
 
@@ -210,6 +213,7 @@ class GuildMemberUpdatedGuildMemberExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild-member#服务器成员信息更新` */
 class GuildMemberUpdatedGuildMember {
     #api;
 
@@ -296,6 +300,7 @@ class GuildMemberGuildMemberOnlineExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild-member#服务器成员上线` */
 class GuildMemberGuildMemberOnline {
     #api;
 
@@ -382,6 +387,7 @@ class GuildMemberGuildMemberOfflineExtra {
     }
 }
 
+/** @link `https://developer.kookapp.cn/doc/event/guild-member#服务器成员下线` */
 class GuildMemberGuildMemberOffline {
     #api;
 
