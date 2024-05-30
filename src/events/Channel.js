@@ -3,9 +3,12 @@
  * @description Channel implementation
  */
 
+import APIExecutor from "../api/index.js";
 import { BaseEmoji, BaseChannel } from "../types/index.js";
 
 class ChannelAddedReactionExtraBody {
+    #api;
+
     /** @type {String} */
     channel_id;
 
@@ -18,24 +21,40 @@ class ChannelAddedReactionExtraBody {
     /** @type {String} */
     msg_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.emoji = new BaseEmoji(raw.emoji, api);
     }
 }
 
 class ChannelAddedReactionExtra {
+    #api;
+
     /** @type {"added_reaction"} */
     type;
 
     /** @type {ChannelAddedReactionExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new ChannelAddedReactionExtraBody(raw.body, api);
     }
 }
 
 class ChannelAddedReaction {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -66,12 +85,20 @@ class ChannelAddedReaction {
     /** @type {ChannelAddedReactionExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new ChannelAddedReactionExtra(raw.extra, api);
     }
 }
 
 class ChannelDeletedReactionExtraBody {
+    #api;
+
     /** @type {String} */
     channel_id;
 
@@ -84,24 +111,40 @@ class ChannelDeletedReactionExtraBody {
     /** @type {String} */
     msg_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.emoji = new BaseEmoji(raw.emoji, api);
     }
 }
 
 class ChannelDeletedReactionExtra {
+    #api;
+
     /** @type {"deleted_reaction"} */
     type;
 
     /** @type {ChannelDeletedReactionExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new ChannelDeletedReactionExtraBody(raw.body, api);
     }
 }
 
 class ChannelDeletedReaction {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -132,12 +175,20 @@ class ChannelDeletedReaction {
     /** @type {ChannelDeletedReactionExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new ChannelDeletedReactionExtra(raw.extra, api);
     }
 }
 
 class ChannelUpdatedMessageExtraBody {
+    #api;
+
     /** @type {String} */
     channel_id;
 
@@ -162,24 +213,39 @@ class ChannelUpdatedMessageExtraBody {
     /** @type {String} */
     msg_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class ChannelUpdatedMessageExtra {
+    #api;
+
     /** @type {"updated_message"} */
     type;
 
     /** @type {ChannelUpdatedMessageExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new ChannelUpdatedMessageExtraBody(raw.body, api);
     }
 }
 
 class ChannelUpdatedMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -210,36 +276,59 @@ class ChannelUpdatedMessage {
     /** @type {ChannelUpdatedMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new ChannelUpdatedMessageExtra(raw.extra, api);
     }
 }
 
 class ChannelDeletedMessageExtraBody {
+    #api;
+
     /** @type {String} */
     channel_id;
 
     /** @type {String} */
     msg_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class ChannelDeletedMessageExtra {
+    #api;
+
     /** @type {"deleted_message"} */
     type;
 
     /** @type {ChannelDeletedMessageExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new ChannelDeletedMessageExtraBody(raw.body, api);
     }
 }
 
 class ChannelDeletedMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -270,24 +359,40 @@ class ChannelDeletedMessage {
     /** @type {ChannelDeletedMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new ChannelDeletedMessageExtra(raw.extra, api);
     }
 }
 
 class ChannelAddedChannelExtra {
+    #api;
+
     /** @type {"added_channel"} */
     type;
 
     /** @type {BaseChannel} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new BaseChannel(raw.body, api);
     }
 }
 
 class ChannelAddedChannel {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -318,24 +423,40 @@ class ChannelAddedChannel {
     /** @type {ChannelAddedChannelExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new ChannelAddedChannelExtra(raw.extra, api);
     }
 }
 
 class ChannelUpdatedChannelExtra {
+    #api;
+
     /** @type {"updated_channel"} */
     type;
 
     /** @type {BaseChannel} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new BaseChannel(raw.body, api);
     }
 }
 
 class ChannelUpdatedChannel {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -366,36 +487,59 @@ class ChannelUpdatedChannel {
     /** @type {ChannelUpdatedChannelExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new ChannelUpdatedChannelExtra(raw.extra, api);
     }
 }
 
 class ChannelDeletedChannelExtraBody {
+    #api;
+
     /** @type {String} */
     id;
 
     /** @type {Number} */
     deleted_at;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class ChannelDeletedChannelExtra {
+    #api;
+
     /** @type {"deleted_channel"} */
     type;
 
     /** @type {ChannelDeletedChannelExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new ChannelDeletedChannelExtraBody(raw.body, api);
     }
 }
 
 class ChannelDeletedChannel {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -426,12 +570,20 @@ class ChannelDeletedChannel {
     /** @type {ChannelDeletedChannelExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new ChannelDeletedChannelExtra(raw.extra, api);
     }
 }
 
 class ChannelPinnedMessageExtraBody {
+    #api;
+
     /** @type {String} */
     channel_id;
 
@@ -441,24 +593,39 @@ class ChannelPinnedMessageExtraBody {
     /** @type {String} */
     msg_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class ChannelPinnedMessageExtra {
+    #api;
+
     /** @type {"pinned_message"} */
     type;
 
     /** @type {ChannelPinnedMessageExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new ChannelPinnedMessageExtraBody(raw.body, api);
     }
 }
 
 class ChannelPinnedMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -489,12 +656,20 @@ class ChannelPinnedMessage {
     /** @type {ChannelPinnedMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new ChannelPinnedMessageExtra(raw.extra, api);
     }
 }
 
 class ChannelUnpinnedMessageExtraBody {
+    #api;
+
     /** @type {String} */
     channel_id;
 
@@ -504,24 +679,39 @@ class ChannelUnpinnedMessageExtraBody {
     /** @type {String} */
     msg_id;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
     }
 }
 
 class ChannelUnpinnedMessageExtra {
+    #api;
+
     /** @type {"unpinned_message"} */
     type;
 
     /** @type {ChannelUnpinnedMessageExtraBody} */
     body;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.body = new ChannelUnpinnedMessageExtraBody(raw.body, api);
     }
 }
 
 class ChannelUnpinnedMessage {
+    #api;
+
     /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
     channel_type;
 
@@ -552,8 +742,14 @@ class ChannelUnpinnedMessage {
     /** @type {ChannelUnpinnedMessageExtra} */
     extra;
 
-    constructor(raw) {
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
         Object.assign(this, raw);
+        this.#api = api;
+        this.extra = new ChannelUnpinnedMessageExtra(raw.extra, api);
     }
 }
 
