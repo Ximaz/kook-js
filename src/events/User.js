@@ -1,142 +1,385 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Kook User events : https://developer.kookapp.cn/doc/event/user
+ * @description User implementation
  */
 
-/**
- * @typedef {Object} UserJoinedChannelExtraBody
- * @property {String} user_id
- * @property {String} channel_id
- * @property {Number} joined_at
- *
- * @typedef {Object} UserJoinedChannelExtra
- * @property {"joined_channel"} type
- * @property {UserJoinedChannelExtraBody} body
- *
- * @typedef {Object} UserJoinedChannel
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {UserJoinedChannelExtra} extra
- */
+class UserJoinedChannelExtraBody {
+    /** @type {String} */
+    user_id;
 
-/**
- * @typedef {Object} UserExitedChannelExtraBody
- * @property {String} user_id
- * @property {String} channel_id
- * @property {Number} exited_at
- *
- * @typedef {Object} UserExitedChannelExtra
- * @property {"exited_channel"} type
- * @property {UserExitedChannelExtraBody} body
- *
- * @typedef {Object} UserExitedChannel
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {UserExitedChannelExtra} extra
- */
+    /** @type {String} */
+    channel_id;
 
-/**
- * @typedef {Object} UserUpdatedExtraBody
- * @property {String} user_id
- * @property {String} username
- * @property {String} avatar
- *
- * @typedef {Object} UserUpdatedExtra
- * @property {"user_updated"} type
- * @property {UserUpdatedExtraBody} body
- *
- * @typedef {Object} UserUpdated
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {UserUpdatedExtra} extra
- */
+    /** @type {Number} */
+    joined_at;
 
-/**
- * @typedef {Object} UserSelfJoinedGuildExtraBody
- * @property {String} guild_id
- * @property {String} state
- *
- * @typedef {Object} UserSelfJoinedGuildExtra
- * @property {"self_joined_guild"} type
- * @property {UserSelfJoinedGuildExtraBody} body
- *
- * @typedef {Object} UserSelfJoinedGuild
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {UserSelfJoinedGuildExtra} extra
- */
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
 
-/**
- * @typedef {Object} UserSelfExitedGuildExtraBody
- * @property {String} guild_id
- *
- * @typedef {Object} UserSelfExitedGuildExtra
- * @property {"self_exited_guild"} type
- * @property {UserSelfExitedGuildExtraBody} body
- *
- * @typedef {Object} UserSelfExitedGuild
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {UserSelfExitedGuildExtra} extra
- */
+class UserJoinedChannelExtra {
+    /** @type {"joined_channel"} */
+    type;
 
-/**
- * @typedef {Object} UserMessageBtnClickExtraBody
- * @property {String} value
- * @property {String} msg_id
- * @property {String} user_id
- * @property {String} target_id
- *
- * @typedef {Object} UserMessageBtnClickExtra
- * @property {"message_btn_click"} type
- * @property {UserMessageBtnClickExtraBody} body
- *
- * @typedef {Object} UserMessageBtnClick
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {UserMessageBtnClickExtra} extra
- */
+    /** @type {UserJoinedChannelExtraBody} */
+    body;
 
-export {};
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserJoinedChannel {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {UserJoinedChannelExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserExitedChannelExtraBody {
+    /** @type {String} */
+    user_id;
+
+    /** @type {String} */
+    channel_id;
+
+    /** @type {Number} */
+    exited_at;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserExitedChannelExtra {
+    /** @type {"exited_channel"} */
+    type;
+
+    /** @type {UserExitedChannelExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserExitedChannel {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {UserExitedChannelExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserUpdatedExtraBody {
+    /** @type {String} */
+    user_id;
+
+    /** @type {String} */
+    username;
+
+    /** @type {String} */
+    avatar;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserUpdatedExtra {
+    /** @type {"user_updated"} */
+    type;
+
+    /** @type {UserUpdatedExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserUpdated {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {UserUpdatedExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserSelfJoinedGuildExtraBody {
+    /** @type {String} */
+    guild_id;
+
+    /** @type {String} */
+    state;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserSelfJoinedGuildExtra {
+    /** @type {"self_joined_guild"} */
+    type;
+
+    /** @type {UserSelfJoinedGuildExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserSelfJoinedGuild {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {UserSelfJoinedGuildExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserSelfExitedGuildExtraBody {
+    /** @type {String} */
+    guild_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserSelfExitedGuildExtra {
+    /** @type {"self_exited_guild"} */
+    type;
+
+    /** @type {UserSelfExitedGuildExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserSelfExitedGuild {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {UserSelfExitedGuildExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserMessageBtnClickExtraBody {
+    /** @type {String} */
+    value;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {String} */
+    user_id;
+
+    /** @type {String} */
+    target_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserMessageBtnClickExtra {
+    /** @type {"message_btn_click"} */
+    type;
+
+    /** @type {UserMessageBtnClickExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class UserMessageBtnClick {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {UserMessageBtnClickExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+export {
+    UserJoinedChannel,
+    UserExitedChannel,
+    UserUpdated,
+    UserSelfJoinedGuild,
+    UserSelfExitedGuild,
+    UserMessageBtnClick,
+};

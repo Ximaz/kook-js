@@ -1,26 +1,39 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description KMarkdown objects : https://developer.kookapp.cn/doc/event/message
- * https://developer.kookapp.cn/doc/kmarkdown#KMarkdown 消息
+ * @description KMarkdown implementation
  */
 
-/**
- * @typedef {Object} BaseKMarkdownMentionPart
- * @property {String} id
- * @property {String} username
- * @property {String} full_name
- * @property {String} avatar
- *
- * @typedef {Object} BaseKMarkdown
- * @property {String} raw_content
- * @property {String[]} mention_part
- * @property {BaseKMarkdownMentionPart[]} mention_role_part
- * @property {any[]} [item_part]
- */
+class BaseKMarkdownMentionPart {
+    /** @type {String} */
+    id;
 
-/**
- * @param {BaseKMarkdown} raw
- */
-export function kmarkdown(raw) {
-    return { ...raw };
+    /** @type {String} */
+    username;
+
+    /** @type {String} */
+    full_name;
+
+    /** @type {String} */
+    avatar;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
+
+class BaseKMarkdown {
+    /** @type {String} */
+    raw_content;
+
+    /** @type {String[]} */
+    mention_part;
+
+    /** @type {BaseKMarkdownMentionPart[]} */
+    mention_role_part;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+export { BaseKMarkdown };

@@ -1,258 +1,533 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Message objects : https://developer.kookapp.cn/doc/event/message
- * https://developer.kookapp.cn/doc/cardmessage
- * https://developer.kookapp.cn/doc/kmarkdown
+ * @description Message implementation
  */
 
-/**
- * @typedef {Object} BaseTextMessageExtra
- * @property {1} type
- * @property {String} guild_id
- * @property {String} channel_name
- * @property {String[]} mention
- * @property {Boolean} mention_all
- * @property {Number[]} mention_roles
- * @property {Boolean} mention_here
- * @property {String} code
- * @property {import("./User.js").BaseUser} author
- *
- * @typedef {Object} BaseTextMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {1} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {BaseTextMessageExtra} extra
- */
+import { BaseUser } from "./User.js";
+import {
+    BaseImageAttachment,
+    BaseVideoAttachment,
+    BaseFileAttachment,
+} from "./Attachment.js";
+import { BaseKMarkdown } from "./KMarkdown.js";
 
-/**
- * @param {BaseTextMessage} raw
- */
-export function messageText(raw) {
-    return { ...raw };
+class BaseTextMessageExtra {
+    /** @type {1} */
+    type;
+
+    /** @type {String} */
+    guild_id;
+
+    /** @type {String} */
+    channel_name;
+
+    /** @type {String[]} */
+    mention;
+
+    /** @type {Boolean} */
+    mention_all;
+
+    /** @type {Number[]} */
+    mention_roles;
+
+    /** @type {Boolean} */
+    mention_here;
+
+    /** @type {String} */
+    code;
+
+    /** @type {BaseUser} */
+    author;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
 
-/**
- * @typedef {Object} BaseImageMessageExtra
- * @property {2} type
- * @property {String} guild_id
- * @property {String} code
- * @property {import("./User.js").BaseUser} author
- * @property {import("./Attachment.js").BaseImageAttachment} attachments
- *
- * @typedef {Object} BaseImageMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {2} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {BaseImageMessageExtra} extra
- */
+class BaseTextMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
 
-/**
- * @param {BaseImageMessage} raw
- */
-export function messageImage(raw) {
-    return { ...raw };
+    /** @type {1} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {BaseTextMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
 
-/**
- * @typedef {Object} BaseVideoMessageExtra
- * @property {3} type
- * @property {String} guild_id
- * @property {String} code
- * @property {import("./User.js").BaseUser} author
- * @property {import("./Attachment.js").BaseVideoAttachment} attachments
- *
- * @typedef {Object} BaseVideoMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {3} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {BaseVideoMessageExtra} extra
- */
+class BaseImageMessageExtra {
+    /** @type {2} */
+    type;
 
-/**
- * @param {BaseVideoMessage} raw
- */
-export function messageVideo(raw) {
-    return { ...raw };
+    /** @type {String} */
+    guild_id;
+
+    /** @type {String} */
+    code;
+
+    /** @type {BaseUser} */
+    author;
+
+    /** @type {BaseImageAttachment} */
+    attachments;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
 
-/**
- * @typedef {Object} BaseFileMessageExtra
- * @property {4} type
- * @property {String} guild_id
- * @property {String} code
- * @property {import("./User.js").BaseUser} author
- * @property {import("./Attachment.js").BaseFileAttachment} attachments
- *
- * @typedef {Object} BaseFileMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {4} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {BaseFileMessageExtra} extra
- */
+class BaseImageMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
 
-/**
- * @param {BaseFileMessage} raw
- */
-export function messageFile(raw) {
-    return { ...raw };
+    /** @type {2} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {BaseImageMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
 
-/**
- * @typedef {Object} BaseKMarkdownMessageExtra
- * @property {9} type
- * @property {String} guild_id
- * @property {String} channel_name
- * @property {String[]} mention
- * @property {Boolean} mention_all
- * @property {Number[]} mention_roles
- * @property {Boolean} mention_here
- * @property {any[]} nav_channels Undefined in the documentation yet
- * @property {String} code
- * @property {import("./User.js").BaseUser} author
- * @property {import("./KMarkdown.js").BaseKMarkdown} kmarkdown
- *
- * @typedef {Object} BaseKMarkdownMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {9} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {BaseKMarkdownMessageExtra} extra
- */
+class BaseVideoMessageExtra {
+    /** @type {3} */
+    type;
 
-/**
- * @param {BaseKMarkdownMessage} raw
- */
-export function messageKMarkdown(raw) {
-    return { ...raw };
+    /** @type {String} */
+    guild_id;
+
+    /** @type {String} */
+    code;
+
+    /** @type {BaseUser} */
+    author;
+
+    /** @type {BaseVideoAttachment} */
+    attachments;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
 
-/**
- * @typedef {Object} BaseCardMessageExtra
- * @property {10} type
- * @property {String} guild_id
- * @property {String} channel_name
- * @property {String[]} mention
- * @property {Boolean} mention_all
- * @property {Number[]} mention_roles
- * @property {Boolean} mention_here
- * @property {any[]} nav_channels Undefined in the documentation yet
- * @property {String} code
- * @property {import("./User.js").BaseUser} author
- *
- * @typedef {Object} BaseCardMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {10} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {BaseCardMessageExtra} extra
- */
+class BaseVideoMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
 
-/**
- * @param {BaseCardMessage} raw
- */
-export function messageCard(raw) {
-    return { ...raw };
+    /** @type {3} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {BaseVideoMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
 
-/**
- * @typedef {Object} BasePropsMessageContentData
- * @property {String} user_id
- * @property {String} target_id
- * @property {Number} item_id
- *
- * @typedef {Object} BasePropsMessageContent
- * @property {"string" | "item"} type
- * @property {BasePropsMessageContentData} data
- *
- * @typedef {Object} BasePropsMessageExtra
- * @property {12} type
- * @property {String} guild_id
- * @property {String} channel_name
- * @property {String[]} mention
- * @property {import("./User.js").BaseUser} author
- * @property {import("./KMarkdown.js").BaseKMarkdown} kmarkdown
- *
- * @typedef {Object} BasePropsMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {12} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {BasePropsMessageContent} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {BasePropsMessageExtra} extra
- */
+class BaseFileMessageExtra {
+    /** @type {4} */
+    type;
 
-/**
- * @param {BasePropsMessage} raw
- */
-export function messageProps(raw) {
-    return { ...raw };
+    /** @type {String} */
+    guild_id;
+
+    /** @type {String} */
+    code;
+
+    /** @type {BaseUser} */
+    author;
+
+    /** @type {BaseFileAttachment} */
+    attachments;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
 
-/**
- * @typedef {Object} BaseMessageExtra
- * @property {1 | 2 | 3 | 4 | 9 | 10 | 12} type
- * @property {import("./User.js").BaseUser} author
- * @property {String} [guild_id]
- * @property {String} [channel_name]
- * @property {String[]} [mention]
- * @property {Boolean} [mention_all]
- * @property {Number[]} [mention_roles]
- * @property {Boolean} [mention_here]
- * @property {any[]} [nav_channels] Undefined in the documentation yet
- * @property {String} [code]
- * @property {import("./Attachment.js").BaseAttachment} [attachments]
- * @property {import("./KMarkdown.js").BaseKMarkdown} [kmarkdown]
- *
- * @typedef {Object} BaseMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {1 | 2 | 3 | 4 | 9 |10 | 12} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String | BasePropsMessageContent} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {BaseMessageExtra} extra
- */
+class BaseFileMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
 
-/**
- * @param {BaseMessage} raw
- */
-export function message(raw) {
-    return { ...raw };
+    /** @type {4} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {BaseFileMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
+
+class BaseKMarkdownMessageExtra {
+    /** @type {9} */
+    type;
+
+    /** @type {String} */
+    guild_id;
+
+    /** @type {String} */
+    channel_name;
+
+    /** @type {String[]} */
+    mention;
+
+    /** @type {Boolean} */
+    mention_all;
+
+    /** @type {Number[]} */
+    mention_roles;
+
+    /** @type {Boolean} */
+    mention_here;
+
+    /** @type {any[]} */
+    nav_channels;
+
+    /** @type {String} */
+    code;
+
+    /** @type {BaseUser} */
+    author;
+
+    /** @type {BaseKMarkdown} */
+    kmarkdown;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class BaseKMarkdownMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {9} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {BaseKMarkdownMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class BaseCardMessageExtra {
+    /** @type {10} */
+    type;
+
+    /** @type {String} */
+    guild_id;
+
+    /** @type {String} */
+    channel_name;
+
+    /** @type {String[]} */
+    mention;
+
+    /** @type {Boolean} */
+    mention_all;
+
+    /** @type {Number[]} */
+    mention_roles;
+
+    /** @type {Boolean} */
+    mention_here;
+
+    /** @type {any[]} */
+    nav_channels;
+
+    /** @type {String} */
+    code;
+
+    /** @type {BaseUser} */
+    author;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class BaseCardMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {10} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {BaseCardMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class BasePropsMessageContentData {
+    /** @type {String} */
+    user_id;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {Number} */
+    item_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class BasePropsMessageContent {
+    /** @type {"string" | "item"} */
+    type;
+
+    /** @type {BasePropsMessageContentData} */
+    data;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class BasePropsMessageExtra {
+    /** @type {12} */
+    type;
+
+    /** @type {String} */
+    guild_id;
+
+    /** @type {String} */
+    channel_name;
+
+    /** @type {String[]} */
+    mention;
+
+    /** @type {BaseUser} */
+    author;
+
+    /** @type {BaseKMarkdown} */
+    kmarkdown;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class BasePropsMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {12} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {BasePropsMessageContent} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {BasePropsMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class BaseMessageExtra {
+    /** @type {1 | 2 | 3 | 4 | 9 | 10 | 12} */
+    type;
+
+    /** @type {BaseUser} */
+    author;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class BaseMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {1 | 2 | 3 | 4 | 9 |10 | 12} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String | BasePropsMessageContent} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {BaseMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+export {
+    BaseTextMessage,
+    BaseImageMessage,
+    BaseVideoMessage,
+    BaseFileMessage,
+    BaseKMarkdownMessage,
+    BaseCardMessage,
+    BasePropsMessage,
+    BaseMessage,
+};

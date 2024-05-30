@@ -1,72 +1,92 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Attachment object : https://developer.kookapp.cn/doc/objects#附加的多媒体数据 Attachments
+ * @description Attachment implementation
  */
 
-/**
- * @typedef {Object} BaseImageAttachment
- * @property {"image"} type
- * @property {String} name
- * @property {String} url
- */
+class BaseImageAttachment {
+    /** @type {"image"} */
+    type;
 
-/**
- * @param {BaseImageAttachment} raw
- */
-export function attachmentImage(raw) {
-    return { ...raw };
+    /** @type {String} */
+    name;
+
+    /** @type {String} */
+    url;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
 
-/**
- * @typedef {Object} BaseVideoAttachment
- * @property {"video"} type
- * @property {String} name
- * @property {String} url
- * @property {String} file_type
- * @property {Number} size
- * @property {Number} duration
- * @property {Number} width
- * @property {Number} height
- */
+class BaseVideoAttachment {
+    /** @type {"video"} */
+    type;
 
-/**
- * @param {BaseVideoAttachment} raw
- */
-export function attachmentVideo(raw) {
-    return { ...raw };
+    /** @type {String} */
+    name;
+
+    /** @type {String} */
+    url;
+
+    /** @type {String} */
+    file_type;
+
+    /** @type {Number} */
+    size;
+
+    /** @type {Number} */
+    duration;
+
+    /** @type {Number} */
+    width;
+
+    /** @type {Number} */
+    height;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
 
-/**
- * @typedef {Object} BaseFileAttachment
- * @property {"file"} type
- * @property {String} name
- * @property {String} url
- * @property {String} file_type
- * @property {Number} size
- */
+class BaseFileAttachment {
+    /** @type {"file"} */
+    type;
 
-/**
- * @param {BaseFileAttachment} raw
- */
-export function attachmentFile(raw) {
-    return { ...raw };
+    /** @type {String} */
+    name;
+
+    /** @type {String} */
+    url;
+
+    /** @type {String} */
+    file_type;
+
+    /** @type {Number} */
+    size;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
 
-/**
- * @typedef {Object} BaseAttachment
- * @property {"image" | "video" | "file"} type
- * @property {String} name
- * @property {String} url
- * @property {String} [file_type]
- * @property {Number} [size]
- * @property {Number} [duration]
- * @property {Number} [width]
- * @property {Number} [height]
- */
+class BaseAttachment {
+    /** @type {"image" | "video" | "file"} */
+    type;
 
-/**
- * @param {BaseAttachment} raw
- */
-export function attachment(raw) {
-    return { ...raw };
+    /** @type {String} */
+    name;
+
+    /** @type {String} */
+    url;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
+
+export {
+    BaseImageAttachment,
+    BaseVideoAttachment,
+    BaseFileAttachment,
+    BaseAttachment,
+};

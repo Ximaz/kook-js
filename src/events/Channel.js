@@ -1,208 +1,570 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Kook Channel events : https://developer.kookapp.cn/doc/event/channel
+ * @description Channel implementation
  */
 
-/**
- * @typedef {Object} ChannelAddedReactionExtraBody
- * @property {String} channel_id
- * @property {import("../types/index.js").BaseEmoji} emoji
- * @property {String} user_id
- * @property {String} msg_id
- *
- * @typedef {Object} ChannelAddedReactionExtra
- * @property {"added_reaction"} type
- * @property {ChannelAddedReactionExtraBody} body
- *
- * @typedef {Object} ChannelAddedReaction
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {ChannelAddedReactionExtra} extra
- */
+import { BaseEmoji } from "../types/index.js";
 
-/**
- * @typedef {Object} ChannelDeletedReactionExtraBody
- * @property {String} channel_id
- * @property {import("../types/index.js").BaseEmoji} emoji
- * @property {String} user_id
- * @property {String} msg_id
- *
- * @typedef {Object} ChannelDeletedReactionExtra
- * @property {"deleted_reaction"} type
- * @property {ChannelDeletedReactionExtraBody} body
- *
- * @typedef {Object} ChannelDeletedReaction
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {ChannelDeletedReactionExtra} extra
- */
+class ChannelAddedReactionExtraBody {
+    /** @type {String} */
+    channel_id;
 
-/**
- * @typedef {Object} ChannelUpdatedMessageExtraBody
- * @property {String} channel_id
- * @property {String} content
- * @property {String[]} mention
- * @property {Boolean} mention_all
- * @property {Boolean} mention_here
- * @property {Number[]} mention_roles
- * @property {Number} updated_at
- * @property {String} msg_id
- *
- * @typedef {Object} ChannelUpdatedMessageExtra
- * @property {"updated_message"} type
- * @property {ChannelUpdatedMessageExtraBody} body
- *
- * @typedef {Object} ChannelUpdatedMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {ChannelUpdatedMessageExtra} extra
- */
+    /** @type {BaseEmoji} */
+    emoji;
 
-/**
- * @typedef {Object} ChannelDeletedMessageExtraBody
- * @property {String} channel_id
- * @property {String} msg_id
- *
- * @typedef {Object} ChannelDeletedMessageExtra
- * @property {"deleted_message"} type
- * @property {ChannelDeletedMessageExtraBody} body
- *
- * @typedef {Object} ChannelDeletedMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {ChannelDeletedMessageExtra} extra
- */
+    /** @type {String} */
+    user_id;
 
-/**
- * @typedef {Object} ChannelAddedChannelExtra
- * @property {"added_channel"} type
- * @property {import("../types/index.js").BaseChannel} body
- *
- * @typedef {Object} ChannelAddedChannel
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {ChannelAddedChannelExtra} extra
- */
+    /** @type {String} */
+    msg_id;
 
-/**
- * @typedef {Object} ChannelUpdatedChannelExtra
- * @property {"updated_channel"} type
- * @property {import("../types/index.js").BaseChannel} body
- *
- * @typedef {Object} ChannelUpdatedChannel
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {ChannelUpdatedChannelExtra} extra
- */
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
 
-/**
- * @typedef {Object} ChannelDeletedChannelExtraBody
- * @property {String} id
- * @property {Number} deleted_at
- *
- * @typedef {Object} ChannelDeletedChannelExtra
- * @property {"deleted_channel"} type
- * @property {ChannelDeletedChannelExtraBody} body
- *
- * @typedef {Object} ChannelDeletedChannel
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {ChannelDeletedChannelExtra} extra
- */
+class ChannelAddedReactionExtra {
+    /** @type {"added_reaction"} */
+    type;
 
-/**
- * @typedef {Object} ChannelPinnedMessageExtraBody
- * @property {String} channel_id
- * @property {String} operator_id
- * @property {String} msg_id
- *
- * @typedef {Object} ChannelPinnedMessageExtra
- * @property {"pinned_message"} type
- * @property {ChannelPinnedMessageExtraBody} body
- *
- * @typedef {Object} ChannelPinnedMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {ChannelPinnedMessageExtra} extra
- */
+    /** @type {ChannelAddedReactionExtraBody} */
+    body;
 
-/**
- * @typedef {Object} ChannelUnpinnedMessageExtraBody
- * @property {String} channel_id
- * @property {String} operator_id
- * @property {String} msg_id
- *
- * @typedef {Object} ChannelUnpinnedMessageExtra
- * @property {"unpinned_message"} type
- * @property {ChannelUnpinnedMessageExtraBody} body
- *
- * @typedef {Object} ChannelUnpinnedMessage
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {ChannelUnpinnedMessageExtra} extra
- */
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
 
-export {};
+class ChannelAddedReaction {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {ChannelAddedReactionExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelDeletedReactionExtraBody {
+    /** @type {String} */
+    channel_id;
+
+    /** @type {BaseEmoji} */
+    emoji;
+
+    /** @type {String} */
+    user_id;
+
+    /** @type {String} */
+    msg_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelDeletedReactionExtra {
+    /** @type {"deleted_reaction"} */
+    type;
+
+    /** @type {ChannelDeletedReactionExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelDeletedReaction {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {ChannelDeletedReactionExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelUpdatedMessageExtraBody {
+    /** @type {String} */
+    channel_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String[]} */
+    mention;
+
+    /** @type {Boolean} */
+    mention_all;
+
+    /** @type {Boolean} */
+    mention_here;
+
+    /** @type {Number[]} */
+    mention_roles;
+
+    /** @type {Number} */
+    updated_at;
+
+    /** @type {String} */
+    msg_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelUpdatedMessageExtra {
+    /** @type {"updated_message"} */
+    type;
+
+    /** @type {ChannelUpdatedMessageExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelUpdatedMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {ChannelUpdatedMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelDeletedMessageExtraBody {
+    /** @type {String} */
+    channel_id;
+
+    /** @type {String} */
+    msg_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelDeletedMessageExtra {
+    /** @type {"deleted_message"} */
+    type;
+
+    /** @type {ChannelDeletedMessageExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelDeletedMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {ChannelDeletedMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelAddedChannelExtra {
+    /** @type {"added_channel"} */
+    type;
+
+    /** @type {import("../types/index.js").BaseChannel} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelAddedChannel {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {ChannelAddedChannelExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelUpdatedChannelExtra {
+    /** @type {"updated_channel"} */
+    type;
+
+    /** @type {import("../types/index.js").BaseChannel} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelUpdatedChannel {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {ChannelUpdatedChannelExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelDeletedChannelExtraBody {
+    /** @type {String} */
+    id;
+
+    /** @type {Number} */
+    deleted_at;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelDeletedChannelExtra {
+    /** @type {"deleted_channel"} */
+    type;
+
+    /** @type {ChannelDeletedChannelExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelDeletedChannel {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {ChannelDeletedChannelExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelPinnedMessageExtraBody {
+    /** @type {String} */
+    channel_id;
+
+    /** @type {String} */
+    operator_id;
+
+    /** @type {String} */
+    msg_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelPinnedMessageExtra {
+    /** @type {"pinned_message"} */
+    type;
+
+    /** @type {ChannelPinnedMessageExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelPinnedMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {ChannelPinnedMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelUnpinnedMessageExtraBody {
+    /** @type {String} */
+    channel_id;
+
+    /** @type {String} */
+    operator_id;
+
+    /** @type {String} */
+    msg_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelUnpinnedMessageExtra {
+    /** @type {"unpinned_message"} */
+    type;
+
+    /** @type {ChannelUnpinnedMessageExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class ChannelUnpinnedMessage {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {ChannelUnpinnedMessageExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+export {
+    ChannelAddedReaction,
+    ChannelDeletedReaction,
+    ChannelUpdatedMessage,
+    ChannelDeletedMessage,
+    ChannelAddedChannel,
+    ChannelUpdatedChannel,
+    ChannelDeletedChannel,
+    ChannelPinnedMessage,
+    ChannelUnpinnedMessage,
+};

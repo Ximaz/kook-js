@@ -6,10 +6,107 @@
 import { EventEmitter } from "node:events";
 
 import Websocket, { WEBSOCKET_EVENTS } from "./websocket.js";
+import {
+    ChannelAddedReaction,
+    ChannelDeletedReaction,
+    ChannelUpdatedMessage,
+    ChannelDeletedMessage,
+    ChannelAddedChannel,
+    ChannelUpdatedChannel,
+    ChannelDeletedChannel,
+    ChannelPinnedMessage,
+    ChannelUnpinnedMessage,
+
+    DirectMessageUpdatedPrivateMessage,
+    DirectMessageDeletedPrivateMessage,
+    DirectMessagePrivateAddedReaction,
+    DirectMessagePrivateDeletedReaction,
+
+    GuildMemberJoinedGuild,
+    GuildMemberExitedGuild,
+    GuildMemberUpdatedGuildMember,
+    GuildMemberGuildMemberOnline,
+    GuildMemberGuildMemberOffline,
+
+    GuildAddedRole,
+    GuildDeletedRole,
+    GuildUpdatedRole,
+
+    GuildUpdatedGuild,
+    GuildDeletedGuild,
+    GuildAddedBlockList,
+    GuildDeletedBlockList,
+    GuildAddedEmoji,
+    GuildRemovedEmoji,
+    GuildUpdatedEmoji,
+
+    BaseMessage,
+
+    UserJoinedChannel,
+    UserExitedChannel,
+    UserUpdated,
+    UserSelfJoinedGuild,
+    UserSelfExitedGuild,
+    UserMessageBtnClick,
+} from "../events/index.js";
 import APIExecutor from "../api/index.js";
 
+
 /**
- * @typedef {import("../events/index.js").KookEvents} KookEvents
+ * @typedef {Object} KookEvents
+ *
+ * Channel Events
+ * @property {function(ChannelAddedReaction): void} added_reaction
+ * @property {function(ChannelDeletedReaction): void} deleted_reaction
+ * @property {function(ChannelUpdatedMessage): void} updated_message
+ * @property {function(ChannelDeletedMessage): void} deleted_message
+ * @property {function(ChannelAddedChannel): void} added_channel
+ * @property {function(ChannelUpdatedChannel): void} updated_channel
+ * @property {function(ChannelDeletedChannel): void} deleted_channel
+ * @property {function(ChannelPinnedMessage): void} pinned_message
+ * @property {function(ChannelUnpinnedMessage): void} unpinned_message
+ *
+ * DirectMessage Events
+ * @property {function(DirectMessageUpdatedPrivateMessage): void} updated_message
+ * @property {function(DirectMessageDeletedPrivateMessage): void} deleted_message
+ * @property {function(DirectMessagePrivateAddedReaction): void} private_added_reaction
+ * @property {function(DirectMessagePrivateDeletedReaction): void} private_deleted_reaction
+ *
+ * GuildMember Events
+ * @property {function(GuildMemberJoinedGuild): void} joined_guild
+ * @property {function(GuildMemberExitedGuild): void} exited_guild
+ * @property {function(GuildMemberUpdatedGuildMember): void} updated_guild_member
+ * @property {function(GuildMemberGuildMemberOnline): void} guild_member_online
+ * @property {function(GuildMemberGuildMemberOffline): void} guild_member_offline
+ *
+ * GuildRole Events
+ * @property {function(GuildAddedRole): void} added_role
+ * @property {function(GuildDeletedRole): void} deleted_role
+ * @property {function(GuildUpdatedRole): void} updated_role
+ *
+ * Guild Events
+ * @property {function(GuildUpdatedGuild): void} updated_guild
+ * @property {function(GuildDeletedGuild): void} deleted_guild
+ * @property {function(GuildAddedBlockList): void} added_block_list
+ * @property {function(GuildDeletedBlockList): void} deleted_block_list
+ * @property {function(GuildAddedEmoji): void} added_emoji
+ * @property {function(GuildRemovedEmoji): void} removed_emoji
+ * @property {function(GuildUpdatedEmoji): void} updated_emoji
+ *
+ * Message Events
+ * @property {function(BaseMessage): void} message
+ *
+ * User Events
+ * @property {function(UserJoinedChannel): void} joined_channel
+ * @property {function(UserExitedChannel): void} exited_channel
+ * @property {function(UserUpdated): void} user_updated
+ * @property {function(UserSelfJoinedGuild): void} self_joined_guild
+ * @property {function(UserSelfExitedGuild): void} self_exited_guild
+ * @property {function(UserMessageBtnClick): void} message_btn_click
+ *
+ * @property {function(): void} ready
+ * @property {function(): void} disconnected
+ * @property {function(any): void} debug
  */
 
 /* https://developer.kookapp.cn/doc/reference#API 版本管理 */
@@ -50,7 +147,9 @@ class KookClient extends EventEmitter {
         this.emit("debug", { s, d });
         switch (s) {
             case WEBSOCKET_EVENTS.EVENT:
-                const eventName = isNaN(d.extra?.type) ? d.extra?.type : "message";
+                const eventName = isNaN(d.extra?.type)
+                    ? d.extra?.type
+                    : "message";
                 this.emit(eventName, d);
                 break;
             case WEBSOCKET_EVENTS.HANDSHAKE:

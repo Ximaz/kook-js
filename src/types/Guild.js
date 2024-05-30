@@ -1,28 +1,42 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Guild object : https://developer.kookapp.cn/doc/objects#服务器 Guild
+ * @description Guild implementation
  */
 
-/**
- * @typedef {Object} BaseGuild
- * @property {String} id
- * @property {String} name
- * @property {String} [topic]
- * @property {String} user_id
- * @property {String} icon
- * @property {0 | 1 | 2 | 3} notify_type
- * @property {String} region
- * @property {Boolean} enable_open
- * @property {String} open_id
- * @property {String} default_channel_id
- * @property {String} welcome_channel_id
- * @property {import("./Role.js").BaseRole[]} [roles]
- * @property {import("./Channel.js").BaseChannel[]} [channels]
- */
+class BaseGuild {
+    /** @type {String} */
+    id;
 
-/**
- * @param {BaseGuild} raw
- */
-export function guild(raw) {
-    return { ...raw };
+    /** @type {String} */
+    name;
+
+    /** @type {String} */
+    user_id;
+
+    /** @type {String} */
+    icon;
+
+    /** @type {0 | 1 | 2 | 3} */
+    notify_type;
+
+    /** @type {String} */
+    region;
+
+    /** @type {Boolean} */
+    enable_open;
+
+    /** @type {String} */
+    open_id;
+
+    /** @type {String} */
+    default_channel_id;
+
+    /** @type {String} */
+    welcome_channel_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
+
+export { BaseGuild };

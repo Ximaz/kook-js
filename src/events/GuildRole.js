@@ -1,60 +1,152 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Kook GuildRole events : https://developer.kookapp.cn/doc/event/guild-role
+ * @description GuildRole implementation
  */
 
-/**
- * @typedef {Object} GuildAddedRoleExtra
- * @property {"added_role"} type
- * @property {import("../types/index.js").BaseRole} body
- *
- * @typedef {Object} GuildAddedRole
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {GuildAddedRoleExtra} extra
- */
+import { BaseRole } from "../types/index.js";
 
-/**
- * @typedef {Object} GuildDeletedRoleExtra
- * @property {"deleted_role"} type
- * @property {import("../types/index.js").BaseRole} body
- *
- * @typedef {Object} GuildDeletedRole
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {GuildDeletedRoleExtra} extra
- */
+class GuildAddedRoleExtra {
+    /** @type {"added_role"} */
+    type;
 
-/**
- * @typedef {Object} GuildUpdatedRoleExtra
- * @property {"updated_role"} type
- * @property {import("../types/index.js").BaseRole} body
- *
- * @typedef {Object} GuildUpdatedRole
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {GuildUpdatedRoleExtra} extra
- */
+    /** @type {BaseRole} */
+    body;
 
-export {};
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildAddedRole {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {GuildAddedRoleExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildDeletedRoleExtra {
+    /** @type {"deleted_role"} */
+    type;
+
+    /** @type {BaseRole} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildDeletedRole {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {GuildDeletedRoleExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildUpdatedRoleExtra {
+    /** @type {"updated_role"} */
+    type;
+
+    /** @type {BaseRole} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildUpdatedRole {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {GuildUpdatedRoleExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+export { GuildAddedRole, GuildDeletedRole, GuildUpdatedRole };

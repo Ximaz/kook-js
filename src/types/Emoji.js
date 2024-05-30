@@ -1,17 +1,18 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Emoji object
+ * @description Emoji implementation
  */
 
-/**
- * @typedef {Object} BaseEmoji
- * @property {String} id
- * @property {String} name
- */
+class BaseEmoji {
+    /** @type {String} */
+    id;
 
-/**
- * @param {BaseEmoji} raw
- */
-export function emoji(raw) {
-    return { ...raw };
+    /** @type {String} */
+    name;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
 }
+
+export { BaseEmoji };

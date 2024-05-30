@@ -1,141 +1,379 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Kook Guild events : https://developer.kookapp.cn/doc/event/guild
+ * @description Guild implementation
  */
 
-/**
- * @typedef {Object} GuildUpdatedGuildExtra
- * @property {"updated_guild"} type
- * @property {import("../types/index.js").BaseGuild} body
- *
- * @typedef {Object} GuildUpdatedGuild
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {GuildUpdatedGuildExtra} extra
- */
+import { BaseEmoji, BaseGuild } from "../types/index.js";
 
-/**
- * @typedef {Object} GuildDeletedGuildExtra
- * @property {"deleted_guild"} type
- * @property {import("../types/index.js").BaseGuild} body
- *
- * @typedef {Object} GuildDeletedGuild
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {GuildDeletedGuildExtra} extra
- */
+class GuildUpdatedGuildExtra {
+    /** @type {"updated_guild"} */
+    type;
 
-/**
- * @typedef {Object} GuildAddedBlockListExtraBody
- * @property {String} operator_id
- * @property {String} remark
- * @property {String[]} user_id
- *
- * @typedef {Object} GuildAddedBlockListExtra
- * @property {"added_block_list"} type
- * @property {GuildAddedBlockListExtraBody} body
- *
- * @typedef {Object} GuildAddedBlockList
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {GuildAddedBlockListExtra} extra
- */
+    /** @type {BaseGuild} */
+    body;
 
-/**
- * @typedef {Object} GuildDeletedBlockListExtraBody
- * @property {String} operator_id
- * @property {String[]} user_id
- *
- * @typedef {Object} GuildDeletedBlockListExtra
- * @property {"added_block_list"} type
- * @property {GuildDeletedBlockListExtraBody} body
- *
- * @typedef {Object} GuildDeletedBlockList
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {GuildDeletedBlockListExtra} extra
- */
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
 
-/**
- * @typedef {Object} GuildAddedEmojiExtra
- * @property {"added_emoji"} type
- * @property {import("../types/index.js").BaseEmoji} body
- *
- * @typedef {Object} GuildAddedEmoji
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {GuildAddedEmojiExtra} extra
- */
+class GuildUpdatedGuild {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
 
-/**
- * @typedef {Object} GuildRemovedEmojiExtra
- * @property {"removed_emoji"} type
- * @property {import("../types/index.js").BaseEmoji} body
- *
- * @typedef {Object} GuildRemovedEmoji
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {GuildRemovedEmojiExtra} extra
- */
+    /** @type {255} */
+    type;
 
-/**
- * @typedef {Object} GuildUpdatedEmojiExtra
- * @property {"updated_emoji"} type
- * @property {import("../types/index.js").BaseEmoji} body
- *
- * @typedef {Object} GuildUpdatedEmoji
- * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
- * @property {255} type
- * @property {String} target_id
- * @property {String} author_id
- * @property {String} content
- * @property {String} msg_id
- * @property {Number} msg_timestamp
- * @property {String} nonce
- * @property {String} verify_token
- * @property {GuildUpdatedEmojiExtra} extra
- */
+    /** @type {String} */
+    target_id;
 
-export { };
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {GuildUpdatedGuildExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildDeletedGuildExtra {
+    /** @type {"deleted_guild"} */
+    type;
+
+    /** @type {BaseGuild} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildDeletedGuild {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {GuildDeletedGuildExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildAddedBlockListExtraBody {
+    /** @type {String} */
+    operator_id;
+
+    /** @type {String} */
+    remark;
+
+    /** @type {String[]} */
+    user_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildAddedBlockListExtra {
+    /** @type {"added_block_list"} */
+    type;
+
+    /** @type {GuildAddedBlockListExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildAddedBlockList {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {GuildAddedBlockListExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildDeletedBlockListExtraBody {
+    /** @type {String} */
+    operator_id;
+
+    /** @type {String[]} */
+    user_id;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildDeletedBlockListExtra {
+    /** @type {"added_block_list"} */
+    type;
+
+    /** @type {GuildDeletedBlockListExtraBody} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildDeletedBlockList {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {GuildDeletedBlockListExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildAddedEmojiExtra {
+    /** @type {"added_emoji"} */
+    type;
+
+    /** @type {BaseEmoji} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildAddedEmoji {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {GuildAddedEmojiExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildRemovedEmojiExtra {
+    /** @type {"removed_emoji"} */
+    type;
+
+    /** @type {BaseEmoji} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildRemovedEmoji {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {GuildRemovedEmojiExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildUpdatedEmojiExtra {
+    /** @type {"updated_emoji"} */
+    type;
+
+    /** @type {BaseEmoji} */
+    body;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+class GuildUpdatedEmoji {
+    /** @type {"PERSON" | "GROUP" | "BROADCAST"} */
+    channel_type;
+
+    /** @type {255} */
+    type;
+
+    /** @type {String} */
+    target_id;
+
+    /** @type {String} */
+    author_id;
+
+    /** @type {String} */
+    content;
+
+    /** @type {String} */
+    msg_id;
+
+    /** @type {Number} */
+    msg_timestamp;
+
+    /** @type {String} */
+    nonce;
+
+    /** @type {String} */
+    verify_token;
+
+    /** @type {GuildUpdatedEmojiExtra} */
+    extra;
+
+    constructor(raw) {
+        Object.assign(this, raw);
+    }
+}
+
+export {
+    GuildUpdatedGuild,
+    GuildDeletedGuild,
+    GuildAddedBlockList,
+    GuildDeletedBlockList,
+    GuildAddedEmoji,
+    GuildRemovedEmoji,
+    GuildUpdatedEmoji,
+};
