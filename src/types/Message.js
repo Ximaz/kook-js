@@ -230,7 +230,31 @@ export function messageProps(raw) {
 }
 
 /**
- * @typedef {BaseTextMessage | BaseImageMessage | BaseVideoMessage | BaseFileMessage | BaseKMarkdownMessage | BaseCardMessage | BasePropsMessage} BaseMessage
+ * @typedef {Object} BaseMessageExtra
+ * @property {1 | 2 | 3 | 4 | 9 | 10 | 12} type
+ * @property {import("./User.js").BaseUser} author
+ * @property {String} [guild_id]
+ * @property {String} [channel_name]
+ * @property {String[]} [mention]
+ * @property {Boolean} [mention_all]
+ * @property {Number[]} [mention_roles]
+ * @property {Boolean} [mention_here]
+ * @property {any[]} [nav_channels] Undefined in the documentation yet
+ * @property {String} [code]
+ * @property {import("./Attachment.js").BaseAttachment} [attachments]
+ * @property {import("./KMarkdown.js").BaseKMarkdown} [kmarkdown]
+ *
+ * @typedef {Object} BaseMessage
+ * @property {"PERSON" | "GROUP" | "BROADCAST"} channel_type
+ * @property {1 | 2 | 3 | 4 | 9 |10 | 12} type
+ * @property {String} target_id
+ * @property {String} author_id
+ * @property {String | BasePropsMessageContent} content
+ * @property {String} msg_id
+ * @property {Number} msg_timestamp
+ * @property {String} nonce
+ * @property {String} verify_token
+ * @property {BaseMessageExtra} extra
  */
 
 /**
