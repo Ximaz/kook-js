@@ -78,7 +78,7 @@ class APIExecutor {
                 throw new Error(
                     `${response.data.message} (Error code : ${response.data.code})`
                 );
-            return response;
+            return response.data;
         } catch (err) {
             if (err.response?.data)
                 throw new Error(JSON.stringify(err.response.data));
@@ -88,3 +88,5 @@ class APIExecutor {
 }
 
 export default APIExecutor;
+
+export * from "./Guild.js";

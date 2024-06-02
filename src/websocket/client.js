@@ -63,7 +63,7 @@ import {
     UserSelfExitedGuild,
     UserMessageBtnClick,
 } from "../events/index.js";
-import APIExecutor from "../api/index.js";
+import APIExecutor, { GuildAPI } from "../api/index.js";
 
 /**
  * @typedef {Object} KookEvents
@@ -225,6 +225,9 @@ class KookClient extends EventEmitter {
     constructor(token) {
         super();
         this.#api = new APIExecutor(API_VERSION, token);
+        this.managers = {
+            guilds: new GuildAPI(this.#api)
+        };
     }
 
     #onOpen() {
@@ -301,7 +304,7 @@ class KookClient extends EventEmitter {
         const { data } = await this.#api.execute("GET", "/gateway/index", {
             params,
         });
-        if (null === this.#ws) this.#ws = new Websocket(data.data.url);
+        if (null === this.#ws) this.#ws = new Websocket(data.url);
         this.#ws.setHandler("open", (...args) => this.#onOpen(args));
         this.#ws.setHandler("message", (...args) => this.#onMessage(args));
         this.#ws.setHandler("close", (...args) => this.#onClose(args));

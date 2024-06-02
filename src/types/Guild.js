@@ -46,6 +46,12 @@ class BaseGuild {
     /** @type {String} */
     welcome_channel_id;
 
+    /** @type {Number | undefined} */
+    boost_num;
+
+    /** @type {Number | undefined} */
+    level;
+
     /** @type {BaseRole[] | undefined} */
     roles;
 
