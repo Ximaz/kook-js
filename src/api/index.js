@@ -94,3 +94,4 @@ export * from "./Channel.js";
 export * from "./ChannelUser.js";
 export * from "./UserChat.js";
 export * from "./User.js";
+export * from "./Asset.js";

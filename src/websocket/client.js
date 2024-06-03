@@ -69,6 +69,7 @@ import APIExecutor, {
     ChannelUserAPI,
     UserChatAPI,
     UserAPI,
+    AssetAPI
 } from "../api/index.js";
 
 /**
@@ -236,7 +237,8 @@ class KookClient extends EventEmitter {
             channel: new ChannelAPI(this.#api),
             channel_user: new ChannelUserAPI(this.#api),
             user_chat: new UserChatAPI(this.#api),
-            user: new UserAPI(this.#api)
+            user: new UserAPI(this.#api),
+            asset: new AssetAPI(this.#api)
         };
     }
 
