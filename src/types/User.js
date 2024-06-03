@@ -112,6 +112,18 @@ class BaseUser {
     /** @type {String | undefined} */
     banner;
 
+    /** @type {Number | undefined} */
+    invited_count;
+
+    /** @type {String | undefined} */
+    client_id;
+
+    /** @type {String | undefined} */
+    mobile_prefix;
+
+    /** @type {String | undefined} */
+    mobile;
+
     /** @type {BaseUserLiveInfo | undefined} */
     live_info;
 

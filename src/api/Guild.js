@@ -64,10 +64,10 @@ class GuildAPI {
     }
 
     /**
-     * @param {GuildAPIListParams} params
+     * @param {GuildAPIListParams} [params]
      * @return {Promise<BaseGuild[]>}
      */
-    async list(params) {
+    async list(params = {}) {
         return (await this.#api.execute("GET", "/guild/list", { params })).data
             .items;
     }
@@ -86,11 +86,11 @@ class GuildAPI {
 
     /**
      * @param {String} guild_id
-     * @param {GuildAPIUserListFilters} filters
-     * @param {GuildAPIListParams} params
+     * @param {GuildAPIUserListFilters} [filters]
+     * @param {GuildAPIListParams} [params]
      * @return {Promise<BaseUser[]>}
      */
-    async user_list(guild_id, filters, params) {
+    async user_list(guild_id, filters = {}, params = {}) {
         return (
             await this.#api.execute("GET", "/guild/user-list", {
                 params: {

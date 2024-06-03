@@ -93,3 +93,4 @@ export * from "./Guild.js";
 export * from "./Channel.js";
 export * from "./ChannelUser.js";
 export * from "./UserChat.js";
+export * from "./User.js";
