@@ -24,6 +24,31 @@ class BaseUserTagInfo {
     }
 }
 
+class BaseUserLiveInfo {
+    #api;
+
+    /** @type {Boolean} */
+    in_live;
+
+    /** @type {Number} */
+    audience_count;
+
+    /** @type {String} */
+    live_thumb;
+
+    /** @type {Number} */
+    live_start_time;
+
+    /**
+     * @param {Object} raw
+     * @param {APIExecutor} api
+     */
+    constructor(raw, api) {
+        Object.assign(this, raw);
+        this.#api = api;
+    }
+}
+
 /**
  * @link `https://developer.kookapp.cn/doc/objects#用户 User`
  */
@@ -60,6 +85,15 @@ class BaseUser {
     /** @type {String | undefined} */
     vip_avatar;
 
+    /** @type {Boolean | undefined} */
+    is_vip;
+
+    /** @type {Boolean | undefined} */
+    is_ai_reduce_noise;
+
+    /** @type {Boolean | undefined} */
+    is_personal_card_bg;
+
     /** @type {Boolean} */
     mobile_verified;
 
@@ -75,6 +109,12 @@ class BaseUser {
     /** @type {Number | undefined} */
     active_time;
 
+    /** @type {String | undefined} */
+    banner;
+
+    /** @type {BaseUserLiveInfo | undefined} */
+    live_info;
+
     /**
      * @param {Object} raw
      * @param {APIExecutor} api
@@ -82,7 +122,10 @@ class BaseUser {
     constructor(raw, api) {
         Object.assign(this, raw);
         this.#api = api;
-        if (raw.tag_info) this.tag_info = new BaseUserTagInfo(raw.tag_info, api);
+        if (raw.tag_info)
+            this.tag_info = new BaseUserTagInfo(raw.tag_info, api);
+        if (raw.live_info)
+            this.live_info = new BaseUserLiveInfo(raw.live_info, api);
     }
 }
 

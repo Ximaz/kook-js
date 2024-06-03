@@ -90,3 +90,4 @@ class APIExecutor {
 export default APIExecutor;
 
 export * from "./Guild.js";
+export * from "./Channel.js";

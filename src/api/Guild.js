@@ -80,7 +80,7 @@ class GuildAPI {
      * @returns {Promise<any>}
      */
     async nickname(guild_id, nickname, user_id) {
-        return this.#api.execute("POST", "/guild/nickname", {
+        return await this.#api.execute("POST", "/guild/nickname", {
             data: {
                 guild_id,
                 nickname,
@@ -94,7 +94,7 @@ class GuildAPI {
      * @returns {Promise<any>}
      */
     async leave(guild_id) {
-        return this.#api.execute("POST", "/guild/leave", {
+        return await this.#api.execute("POST", "/guild/leave", {
             data: {
                 guild_id,
             },
@@ -107,10 +107,10 @@ class GuildAPI {
      * @returns {Promise<any>}
      */
     async kickout(guild_id, user_id) {
-        return this.#api.execute("POST", "/guild/kickout", {
+        return await this.#api.execute("POST", "/guild/kickout", {
             data: {
                 guild_id,
-                user_id
+                user_id,
             },
         });
     }
