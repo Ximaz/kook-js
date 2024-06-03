@@ -70,7 +70,8 @@ import APIExecutor, {
     UserChatAPI,
     UserAPI,
     AssetAPI,
-    IntimacyAPI
+    IntimacyAPI,
+    BadgeAPI
 } from "../api/index.js";
 
 /**
@@ -240,7 +241,8 @@ class KookClient extends EventEmitter {
             user_chat: new UserChatAPI(this.#api),
             user: new UserAPI(this.#api),
             asset: new AssetAPI(this.#api),
-            intimacy: new IntimacyAPI(this.#api)
+            intimacy: new IntimacyAPI(this.#api),
+            badge: new BadgeAPI(this.#api)
         };
     }
 

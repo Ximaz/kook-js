@@ -1,6 +1,6 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Kook Asset API : https://developer.kookapp.cn/doc/http/asset
+ * @description Kook Intimacy API : https://developer.kookapp.cn/doc/http/intimacy
  */
 
 import APIExecutor from "./index.js";

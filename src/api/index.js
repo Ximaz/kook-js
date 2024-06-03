@@ -67,6 +67,7 @@ class APIExecutor {
                 ...headers,
             },
         };
+        console.log(config.url);
         try {
             let response = await this.#api.request(config);
             const ratelimit = getRatelimitTimeout(response.headers);
@@ -80,6 +81,7 @@ class APIExecutor {
                 );
             return response.data;
         } catch (err) {
+            console.error(err.response.headers);
             if (err.response?.data)
                 throw new Error(JSON.stringify(err.response.data));
             throw err;
@@ -96,3 +98,4 @@ export * from "./UserChat.js";
 export * from "./User.js";
 export * from "./Asset.js";
 export * from "./Intimacy.js";
+export * from "./Badge.js";

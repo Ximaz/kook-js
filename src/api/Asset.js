@@ -4,7 +4,7 @@
  */
 
 import APIExecutor from "./index.js";
-import FormData, { Stream } from "form-data";
+import FormData from "form-data";
 
 /**
  * @typedef {Object} UserChatAPIListParams
@@ -23,7 +23,7 @@ class AssetAPI {
     }
 
     /**
-     * @param {Buffer | Stream} file
+     * @param {Buffer} file
      * @param {String | FormData.AppendOptions} [options]
      * @return {Promise<String>}
      */
