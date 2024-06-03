@@ -8,7 +8,6 @@ import {
     BaseChannel,
     BaseChannelPermissionOverwrite,
     BaseChannelPermissionUser,
-    BaseRole,
     BaseUser,
 } from "../types/index.js";
 
