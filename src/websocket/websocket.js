@@ -115,7 +115,7 @@ export default class {
      * @property {Number | undefined} sn The message counter
      *
      * @param {[Buffer, Boolean]} packet The raw packet to parse
-     * @returns {Promise<RawEvent>} The inflated message
+     * @return {Promise<RawEvent>} The inflated message
      */
     parsePacketResponse(packet) {
         try {

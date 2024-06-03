@@ -26,7 +26,7 @@ class ChannelUserAPI {
      * @param {String} guild_id
      * @param {String} user_id
      * @param {ChannelUserAPIListParams} params
-     * @returns {Promise<BaseChannel[]>}
+     * @return {Promise<BaseChannel[]>}
      */
     async get_joined_channel(guild_id, user_id, params = {}) {
         return (

@@ -321,7 +321,7 @@ class KookClient extends EventEmitter {
      * @template {keyof KookEvents} K
      * @param {K} event
      * @param {KookEvents[K]} listener
-     * @returns {KookClient}
+     * @return {KookClient}
      */
     on(event, listener) {
         super.on(event, listener);
@@ -332,7 +332,7 @@ class KookClient extends EventEmitter {
      * @template {keyof KookEvents} K
      * @param {K} event
      * @param {KookEvents[K]} listener
-     * @returns {KookClient}
+     * @return {KookClient}
      */
     once(event, listener) {
         super.once(event, listener);
@@ -343,7 +343,7 @@ class KookClient extends EventEmitter {
      * @template {keyof KookEvents} K
      * @param {K} event
      * @param {...Parameters<KookEvents[K]>} args
-     * @returns {Boolean}
+     * @return {Boolean}
      */
     emit(event, ...args) {
         return super.emit(event, ...args);

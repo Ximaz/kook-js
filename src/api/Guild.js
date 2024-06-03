@@ -24,6 +24,35 @@ import { BaseGuild, BaseUser } from "../types/index.js";
  * @property {String} [filter_user_id]
  */
 
+/**
+ * @typedef {Object} GuildAPIMuteListMic
+ * @param {1} type
+ * @param {String[]} user_ids
+ *
+ * @typedef {Object} GuildAPIMuteListHeadset
+ * @param {2} type
+ * @param {String[]} user_ids
+ *
+ * @typedef {Object} GuildAPIMuteList
+ * @property {GuildAPIMuteListMic} mic
+ * @property {GuildAPIMuteListHeadset} headset
+ */
+
+/**
+ * @typedef {Object} GuildAPIBoostHistoryParams
+ * @param {Number} [start_time]
+ * @param {Number} [end_time]
+ */
+
+/**
+ * @typedef {Object} GuildAPIBoostHistory
+ * @property {String} user_id
+ * @property {String} guild_id
+ * @property {Number} start_time
+ * @property {Number} end_time
+ * @property {BaseUser} user
+ */
+
 class GuildAPI {
     #api;
 
@@ -36,7 +65,7 @@ class GuildAPI {
 
     /**
      * @param {GuildAPIListParams} params
-     * @returns {Promise<BaseGuild[]>}
+     * @return {Promise<BaseGuild[]>}
      */
     async list(params) {
         return (await this.#api.execute("GET", "/guild/list", { params })).data
@@ -45,7 +74,7 @@ class GuildAPI {
 
     /**
      * @param {String} guild_id
-     * @returns {Promise<BaseGuild>}
+     * @return {Promise<BaseGuild>}
      */
     async view(guild_id) {
         return (
@@ -59,7 +88,7 @@ class GuildAPI {
      * @param {String} guild_id
      * @param {GuildAPIUserListFilters} filters
      * @param {GuildAPIListParams} params
-     * @returns {Promise<BaseUser[]>}
+     * @return {Promise<BaseUser[]>}
      */
     async user_list(guild_id, filters, params) {
         return (
@@ -77,7 +106,7 @@ class GuildAPI {
      * @param {String} guild_id
      * @param {String} [nickname]
      * @param {String} [user_id]
-     * @returns {Promise<any>}
+     * @return {Promise<any>}
      */
     async nickname(guild_id, nickname, user_id) {
         return await this.#api.execute("POST", "/guild/nickname", {
@@ -91,7 +120,7 @@ class GuildAPI {
 
     /**
      * @param {String} guild_id
-     * @returns {Promise<any>}
+     * @return {Promise<any>}
      */
     async leave(guild_id) {
         return await this.#api.execute("POST", "/guild/leave", {
@@ -104,7 +133,7 @@ class GuildAPI {
     /**
      * @param {String} guild_id
      * @param {String} target_id
-     * @returns {Promise<any>}
+     * @return {Promise<any>}
      */
     async kickout(guild_id, target_id) {
         return await this.#api.execute("POST", "/guild/kickout", {
@@ -113,6 +142,65 @@ class GuildAPI {
                 target_id,
             },
         });
+    }
+
+    /**
+     * @param {String} guild_id
+     * @return {Promise<GuildAPIMuteList>}
+     */
+    async mute_list(guild_id) {
+        return await this.#api.execute("GET", "/guild-mute/list", {
+            data: {
+                guild_id,
+                return_type: "detail",
+            },
+        }).data;
+    }
+
+    /**
+     * @param {String} guild_id
+     * @param {String} user_id
+     * @param {1 | 2} type
+     * @return {Promise<any>}
+     */
+    async mute_create(guild_id, user_id, type) {
+        return await this.#api.execute("POST", "/guild-mute/create", {
+            data: {
+                guild_id,
+                user_id,
+                type
+            },
+        });
+    }
+
+    /**
+     * @param {String} guild_id
+     * @param {String} user_id
+     * @param {1 | 2} type
+     * @return {Promise<any>}
+     */
+    async mute_delete(guild_id, user_id, type) {
+        return await this.#api.execute("POST", "/guild-mute/delete", {
+            data: {
+                guild_id,
+                user_id,
+                type
+            },
+        });
+    }
+
+    /**
+     * @param {String} guild_id
+     * @param {GuildAPIBoostHistoryParams} params
+     * @return {Promise<GuildAPIBoostHistory[]>}
+     */
+    async mute_list(guild_id, params = {}) {
+        return await this.#api.execute("POST", "/guild-boost/history", {
+            data: {
+                guild_id,
+                ...params
+            },
+        }).data.items;
     }
 }
 

@@ -24,7 +24,7 @@ class UserChatAPI {
 
     /**
      * @param {UserChatAPIListParams} params
-     * @returns {Promise<BaseUserChat[]>}
+     * @return {Promise<BaseUserChat[]>}
      */
     async list(params = {}) {
         return (await this.#api.execute("GET", "/user-chat/list", { params })).data
@@ -33,7 +33,7 @@ class UserChatAPI {
 
     /**
      * @param {String} chat_code
-     * @returns {Promise<BaseUserChat>}
+     * @return {Promise<BaseUserChat>}
      */
     async view(chat_code) {
         return (
@@ -47,7 +47,7 @@ class UserChatAPI {
      * @param {String} guild_id
      * @param {GuildAPIUserListFilters} filters
      * @param {GuildAPIListParams} params
-     * @returns {Promise<BaseUser[]>}
+     * @return {Promise<BaseUser[]>}
      */
     async user_list(guild_id, filters, params) {
         return (
@@ -63,7 +63,7 @@ class UserChatAPI {
 
     /**
      * @param {String} target_id
-     * @returns {Promise<BaseUserChat>}
+     * @return {Promise<BaseUserChat>}
      */
     async create(target_id) {
         return await this.#api.execute("POST", "/user-chat/create", {
@@ -75,7 +75,7 @@ class UserChatAPI {
 
     /**
      * @param {String} chat_code
-     * @returns {Promise<any>}
+     * @return {Promise<any>}
      */
     async delete(chat_code) {
         return await this.#api.execute("POST", "/user-chat/delete", {

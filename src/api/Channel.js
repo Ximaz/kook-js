@@ -79,7 +79,7 @@ class ChannelAPI {
     /**
      * @param {String} guild_id
      * @param {ChannelAPIListParams} params
-     * @returns {Promise<BaseChannel[]>}
+     * @return {Promise<BaseChannel[]>}
      */
     async list(guild_id, params) {
         return (
@@ -92,7 +92,7 @@ class ChannelAPI {
     /**
      * @param {String} guild_id
      * @param {Boolean} needs_children
-     * @returns {Promise<BaseChannel>}
+     * @return {Promise<BaseChannel>}
      */
     async view(target_id, needs_children = true) {
         return (
@@ -106,7 +106,7 @@ class ChannelAPI {
      * @param {String} guild_id
      * @param {String} name
      * @param {ChannelAPICreateParams} [params]
-     * @returns {Promise<BaseChannel>}
+     * @return {Promise<BaseChannel>}
      */
     async create(guild_id, name, params = {}) {
         return (
@@ -123,7 +123,7 @@ class ChannelAPI {
     /**
      * @param {String} channel_id
      * @param {ChannelAPIUpdateParams} [params]
-     * @returns {Promise<BaseChannel>}
+     * @return {Promise<BaseChannel>}
      */
     async update(channel_id, params = {}) {
         return (
@@ -138,7 +138,7 @@ class ChannelAPI {
 
     /**
      * @param {String} channel_id
-     * @returns {Promise<any>}
+     * @return {Promise<any>}
      */
     async delete(channel_id) {
         return await this.#api.execute("POST", "/channel/delete", {
@@ -149,22 +149,8 @@ class ChannelAPI {
     }
 
     /**
-     * @param {String} guild_id
-     * @param {String} target_id
-     * @returns {Promise<any>}
-     */
-    async kickout(guild_id, user_id) {
-        return this.#api.execute("POST", "/guild/kickout", {
-            data: {
-                guild_id,
-                user_id,
-            },
-        });
-    }
-
-    /**
      * @param {String} channel_id
-     * @returns {Promise<BaseUser[]>}
+     * @return {Promise<BaseUser[]>}
      */
     async user_list(channel_id) {
         return (
@@ -179,7 +165,7 @@ class ChannelAPI {
     /**
      * @param {String} target_id
      * @param {String[]} user_ids
-     * @returns {Promise<BaseUser[]>}
+     * @return {Promise<BaseUser[]>}
      */
     async move_user(target_id, user_ids) {
         return await this.#api.execute("POST", "/channel/move-user", {
@@ -192,7 +178,7 @@ class ChannelAPI {
 
     /**
      * @param {String} channel_id
-     * @returns {Promise<ChannelPermissionsWithSync>}
+     * @return {Promise<ChannelPermissionsWithSync>}
      */
     async role_index(channel_id) {
         return (
@@ -207,7 +193,7 @@ class ChannelAPI {
     /**
      * @param {String} channel_id
      * @param {ChannelAPIRoleCreateParams} [params]
-     * @returns {Promise<BaseChannelPermissionOverwrite | BaseChannelPermissionUser>}
+     * @return {Promise<BaseChannelPermissionOverwrite | BaseChannelPermissionUser>}
      */
     async role_create(channel_id, params = {}) {
         return (
@@ -223,7 +209,7 @@ class ChannelAPI {
     /**
      * @param {String} channel_id
      * @param {ChannelAPIRoleUpdateParams} [params]
-     * @returns {Promise<BaseChannelPermissionOverwrite | BaseChannelPermissionUser>}
+     * @return {Promise<BaseChannelPermissionOverwrite | BaseChannelPermissionUser>}
      */
     async role_update(channel_id, params = {}) {
         return (
@@ -238,7 +224,7 @@ class ChannelAPI {
 
     /**
      * @param {String} channel_id
-     * @returns {Promise<ChannelPermissionsWithoutSync>}
+     * @return {Promise<ChannelPermissionsWithoutSync>}
      */
     async role_sync(channel_id) {
         return (
@@ -252,7 +238,7 @@ class ChannelAPI {
 
     /**
      * @param {String} channel_id
-     * @returns {Promise<any>}
+     * @return {Promise<any>}
      */
     async role_sync(channel_id) {
         return await this.#api.execute("POST", "/channel-role/delete", {
