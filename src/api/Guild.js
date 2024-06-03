@@ -106,11 +106,11 @@ class GuildAPI {
      * @param {String} target_id
      * @returns {Promise<any>}
      */
-    async kickout(guild_id, user_id) {
+    async kickout(guild_id, target_id) {
         return await this.#api.execute("POST", "/guild/kickout", {
             data: {
                 guild_id,
-                user_id,
+                target_id,
             },
         });
     }

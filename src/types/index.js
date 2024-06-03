@@ -12,3 +12,4 @@ export * from "./KMarkdown.js";
 export * from "./Message.js";
 export * from "./Attachment.js";
 export * from "./Emoji.js";
+export * from "./UserChat.js";
