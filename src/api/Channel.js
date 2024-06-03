@@ -1,6 +1,6 @@
 /**
  * @author DURAND Malo <malo.durand@epitech.eu>
- * @description Kook Guild API : https://developer.kookapp.cn/doc/http/guild
+ * @description Kook Channel API : https://developer.kookapp.cn/doc/http/channel
  */
 
 import APIExecutor from "./index.js";
