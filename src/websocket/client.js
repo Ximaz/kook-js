@@ -63,7 +63,7 @@ import {
     UserSelfExitedGuild,
     UserMessageBtnClick,
 } from "../events/index.js";
-import APIExecutor, { GuildAPI, ChannelAPI } from "../api/index.js";
+import APIExecutor, { GuildAPI, ChannelAPI, ChannelUserAPI } from "../api/index.js";
 
 /**
  * @typedef {Object} KookEvents
@@ -226,8 +226,9 @@ class KookClient extends EventEmitter {
         super();
         this.#api = new APIExecutor(API_VERSION, token);
         this.managers = {
-            guilds: new GuildAPI(this.#api),
-            channels: new ChannelAPI(this.#api),
+            guild: new GuildAPI(this.#api),
+            channel: new ChannelAPI(this.#api),
+            channel_user: new ChannelUserAPI(this.#api)
         };
     }
 
