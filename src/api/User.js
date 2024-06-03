@@ -40,7 +40,7 @@ class UserAPI {
      * @return {Promise<any>}
      */
     async offline() {
-        return await this.#api.execute("GET", "/user/offline");
+        return await this.#api.execute("POST", "/user/offline");
     }
 }
 
