@@ -44,24 +44,6 @@ class UserChatAPI {
     }
 
     /**
-     * @param {String} guild_id
-     * @param {GuildAPIUserListFilters} filters
-     * @param {GuildAPIListParams} params
-     * @return {Promise<BaseUser[]>}
-     */
-    async user_list(guild_id, filters, params) {
-        return (
-            await this.#api.execute("GET", "/guild/user-list", {
-                params: {
-                    guild_id,
-                    ...filters,
-                    ...params,
-                },
-            })
-        ).data.items;
-    }
-
-    /**
      * @param {String} target_id
      * @return {Promise<BaseUserChat>}
      */
